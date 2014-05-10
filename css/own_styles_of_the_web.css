@@ -10,26 +10,33 @@
     margin-left: auto;
     margin-right: auto;
     background-color: #fff;
+    border-radius: 10px;
     /*border: 1px solid red; // esto hay que quitarlo*/
-    height: 600px; /* esto hay que quitarlo*/
+    /*height: 600px;  esto hay que quitarlo*/
     /*background-color: #E1CBCE;*/
 }
-#unauthenticatedUserMenu
+#menuDiv
 {
     margin-left: 20px;
     margin-right: 20px;
+    width: 984px;
+    height: 70px;
+    margin-bottom: 20px;
 }
 #unauthenticatedUserMenu a 
 {
     float: left;
     width: 328px;
-    margin-bottom: 20px;
     font-size: 30px;
     padding-top: 20px;
     padding-bottom: 20px;
     background-color: #C93A4D;
     text-align: center;
     color: #fff;
+}
+#unauthenticatedUserMenu a:hover
+{
+    background-color: #C18890;
 }
 #unauthenticatedUserMenu li:first-child a
 {
@@ -45,6 +52,13 @@
 {
     margin-left: 20px;
     margin-right: 20px;
+    margin-bottom: 20px;
+}
+#subtitle
+{
+    height: 75px;
+    padding-top: 5px;
+    margin-bottom: 20px;
 }
 #body
 {
@@ -55,6 +69,23 @@
 {
     margin-left: 20px;
     margin-right: 20px;
+    color: #000;
+    font-family: "Pontano Sans", Arial;
+    padding-bottom: 20px;
+}
+#footer a
+{
+    color: #23E7E7;
+    font-weight: bold;
+    text-decoration: none;
+}
+#footer a:hover
+{
+    text-decoration: underline;
+}
+#footer a:active
+{
+     color: #22B4B4;
 }
 /* ----------------------------------------------------------------------------------------------------------------
  *
@@ -64,22 +95,25 @@
  */
 body
 {
-    /*font-family: "Pontano Sans";*/
-    font-family: "Comic Sans MS", "Pontano Sans";
+    font-family: "Comic Sans MS", "Righteous", Arial;
     color: #C93A4D;
+    font-size: 17px;
+    background-image: url('../img/background.png');
 }
 h1
 {
-    font-family: "Gochi Hand", "Fugaz One";
+    font-family: "Gochi Hand", Arial;
     font-size: 60px;
-    margin-bottom: 20px;
 }
 h2
 {
-    font-family: "Indie Flower", "Marvel";
+    font-family: "Indie Flower", Arial;
     font-size: 60px;
 }
-
+p
+{
+    margin-bottom: 17px;
+}
 
 
 
