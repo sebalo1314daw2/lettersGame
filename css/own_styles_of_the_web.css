@@ -67,26 +67,30 @@
 {
     margin-left: 20px;
     margin-right: 20px;
+    margin-bottom: 20px;
 }
 #footer
 {
     margin-left: 20px;
     margin-right: 20px;
-    color: #000;
-    font-family: "Pontano Sans", Arial;
     padding-bottom: 20px;
 }
-#footer a
+#footerContent
+{
+   color: #000;
+   font-family: "Pontano Sans", Arial; 
+}
+#footerContent a
 {
     color: #271D9F;
     font-weight: bold;
     text-decoration: none;
 }
-#footer a:hover
+#footerContent a:hover
 {
     text-decoration: underline;
 }
-#footer a:active
+#footerContent a:active
 {
      color: #8C82FB;
 }
