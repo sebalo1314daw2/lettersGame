@@ -28,7 +28,7 @@
 #unauthenticatedUserMenu a 
 {
     float: left;
-    width: 328px;
+    width: 327px;
     font-size: 30px;
     padding-top: 20px;
     padding-bottom: 20px;
@@ -122,6 +122,34 @@ p
 {
     margin-bottom: 17px;
 }
+button
+{
+    clear: both;    
+    display: block;
+    border: 1px dotted #ED354B;
+    background-color: #fff;
+    font-family: "Comic Sans MS", "Righteous", Arial;
+    font-size: 17px;
+    color: #B12535;
+    border-radius: 10px;
+    padding-left: 5px;
+    padding-bottom: 2px;
+    padding-right: 5px;
+}
+button:hover
+{
+    border-style: solid;
+}
+button:focus
+{
+    border-style: solid;
+}
+button:active
+{
+    background-color: #B12535;
+    color: #fff;
+    border-color: #B12535;
+}
 /* ----------------------------------------------------------------------------------------------------------------
  *
  *                                                 CLASSES OF THE WEB
@@ -135,4 +163,63 @@ p
 .withoutBackground
 {
     background-color: #fff;
+}
+.label
+{
+    width: 475px;
+    float: left;
+    padding-top: 5px;
+    padding-left: 10px;
+    padding-bottom: 5px;
+    padding-right: 5px;
+    margin-bottom: 5px;
+    border-radius: 10px;
+    margin-right: 5px;
+    border: 1px dashed #ED354B;
+}
+.field
+{
+     width: 475px;
+     float: left;
+     height: 28px;
+     margin-bottom: 8px;
+}
+.field input
+{
+    width: 463px;
+    height: 25px;
+    border: 1px dashed #ED354B;
+    border-radius: 10px;
+    padding-left: 10px;
+    font-family: "Comic Sans MS", "Righteous", Arial;
+    font-size: 17px;
+    color: #000;
+}
+.field input:hover
+{
+    border-style: solid;
+}
+.field input:focus
+{
+    border-style: solid;
+}
+.field select
+{
+    width: 475px;
+    height: 31px;
+    border: 1px dashed #ED354B;
+    border-radius: 10px;
+    background-color: #fff;
+    padding-left: 10px;
+    font-family: "Comic Sans MS", "Righteous", Arial;
+    font-size: 17px;
+    color: #000;
+}
+.field select:hover
+{
+    border-style: solid;
+}
+.field select:focus
+{
+    border-style: solid;
 }
