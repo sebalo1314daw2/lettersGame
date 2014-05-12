@@ -1,0 +1,10 @@
+-- -- Create word table
+-- CREATE TABLE word
+-- (
+-- 	id INT(6) PRIMARY KEY AUTO_INCREMENT,
+-- 	username VARCHAR(10) NOT NULL,
+-- 	password VARCHAR(500) NOT NULL,
+--         name VARCHAR(50) NOT NULL,
+--         surnames VARCHAR(100) 
+--         
+-- ) ENGINE=InnoDB;
