@@ -29,7 +29,7 @@ CREATE TABLE game
         time_of_second_attempt              INT(2)                                                  ,
         num_of_words                        INT(2)           NOT NULL                               
 ) ENGINE=InnoDB;
--- Create game table
+-- Create game table jjjj
 CREATE TABLE game
 (
 	id                                  INT(6)           PRIMARY KEY        AUTO_INCREMENT      ,
