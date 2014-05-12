@@ -11,6 +11,8 @@
     margin-right: auto;
     background-color: #fff;
     border-radius: 10px;
+    margin-top: 5px;
+    margin-bottom: 5px;
     /*border: 1px solid red; // esto hay que quitarlo*/
     /*height: 600px;  esto hay que quitarlo*/
     /*background-color: #E1CBCE;*/
@@ -30,13 +32,13 @@
     font-size: 30px;
     padding-top: 20px;
     padding-bottom: 20px;
-    background-color: #C93A4D;
+    background-color: #B12535;
     text-align: center;
     color: #fff;
 }
 #unauthenticatedUserMenu a:hover
 {
-    background-color: #C18890;
+    background-color: #B7606A;
 }
 #unauthenticatedUserMenu li:first-child a
 {
@@ -53,6 +55,7 @@
     margin-left: 20px;
     margin-right: 20px;
     margin-bottom: 20px;
+    padding-top: 20px;
 }
 #subtitle
 {
@@ -75,7 +78,7 @@
 }
 #footer a
 {
-    color: #23E7E7;
+    color: #271D9F;
     font-weight: bold;
     text-decoration: none;
 }
@@ -85,7 +88,7 @@
 }
 #footer a:active
 {
-     color: #22B4B4;
+     color: #8C82FB;
 }
 /* ----------------------------------------------------------------------------------------------------------------
  *
@@ -96,9 +99,10 @@
 body
 {
     font-family: "Comic Sans MS", "Righteous", Arial;
-    color: #C93A4D;
+    color: #B12535;
     font-size: 17px;
-    background-image: url('../img/background.png');
+    /*background-image: url('../img/fondo.jpg');*/
+    background-color: #EFC0C6;
 }
 h1
 {
