@@ -1,14 +1,3 @@
--- -- Create word table
--- CREATE TABLE word
--- (
--- 	id INT(6) PRIMARY KEY AUTO_INCREMENT,
--- 	username VARCHAR(10) NOT NULL,
--- 	password VARCHAR(500) NOT NULL,
---         name VARCHAR(50) NOT NULL,
---         surnames VARCHAR(100) 
---         
--- ) ENGINE=InnoDB;
--- Create word table
 CREATE TABLE word
 (
 	id                      INT(6)           PRIMARY KEY        AUTO_INCREMENT      ,
@@ -44,40 +33,37 @@ CREATE TABLE province
 	id              INT(6)          PRIMARY KEY         AUTO_INCREMENT      ,
         value           VARCHAR(20)     NOT NULL            UNIQUE
 ) ENGINE=InnoDB;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 -- Create student table 
 CREATE TABLE student
 (
 	id_user         INT(6)          PRIMARY KEY                             ,
+        id_province     INT(6)                                                  ,
         school          VARCHAR(50)     NOT NULL                                ,
         city            VARCHAR(50)     NOT NULL                                ,
         course          VARCHAR(2)      NOT NULL                                ,
         date_of_birth   DATE            NOT NULL                                ,
-        FOREIGN KEY(id_user) REFERENCES user(id)
+        FOREIGN KEY(id_user)     REFERENCES user(id)                            ,
+        FOREIGN KEY(id_province) REFERENCES province(id) 
 ) ENGINE=InnoDB;
 -- Create teacher table 
 CREATE TABLE teacher
 (
 	id_user         INT(6)          PRIMARY KEY                             ,
+        id_province     INT(6)                                                  ,
         school          VARCHAR(50)     NOT NULL                                ,
         city            VARCHAR(50)     NOT NULL                                ,
         courses         VARCHAR(50)     NOT NULL                                ,
-        FOREIGN KEY(id_user) REFERENCES user(id)
+        FOREIGN KEY(id_user) REFERENCES user(id)                                ,
+        FOREIGN KEY(id_province) REFERENCES province(id) 
+) ENGINE=InnoDB;
+-- Create student_teacher table 
+CREATE TABLE student_teacher
+(
+	 id_student     INT(6)                                  ,
+         id_teacher     INT(6)                                  ,
+         PRIMARY KEY(id_student, id_teacher)                    ,
+         FOREIGN KEY(id_student) REFERENCES student(id_user)    ,
+         FOREIGN KEY(id_teacher) REFERENCES teacher(id_user)    
 ) ENGINE=InnoDB;
 -- Create webmaster table 
 CREATE TABLE webmaster
@@ -100,3 +86,66 @@ CREATE TABLE ranking
         FOREIGN KEY(id_user) REFERENCES user(id)                                        ,
         FOREIGN KEY(id_game) REFERENCES game(id)                    
 ) ENGINE=InnoDB;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+-- Delete tables
+-- DROP TABLE word CASCADE;
+-- DROP TABLE game CASCADE;
+-- DROP TABLE user CASCADE;
+-- DROP TABLE province CASCADE;
+-- DROP TABLE student CASCADE;
+-- DROP TABLE teacher CASCADE;
+-- DROP TABLE student_teacher CASCADE;
+-- DROP TABLE webmaster CASCADE;
+-- DROP TABLE ranking CASCADE;
+-- DROP TABLE ranking CASCADE;
