@@ -290,75 +290,300 @@ INSERT INTO teacher
     courses
 ) VALUES 
 (
-    2, -- Rellenar a partir de aqui
-    2,
-    'Escuela de Juan',
-    'Ciudad de Juan',
-    '2A',
-    '2009/03/02'
+    3, 
+    3,
+    'Escuela de Marta',
+    'Ciudad de Marta',
+    '3A, 1B'
 );
-
-
-
-
-
-
-
-
-
--- 
--- CREATE TABLE teacher
--- (
--- 	id_user         INT(6)          PRIMARY KEY                             ,
---         id_province     INT(6)                                                  ,
---         school          VARCHAR(50)     NOT NULL                                ,
---         city            VARCHAR(50)     NOT NULL                                ,
---         courses         VARCHAR(50)     NOT NULL                                ,
---         FOREIGN KEY(id_user) REFERENCES user(id)                                ,
---         FOREIGN KEY(id_province) REFERENCES province(id) 
--- ) ENGINE=InnoDB;
--- 
--- 
--- 
--- 
--- 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+-- Insert rows in table student_teacher
+INSERT INTO student_teacher (id_student, id_teacher) VALUES (1, 3);
+INSERT INTO student_teacher (id_student, id_teacher) VALUES (2, 3);
+-- Insert rows in table webmaster
+INSERT INTO webmaster 
+(
+    id_user, 
+    role, 
+    description_of_their_role
+) VALUES 
+(
+    4,
+    'Rol 1',
+    'Descripci&oacute;n del rol 1'
+);
+-- Insert rows in table ranking
+INSERT INTO ranking 
+(
+    id_user, 
+    id_game, 
+    points,
+    number_of_hits,
+    number_of_failures,
+    number_of_attempts
+) VALUES 
+(
+    1,
+    1,
+    10,
+    2,
+    1,
+    3
+);
+INSERT INTO ranking 
+(
+    id_user, 
+    id_game, 
+    points,
+    number_of_hits,
+    number_of_failures,
+    number_of_attempts
+) VALUES 
+(
+    1,
+    2,
+    10,
+    2,
+    1,
+    3
+);
+INSERT INTO ranking 
+(
+    id_user, 
+    id_game, 
+    points,
+    number_of_hits,
+    number_of_failures,
+    number_of_attempts
+) VALUES 
+(
+    1,
+    3,
+    10,
+    2,
+    1,
+    3
+);
+INSERT INTO ranking 
+(
+    id_user, 
+    id_game, 
+    points,
+    number_of_hits,
+    number_of_failures,
+    number_of_attempts
+) VALUES 
+(
+    1,
+    4,
+    10,
+    2,
+    1,
+    3
+);
+INSERT INTO ranking 
+(
+    id_user, 
+    id_game, 
+    points,
+    number_of_hits,
+    number_of_failures,
+    number_of_attempts
+) VALUES 
+(
+    2,
+    1,
+    20,
+    3,
+    2,
+    5
+);
+INSERT INTO ranking 
+(
+    id_user, 
+    id_game, 
+    points,
+    number_of_hits,
+    number_of_failures,
+    number_of_attempts
+) VALUES 
+(
+    2,
+    2,
+    20,
+    3,
+    2,
+    5
+);
+INSERT INTO ranking 
+(
+    id_user, 
+    id_game, 
+    points,
+    number_of_hits,
+    number_of_failures,
+    number_of_attempts
+) VALUES 
+(
+    2,
+    3,
+    20,
+    3,
+    2,
+    5
+);
+INSERT INTO ranking 
+(
+    id_user, 
+    id_game, 
+    points,
+    number_of_hits,
+    number_of_failures,
+    number_of_attempts
+) VALUES 
+(
+    2,
+    4,
+    20,
+    3,
+    2,
+    5
+);
+INSERT INTO ranking 
+(
+    id_user, 
+    id_game, 
+    points,
+    number_of_hits,
+    number_of_failures,
+    number_of_attempts
+) VALUES 
+(
+    3,
+    1,
+    30,
+    4,
+    3,
+    7
+);
+INSERT INTO ranking 
+(
+    id_user, 
+    id_game, 
+    points,
+    number_of_hits,
+    number_of_failures,
+    number_of_attempts
+) VALUES 
+(
+    3,
+    2,
+    30,
+    4,
+    3,
+    7
+);
+INSERT INTO ranking 
+(
+    id_user, 
+    id_game, 
+    points,
+    number_of_hits,
+    number_of_failures,
+    number_of_attempts
+) VALUES 
+(
+    3,
+    3,
+    30,
+    4,
+    3,
+    7
+);
+INSERT INTO ranking 
+(
+    id_user, 
+    id_game, 
+    points,
+    number_of_hits,
+    number_of_failures,
+    number_of_attempts
+) VALUES 
+(
+    3,
+    4,
+    30,
+    4,
+    3,
+    7
+);
+INSERT INTO ranking 
+(
+    id_user, 
+    id_game, 
+    points,
+    number_of_hits,
+    number_of_failures,
+    number_of_attempts
+) VALUES 
+(
+    4,
+    1,
+    30,
+    4,
+    3,
+    7
+);
+INSERT INTO ranking 
+(
+    id_user, 
+    id_game, 
+    points,
+    number_of_hits,
+    number_of_failures,
+    number_of_attempts
+) VALUES 
+(
+    4,
+    2,
+    30,
+    4,
+    3,
+    7
+);
+INSERT INTO ranking 
+(
+    id_user, 
+    id_game, 
+    points,
+    number_of_hits,
+    number_of_failures,
+    number_of_attempts
+) VALUES 
+(
+    4,
+    3,
+    30,
+    4,
+    3,
+    7
+);
+INSERT INTO ranking 
+(
+    id_user, 
+    id_game, 
+    points,
+    number_of_hits,
+    number_of_failures,
+    number_of_attempts
+) VALUES 
+(
+    4,
+    4,
+    30,
+    4,
+    3,
+    7
+);
 -- Delete tables
 -- DROP TABLE word CASCADE;
 -- DROP TABLE game CASCADE;
