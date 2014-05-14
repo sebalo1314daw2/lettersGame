@@ -14,20 +14,29 @@ function Utilities(){}
 Utilities.createSelect = function(objectList, attrNameOptionContent, attrNameOptionValue, id)
 {
     var selectObject = $("<select></select>").attr("id", id);
-    var optionObject;
+    var anOptionObject;
     for(var i = 0; i < objectList.length; i++)
     {
-        // POR AQUI VOY
+        // we put the first letter in uppercase.
+        attrNameOptionContent = attrNameOptionContent.charAt(0).toUpperCase() + 
+                                attrNameOptionContent.substr(1);
+        attrNameOptionValue = attrNameOptionValue.charAt(0).toUpperCase() + 
+                              attrNameOptionValue.substr(1);
+        eval
+        (
+                'anOptionObject = $("<option></option>").attr("value", objectList[' +
+                i                                                                   +
+                '].get'                                                             +
+                attrNameOptionValue                                                 +
+                '()).html(objectList['                                              +
+                i                                                                   +
+                '].get'                                                             +
+                attrNameOptionContent                                               +
+                '());'
+        );
+        // we put this option in select
+        selectObject.append(anOptionObject);
     }
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+    // we put all the option in the select
+    return selectObject;
 }

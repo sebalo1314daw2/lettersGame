@@ -22,7 +22,7 @@ function Province(value)
       * @param {function} completeFunction Function to be executed just after returning from the server.
       * @return {Array} An associative array with this format:
       * "isServerError" {boolean} if an error has occurred with the server.
-      * "provinceList" {Array of Provinces} all provinces stored in the database
+      * "provinceList" {Array of Provinces objects} all provinces stored in the database
       */
      Province.prototype.obtainAll = function(serverPath, beforeSendFunction, completeFunction)
      {

@@ -16,10 +16,14 @@ function atTheStartOfPage()
     {
         // is not server error
         // we create the select
-        
+        var selectProvincies = Utilities.createSelect
+        (
+                dataArray["provinceList"], "value", "id", "selectProvinces"
+        );
+        // we put this select in the view
+        $("#divSelectProvincies").append(selectProvincies);
     }
-    
-    
-    
-    
+    // PRUEBA 
+    showLoadAnimation();
+    setTimeout(function(){hideLoadAnimation();}, 1000);
 }

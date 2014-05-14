@@ -14,6 +14,8 @@
         <script type="text/javascript" src="../js/jQuery/jQuery.js"></script>
         <script type="text/javascript" src="../js/control/registro.js"></script>
         <script type="text/javascript" src="../js/model/Province.js"></script>
+        <script type="text/javascript" src="../js/model/Utilities.js"></script>
+        <script type="text/javascript" src="../js/control/generalFunctions.js"></script>
     </head>
     <body>
         <div id="webContainer">   
@@ -62,12 +64,7 @@
                         </div>
                         <!-- A field -->
                         <div class="label">Provincia en d&oacute;nde vives</div>
-                        <div class="field">
-                            <select>
-                                <option value="bcn">Barcelona</option>
-                                <option value="tarragona">Tarragona</option>
-                            </select>
-                        </div>
+                        <div class="field" id="divSelectProvincies"></div>
                         <!-- A field -->
                         <div class="label">Ciudad en d&oacute;nde vives</div>
                         <div class="field">
@@ -133,6 +130,9 @@
                     Tu navegador no soporta iFrames
                 </iframe>
             </div>
+        </div>
+        <div id="loadAnimation" style="display: none; position: absolute; top: 450px; left: 50%;">
+            <img src="../img/load.gif" alt="Cargando ..." />
         </div>
     </body>
 </html>
