@@ -1,9 +1,9 @@
 <?php
-//        require_once "../LettersGameDB.php";
-//        require_once "../tablesItem/Province.php";
+        require_once "../LettersGameDB.php";
+        require_once "../tablesItem/Province.php";
 
-    require_once "../model/LettersGameDB.php";
-    require_once "../model/tablesItem/Province.php";
+//    require_once "../model/LettersGameDB.php";
+//    require_once "../model/tablesItem/Province.php";
     class ProvinceTable 
     {
         // ==================================== Attributes ===================================
@@ -25,7 +25,6 @@
             // prepare query
             $sql =   "SELECT *
                       FROM " . self::$NAME . ";";
-//            echo $sql;
             $stmt = $db->prepare($sql);
             // execute query
             $stmt->execute();
@@ -58,7 +57,7 @@
         {
             // open connection
             $db = new LettersGameDB();
-            // prepare query // POR AQUI VOY
+            // prepare query
             $sql =   "SELECT *
                       FROM " . self::$NAME .
                     " WHERE " . self::$NAME . "." . self::$COL_ID . " = ?;";
@@ -68,24 +67,17 @@
             // execute query
             $stmt->execute();
             // link outcome variables
-            $stmt->bind_result($id, $theValue, $difficulty);
+            $stmt->bind_result($id, $value);
             // get the value
             $stmt->fetch();
-            // create a "Word" object container for all these values.
-            $word = new Word($theValue, $difficulty);
-            $word->setId($id);
+            // create a "Province" object container for all these values.
+            $province = new Province($value);
+            $province->setId($id);
             // close connection
             $db->close();
-            // return the word object
-            return $word;
+            // return the province object
+            return $province;
         }
-        
-        
-        
-        
-        
-        
-        
     }
     // Testeo
 //    $lista = ProvinceTable::obtainAll();
