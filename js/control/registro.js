@@ -6,7 +6,10 @@ function atTheStartOfPage()
 {
     var SERVER_PATH = "../php/control/invokeController.php";
     // We get a list of all provinces
-    var dataArray = new Province("").obtainAll(SERVER_PATH, function(){}, function(){});
+    var dataArray = new Province("").obtainAll
+    (
+            SERVER_PATH, function(){showLoadAnimation();}, function(){hideLoadAnimation();}
+    );
     if(dataArray["isServerError"])
     {
         // is server error
@@ -23,7 +26,4 @@ function atTheStartOfPage()
         // we put this select in the view
         $("#divSelectProvincies").append(selectProvincies);
     }
-    // PRUEBA 
-    showLoadAnimation();
-    setTimeout(function(){hideLoadAnimation();}, 1000);
 }

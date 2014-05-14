@@ -48,7 +48,7 @@
         {
             // get all provinces 
             $provinceList = ProvinceTable::obtainAll();
-            // objects passed an associative "array" AQUI SE PODRIA COMPROBAR QUE provinceList si esta vacio 
+            // objects passed an associative "array"  
             for($i = 0; $i < count($provinceList); $i++)
             {
                 $provinceList[$i] = $provinceList[$i]->toAssociativeArray();

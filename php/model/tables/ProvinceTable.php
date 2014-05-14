@@ -46,6 +46,46 @@
             // return the list of provinces
             return $provinceList;
         }
+        /**
+         * findById()
+         * Function that seeks to find a province by id (primary key)
+         * @author Sergio Baena López
+         * @version 1.0
+         * @param {int} $id the id that will filter.
+         * @return {Province object} the Province object that has this id.
+         */
+        public static function findById($id)
+        {
+            // open connection
+            $db = new LettersGameDB();
+            // prepare query // POR AQUI VOY
+            $sql =   "SELECT *
+                      FROM " . self::$NAME .
+                    " WHERE " . self::$NAME . "." . self::$COL_ID . " = ?;";
+            $stmt = $db->prepare($sql);
+            // associate values
+            $stmt->bind_param("i", $id);
+            // execute query
+            $stmt->execute();
+            // link outcome variables
+            $stmt->bind_result($id, $theValue, $difficulty);
+            // get the value
+            $stmt->fetch();
+            // create a "Word" object container for all these values.
+            $word = new Word($theValue, $difficulty);
+            $word->setId($id);
+            // close connection
+            $db->close();
+            // return the word object
+            return $word;
+        }
+        
+        
+        
+        
+        
+        
+        
     }
     // Testeo
 //    $lista = ProvinceTable::obtainAll();

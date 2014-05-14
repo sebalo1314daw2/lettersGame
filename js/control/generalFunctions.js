@@ -4,12 +4,13 @@
  * the web and obscure everything back.
  * @author Sergio Baena López
  * @version 1.0
- */
+ */ 
 function showLoadAnimation()
 {
-    $("#loadAnimation").show();
-    $("#webContainer").css("opacity","0.3");
-    $("body").css("background-color", "#fff");
+    // put the loading class
+    $("#loadAnimation").addClass("loading");
+    $("#webContainer").addClass("loading");
+    $("body").addClass("loading");
 }
 /**
  * hideLoadAnimation()
@@ -19,7 +20,8 @@ function showLoadAnimation()
  */
 function hideLoadAnimation()
 {
-    $("#loadAnimation").hide();
-    $("#webContainer").css("opacity","1");
-    $("body").css("background-color", "#EFC0C6");
+    // quit the loading class
+    $("#loadAnimation").removeClass("loading");
+    $("#webContainer").removeClass("loading");
+    $("body").removeClass("loading");
 }

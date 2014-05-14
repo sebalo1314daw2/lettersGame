@@ -94,7 +94,13 @@
 {
      color: #8C82FB;
 }
-/* ----------------------------------------------------------------------------------------------------------------
+#loadAnimation
+{
+    display: none;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+}/* ----------------------------------------------------------------------------------------------------------------
  *
  *                                                 TAGS OF THE WEB
  *
@@ -223,3 +229,16 @@ button:active
 {
     border-style: solid;
 }
+#loadAnimation.loading
+{
+    display: block;
+}
+#webContainer.loading
+{
+    opacity: 0.3;
+}
+body.loading
+{
+    background-color: #fff;
+}
+
