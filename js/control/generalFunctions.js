@@ -7,9 +7,9 @@
  */
 function showLoadAnimation()
 {
-    $("#webContainer").css({"background":"transparent"});
     $("#loadAnimation").show();
-    $("body").css("background-color", "#938989");
+    $("#webContainer").css("opacity","0.3");
+    $("body").css("background-color", "#fff");
 }
 /**
  * hideLoadAnimation()
@@ -20,5 +20,6 @@ function showLoadAnimation()
 function hideLoadAnimation()
 {
     $("#loadAnimation").hide();
+    $("#webContainer").css("opacity","1");
     $("body").css("background-color", "#EFC0C6");
 }
