@@ -240,6 +240,32 @@ INSERT INTO user
     'Rodrigo',
     'Ventana Pared'
 );
+INSERT INTO user 
+(
+    username,
+    password,
+    name,
+    surnames
+) VALUES 
+(
+    'frederico1', 
+    'f72e26d7c6c2c51f552b4d1d59126659', -- the username is the password
+    'Frederico',
+    'Quilo Teclado'
+);
+INSERT INTO user 
+(
+    username,
+    password,
+    name,
+    surnames
+) VALUES 
+(
+    'ana1', 
+    '12ee195ec1324b1d7f4806da041f3573', -- the username is the password
+    'Ana',
+    'Rodr&iacute;guez Villalba'
+);
 -- Insert rows in table province
 INSERT INTO province (value) VALUES ('Barcelona');
 INSERT INTO province (value) VALUES ('Tarragona');
@@ -280,6 +306,23 @@ INSERT INTO student
     '2A',
     '2009/03/02'
 );
+INSERT INTO student 
+(
+    id_user,
+    id_province,
+    school,
+    city,
+    course,
+    date_of_birth
+) VALUES 
+(
+    6,
+    3,
+    'Escuela de Ana',
+    'Ciudad de Ana',
+    '2C',
+    '2009/03/09'
+);
 -- Insert rows in table teacher
 INSERT INTO teacher 
 (
@@ -296,9 +339,25 @@ INSERT INTO teacher
     'Ciudad de Marta',
     '3A, 1B'
 );
+INSERT INTO teacher 
+(
+    id_user,
+    id_province,
+    school,
+    city,
+    courses
+) VALUES 
+(
+    5, 
+    1,
+    'Escuela de Frederico',
+    'Ciudad de Frederico',
+    '1A, 2B, 3C'
+);
 -- Insert rows in table student_teacher
 INSERT INTO student_teacher (id_student, id_teacher) VALUES (1, 3);
 INSERT INTO student_teacher (id_student, id_teacher) VALUES (2, 3);
+INSERT INTO student_teacher (id_student, id_teacher) VALUES (6, 5);
 -- Insert rows in table webmaster
 INSERT INTO webmaster 
 (

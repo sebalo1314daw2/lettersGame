@@ -55,5 +55,22 @@
             $this->surnames = $surnames;
         }
         // ============================================= Methods =================================
+        /**
+         * toAssociativeArray()
+         * Function that seeks to convert this User object to an associative array
+         * @author Sergio Baena López
+         * @version 1.0
+         * @return {Associative array} an associative array that represent this User object
+         */
+        public function toAssociativeArray()
+        {
+            $namesAttr = array("id", "username", "password", "name", "surnames");
+            $theAssociativeArray = array();
+            for($i = 0; $i < count($namesAttr); $i++)
+            {
+                eval('$theAssociativeArray["' . $namesAttr[$i] . '"] = $this->' . $namesAttr[$i] . ';');
+            }
+            return $theAssociativeArray;
+        }
     }
 ?>

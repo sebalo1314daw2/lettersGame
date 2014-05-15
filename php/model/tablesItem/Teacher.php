@@ -65,8 +65,20 @@
          */
         public function toAssociativeArray()
         {
-            $namesAttr = array("user", "province", "school", "city", "courses");
+            $namesAttr = array("school", "city", "courses");
+            $attrNamesThatAreObj = array("user", "province");
             $theAssociativeArray = array();
+            for($i = 0; $i < count($attrNamesThatAreObj); $i++)
+            {
+                eval
+                (
+                        '$theAssociativeArray["' .
+                        $attrNamesThatAreObj[$i] .
+                        '"] = $this->'           . 
+                        $attrNamesThatAreObj[$i] .
+                        '->toAssociativeArray();' 
+                );
+            }
             for($i = 0; $i < count($namesAttr); $i++)
             {
                 eval('$theAssociativeArray["' . $namesAttr[$i] . '"] = $this->' . $namesAttr[$i] . ';');

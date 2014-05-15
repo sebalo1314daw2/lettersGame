@@ -1,5 +1,6 @@
 <?php
     require_once "../model/tables/ProvinceTable.php";
+    require_once "../model/tables/TeacherTable.php";
     class Controller 
     {
         // ======================================== Attributes =================================================

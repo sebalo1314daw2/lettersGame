@@ -5,6 +5,7 @@ $("document").ready(function(){atTheStartOfPage();});
 function atTheStartOfPage()
 {
     createSelectProvincies();
+    createSelectTeachers();
 }
 /**
  * createSelectProvincies()
@@ -74,10 +75,13 @@ function createSelectTeachers()
                     dataArray["teacherList"][i].getUser().getName()      + 
                     " "                                                  +
                     dataArray["teacherList"][i].getUser().getSurnames()  +
-                    
+                    " ("                                                 +
+                    dataArray["teacherList"][i].getUser().getUsername()  +
+                    ")"
             );
+            selectTeachers.append(anOptionOfSelect);
         }
         // we put this select in the view
-        $("#divSelectProvincies").append(selectProvincies);
+        $("#divSelectTeachers").append(selectTeachers);
     }
 }
