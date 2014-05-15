@@ -34,6 +34,10 @@
                         // Action: obtain all provinces stored in the database 
                         echo $this->obtainAllProvinces();
                         break;
+                    case "1":
+                        // Action: obtain all teachers stored in the database 
+                        echo $this->obtainAllTeachers();
+                        break;
                 }
             }
         }
@@ -55,6 +59,25 @@
             }
             // $provinceList already can be encoded
             return json_encode($provinceList);
+        }
+        /**
+         * obtainAllTeachers()
+         * Function that seeks to get all teachers of the TeacherTable
+         * @author Sergio Baena López
+         * @version 1.0
+         * @return {String} an array of objects Teacher's (encoded with JSON)
+         */
+        private function obtainAllTeachers()
+        {
+            // get all teachers 
+            $teacherList = TeacherTable::obtainAll();
+            // objects passed an associative "array"  
+            for($i = 0; $i < count($teacherList); $i++)
+            {
+                $teacherList[$i] = $teacherList[$i]->toAssociativeArray();
+            }
+            // $teacherList already can be encoded
+            return json_encode($teacherList);
         }
     }
 ?>

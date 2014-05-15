@@ -56,6 +56,22 @@
             $this->courses = $courses;
         }
         // ============================================= Methods =================================
-        
+        /**
+         * toAssociativeArray()
+         * Function that seeks to convert this Teacher object to an associative array
+         * @author Sergio Baena López
+         * @version 1.0
+         * @return {Associative array} an associative array that represent this Teacher object
+         */
+        public function toAssociativeArray()
+        {
+            $namesAttr = array("user", "province", "school", "city", "courses");
+            $theAssociativeArray = array();
+            for($i = 0; $i < count($namesAttr); $i++)
+            {
+                eval('$theAssociativeArray["' . $namesAttr[$i] . '"] = $this->' . $namesAttr[$i] . ';');
+            }
+            return $theAssociativeArray;
+        }
     }
 ?>

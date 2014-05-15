@@ -35,12 +35,65 @@ function Teacher(user, province, school, city, courses)
       */
     Teacher.prototype.obtainAll = function(serverPath, beforeSendFunction, completeFunction)
     {
-        
-        
-        
-        
-        
-        
-        
-    }
-     
+        var outputData;
+        var dataArray = new Array();
+        dataArray["isServerError"] = false;
+        $.ajax(
+        {
+                url: serverPath,
+                type: "POST",
+                async: false,
+                data: "action=1",
+                dataType: "json",
+                beforeSend: function (xhr)
+                {
+                    beforeSendFunction();
+                },
+                complete: function (xhr, status)
+                {
+                    completeFunction();
+                },
+                success: function (response)
+                {
+                    outputData = response;
+                },
+                error: function (xhr, ajaxOptions, thrownError) 
+                {
+                    dataArray["isServerError"] = true;
+                }	
+        }); 
+        if(!dataArray["isServerError"])
+        {
+            // is not server error
+            dataArray["teacherList"] = new Array();
+            var aTeacher;
+            var anUser;
+            var aProvince;
+            for(var i = 0; i < outputData.length; i++)
+            {
+                // create an User object
+                anUser = new User
+                (
+                        outputData[i].user.username,
+                        outputData[i].user.password,
+                        outputData[i].user.name,
+                        outputData[i].user.surnames
+                );
+                anUser.setId(outputData[i].user.id);
+                // create a Province object
+                aProvince = new Province(outputData[i].province.value);
+                aProvince.setId(outputData[i].province.id);
+                // create a Teacher object
+                aTeacher = new Teacher
+                (
+                        anUser,
+                        aProvince,
+                        outputData[i].school,
+                        outputData[i].city,
+                        outputData[i].courses
+                );
+                dataArray["teacherList"].push(aTeacher);
+            }
+        }
+        return dataArray;
+    }   

@@ -1,9 +1,11 @@
 <?php
-            require_once "../LettersGameDB.php";
-            require_once "../tablesItem/User.php";
+            // Testing requires
+//            require_once "../LettersGameDB.php";
+//            require_once "../tablesItem/User.php";
 
-//    require_once "../model/LettersGameDB.php";
-//    require_once "../model/tablesItem/User.php";
+    // Real requires
+    require_once "../model/LettersGameDB.php";
+    require_once "../model/tablesItem/User.php";
     class UserTable 
     {
         // ==================================== Attributes ===================================
@@ -48,4 +50,7 @@
             return $user;
         }
     }
+    // Testeo
+//    $user = UserTable::findById(1);
+//    echo $user->getUsername(); 
 ?>

@@ -1,8 +1,15 @@
 <?php
-    require_once "../LettersGameDB.php";
-    require_once "../tablesItem/Teacher.php";
-    require_once "UserTable.php";
-    require_once "ProvinceTable";
+    // Testing requires
+//    require_once "../LettersGameDB.php";
+//    require_once "../tablesItem/Teacher.php";
+//    require_once "UserTable.php";
+//    require_once "ProvinceTable.php";
+    
+    // Real requires
+    require_once "../model/LettersGameDB.php";    
+    require_once "../model/tablesItem/Teacher.php";
+    require_once "../model/tables/UserTable.php";
+    require_once "../model/tables/ProvinceTable.php";
     class TeacherTable 
     {
         // ==================================== Attributes ===================================
@@ -51,6 +58,6 @@
         }        
     }
     // Testeo
-    $teacherArray = TeacherTable::obtainAll();
-    echo $teacherArray[0]->getCity();
+//    $teacherArray = TeacherTable::obtainAll();
+//    echo $teacherArray[0]->getUser()->getUsername();
 ?>
