@@ -84,7 +84,6 @@
 {
     color: #271D9F;
     font-weight: bold;
-    text-decoration: none;
 }
 #footerContent a:hover
 {
@@ -155,6 +154,10 @@ button:active
     background-color: #B12535;
     color: #fff;
     border-color: #B12535;
+}
+a
+{
+    text-decoration: none;
 }
 /* ----------------------------------------------------------------------------------------------------------------
  *

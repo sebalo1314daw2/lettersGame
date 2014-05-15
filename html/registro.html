@@ -44,9 +44,9 @@
                         <!-- A field -->
                         <div class="label">Tipo de usuario</div>
                         <div class="field">
-                            <select>
-                                <option value="0" selected>Alumno</option>
-                                <option value="1">Profesor</option>
+                            <select onchange="prepareForm($(this).val())">
+                                <option value="student" selected>Alumno</option>
+                                <option value="teacher">Profesor</option>
                             </select>
                         </div>
                         <!-- A field -->
@@ -89,7 +89,7 @@
                         </div>
                         <!-- Hidden fields -->
                         <!-- Student fields -->                        
-                        <div>
+                        <div id="studentFields">
                             <!-- A field -->
                             <div class="label">Tu profesor</div>
                             <div id="divSelectTeachers" class="field"></div>
@@ -105,12 +105,7 @@
                             </div>
                         </div>
                         <!-- Teacher fields -->
-                        <div style="display: none;">
-                            <!-- A field -->
-                            <div class="label">Cursos (NL, NL, NL,...)</div>
-                            <div class="field">
-                                <input type="text" id="courses" maxlength="50" />
-                            </div>
+                        <div id="teacherFields" style="display: none;">
                             <!-- A field -->
                             <div class="label">Cursos (NL, NL, NL,...)</div>
                             <div class="field">

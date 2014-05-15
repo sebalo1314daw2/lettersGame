@@ -85,3 +85,47 @@ function createSelectTeachers()
         $("#divSelectTeachers").append(selectTeachers);
     }
 }
+/**
+ * prepareForm()
+ * @description Procedure aims at preparing the form requires the user type indicated by the "select". 
+ * What will make this procedure, from one hide fields and display fields other, basically.
+ * @author Sergio Baena López
+ * @version 1.0
+ * @param {String} selectedOption the selected option (student, teacher)
+ */
+function prepareForm(selectedOption)
+{
+    if(selectedOption == "student")
+    {
+        // the selected option is student
+        // TODO
+        
+        
+    }
+    else
+    {
+        // the selected option is teacher
+        // hide student fields
+        $("#studentFields").hide();
+        // reset student fields
+        resetStudentFields();
+        // show teacher fields
+        $("#teacherFields").show();
+    }
+}
+/**
+ * resetStudentFields()
+ * @description Procedure is intended to reset the fields of student.
+ * @author Sergio Baena López
+ * @version 1.0
+ */
+function resetStudentFields()
+{
+    // select first item
+    $("#selectTeachers > option:selected").attr("selected", false);
+    $("#selectTeachers > option:first-child").attr("selected", true);
+    // textbox #course
+    $("#course").val("");
+    // datebox #dateOfBirth
+    $("#dateOfBirth").val("");
+}
