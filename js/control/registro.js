@@ -142,3 +142,31 @@ function resetTeacherFields()
     // textbox #courses
     $("#courses").val("");
 }
+/**
+ * registerNewUser()
+ * @description Procedure which aims to collect the form values​​, validate (first, with the 
+ * client and then the server), correct them and, finally, does the "INSERTS" necessary.
+ * @author Sergio Baena López
+ * @version 1.0
+ */
+function registerNewUser()
+{
+    // --------------------------------------------- data validation -------------------------
+    var user = new User
+    (
+            $("#username").val(),
+            $("#password").val(),
+            $("#dni").val(), // POR AQUI VOY
+            $("#email").val(),
+            $("#username").val(),
+            $("#password").val(),
+            $("#passwordChecking").val()
+    );
+    
+    
+    
+    
+    
+    
+    
+}
