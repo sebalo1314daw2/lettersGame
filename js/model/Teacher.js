@@ -97,4 +97,30 @@ function Teacher(user, province, school, city, courses)
             }
         }
         return dataArray;
-    }   
+    }
+    /**
+     * validate()
+     * @description Procedure that aims to validate all its attributes.
+     * @author Sergio Baena López
+     * @version 1.0
+     * @return {array} Array format --> first element:
+     * a boolean indicating whether all valid attributes; second element: an associative array as the key the key of the fields attribute  and values​as a boolean indicating
+     * whether the fields is valid or not; third element: an array of errors.
+     */
+    Teacher.prototype.validate = function()
+    {
+        // POR AQUI VOY
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+    }
