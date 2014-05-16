@@ -109,7 +109,9 @@ function Teacher(user, province, school, city, courses)
      */
     Teacher.prototype.validate = function()
     {
-        // POR AQUI VOY
+        // ----------------------------------- Validation user -------------------------
+        var validationArray = this.user.validate();
+        // ----------------------------------- Validation school -------------------------
         
         
         
