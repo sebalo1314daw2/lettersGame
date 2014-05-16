@@ -244,4 +244,10 @@ body.loading
 {
     background-color: #fff;
 }
+.invalidField
+{
+    background-image: url('../img/error.png');
+    background-repeat: no-repeat;
+    background-position: right center;
+}
 

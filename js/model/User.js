@@ -39,7 +39,6 @@ function User(username, password, passwordConfirmation, name, surnames)
         validationArray[0] = true; // All attributes are valid until otherwise stated.
         validationArray[1] = new Array();
         validationArray[2] = new Array();
-        var stringData = new StringData();
         // ----------------------------------- Validation name -------------------------
         if(ValidationUtilities.containsOnlyLettersAndSpaces(this.name))
         {

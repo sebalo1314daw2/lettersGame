@@ -25,3 +25,19 @@ function hideLoadAnimation()
     $("#webContainer").removeClass("loading");
     $("body").removeClass("loading");
 }
+/**
+ * showErrors()
+ * @description Procedure is to show an "alert" all the errors contained in the specified array.
+ * @author Sergio Baena López
+ * @version 1.0
+ * @param {Array of Strings} errorsArray array containing the errors
+ */
+function showErrors(errorsArray)
+{
+    var alertContent = "";
+    for(var i = 0; i < errorsArray.length; i++)
+    {
+        alertContent += errorsArray[i] + "\n\n";
+    }
+    alert(alertContent);
+}

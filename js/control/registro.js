@@ -156,17 +156,32 @@ function registerNewUser()
     (
             $("#username").val(),
             $("#password").val(),
-            $("#dni").val(), // POR AQUI VOY
-            $("#email").val(),
-            $("#username").val(),
-            $("#password").val(),
-            $("#passwordChecking").val()
+            $("#passwordConfirmation").val(), 
+            $("#name").val(),
+            $("#surnames").val()
     );
-    
-    
-    
-    
-    
-    
-    
+    var validationArray = user.validate();
+    // We put styles that correspond to text fields depending valid or not.
+    for(var nameOfFormField in validationArray[1])
+    {
+        if(validationArray[1][nameOfFormField])
+        {
+            // is valid the field nameOfFormField
+            // assign the normal box style --> Delete the "invalidField" class
+            $("#" + nameOfFormField).removeClass("invalidField");
+        }
+        else
+        {
+            // is not valid
+            $("#" + nameOfFormField).addClass("invalidField");
+        }
+    }
+    if(validationArray[0])
+    {
+        alert("es valido todos los campos");
+    }
+    else
+    {
+        showErrors(validationArray[2]);
+    }
 }
