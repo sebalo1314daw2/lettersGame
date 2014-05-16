@@ -98,9 +98,11 @@ function prepareForm(selectedOption)
     if(selectedOption == "student")
     {
         // the selected option is student
-        // TODO
-        
-        
+        $("#teacherFields").hide();
+        // reset teacher fields
+        resetTeacherFields();
+        // show student fields
+        $("#studentFields").show();
     }
     else
     {
@@ -128,4 +130,15 @@ function resetStudentFields()
     $("#course").val("");
     // datebox #dateOfBirth
     $("#dateOfBirth").val("");
+}
+/**
+ * resetTeacherFields()
+ * @description Procedure is intended to reset the fields of teacher.
+ * @author Sergio Baena López
+ * @version 1.0
+ */
+function resetTeacherFields()
+{
+    // textbox #courses
+    $("#courses").val("");
 }
