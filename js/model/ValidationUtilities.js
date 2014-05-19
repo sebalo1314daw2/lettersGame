@@ -107,20 +107,21 @@ ValidationUtilities.isValidCourse = function(course)
  */
 ValidationUtilities.isEmpty = function(theString)
 {
-    
+    var isValid = false;
     if(!theString == "")
     {
         // the string is not empty string
         // look, now, if it only has spaces.
-        
+        var pattern = /^[ ]+$/;
+        var regExpObject = new RegExp(pattern);
+        if(!regExpObject.test(theString))
+        {
+            // not only has spaces 
+            // is valid
+            isValid = true;
+        }
     }
-    
-    
-    
-    
-    
-    
-    
+    return isValid;
 }
 
 

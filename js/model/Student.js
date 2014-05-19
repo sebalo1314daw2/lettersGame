@@ -38,7 +38,7 @@ function Student(user, province, school, city, course,dateOfBirth)
             // ----------------------------------- Validation user -------------------------
             var validationArray = this.user.validate();
             // ----------------------------------- Validation school -------------------------
-            if(this.school != "")
+            if(ValidationUtilities.isEmpty(this.school))
             {
                 // is valid
                 validationArray[1]["school"] = true;   
@@ -51,7 +51,7 @@ function Student(user, province, school, city, course,dateOfBirth)
                 validationArray[2][2] = "[Colegio] Tienes que indicarlo";
             }
             // ----------------------------------- Validation city -------------------------
-            if(this.city != "")
+            if(ValidationUtilities.isEmpty(this.city))
             {
                 // is valid
                 validationArray[1]["city"] = true;   
