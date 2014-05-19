@@ -62,27 +62,37 @@ function createSelectTeachers()
     else
     {
         // is not server error
-        // we create the select
-        var selectTeachers = $("<select></select>").attr("id", "selectTeachers");
-        var anOptionOfSelect;
-        for(var i = 0; i < dataArray["teacherList"].length; i++)
+        // look if 'dataArray["teacherList"]' is an empty array --> empty table
+        if(dataArray["teacherList"].length == 0)
         {
-            anOptionOfSelect = $("<option></option>").attr
-            (
-                    "value", dataArray["teacherList"][i].getUser().getId()
-            ).html
-            (
-                    dataArray["teacherList"][i].getUser().getName()      + 
-                    " "                                                  +
-                    dataArray["teacherList"][i].getUser().getSurnames()  +
-                    " ("                                                 +
-                    dataArray["teacherList"][i].getUser().getUsername()  +
-                    ")"
-            );
-            selectTeachers.append(anOptionOfSelect);
+            // empty array (empty table)
+            // redirect to an error page
+            // TODO
         }
-        // we put this select in the view
-        $("#divSelectTeachers").append(selectTeachers);
+        else
+        {
+            // not empty array --> we create the select
+            var selectTeachers = $("<select></select>").attr("id", "selectTeachers");
+            var anOptionOfSelect;
+            for(var i = 0; i < dataArray["teacherList"].length; i++)
+            {
+                anOptionOfSelect = $("<option></option>").attr
+                (
+                        "value", dataArray["teacherList"][i].getUser().getId()
+                ).html
+                (
+                        dataArray["teacherList"][i].getUser().getName()      + 
+                        " "                                                  +
+                        dataArray["teacherList"][i].getUser().getSurnames()  +
+                        " ("                                                 +
+                        dataArray["teacherList"][i].getUser().getUsername()  +
+                        ")"
+                );
+                selectTeachers.append(anOptionOfSelect);
+            }
+            // we put this select in the view
+            $("#divSelectTeachers").append(selectTeachers);
+        }   
     }
 }
 /**

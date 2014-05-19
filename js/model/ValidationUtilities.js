@@ -58,3 +58,41 @@ ValidationUtilities.containsOnlyLettersAndSpaces = function(data)
    }
    return isCorrect;
  }
+/**
+ * isValidSeriesOfCourses()
+ * @description Function that seeks to indicate whether the specified string is a series of 
+ * courses in the proper format or not. The format is: NL, NL, NL, ...
+ * @author Sergio Baena López
+ * @version 1.0
+ * @param {String} courses the series of courses to verify
+ * @return {boolean} if the spacified string is a series of courses in the proper format or not
+ */
+ValidationUtilities.isValidSeriesOfCourses = function(courses)
+{
+    var isValid = true;
+    var coursesArray = courses.split(", ");
+    for(var i = 0; i < coursesArray.length && isValid; i++)
+    {
+        if(!ValidationUtilities.isValidCourse(coursesArray[i]))
+        {
+            // is invalid the format 
+            isValid = false;
+        }
+    }
+    return isValid;
+}
+/**
+ * isValidCourse()
+ * @description Function that is intended to indicate whether the specified course is valid or 
+ * not. Consider a valid course which has this format: NL (number: 1-6, letter: A-Z or a-z)
+ * @author Sergio Baena López
+ * @version 1.0
+ * @param {String} course the courses to verify
+ * @return {boolean} if the spacified string is a courses in the proper format or not
+ */
+ValidationUtilities.isValidCourse = function(course)
+{
+    var pattern = /^[1-6][A-Za-z]$/;
+    var regExpObject = new RegExp(pattern);
+    return regExpObject.test(course);    
+}
