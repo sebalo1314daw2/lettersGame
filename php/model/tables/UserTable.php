@@ -49,8 +49,50 @@
             // return the user object
             return $user;
         }
+        /**
+         * isUniqueUsername()
+         * Function that seeks to indicate whether the specified user name is unique or not in the table.
+         * @author Sergio Baena López
+         * @version 1.0
+         * @param {String} $username the username to look
+         * @return {boolean} if the username is unique or not
+         */
+        public static function isUniqueUsername($username)
+        {
+            $isUnique = true;
+            // open connection
+            $db = new LettersGameDB();
+            // prepare query
+            $sql =   "SELECT COUNT(*)
+                      FROM " . self::$NAME .
+                    " WHERE " . self::$NAME . "." . self::$COL_USERNAME . "= ?;";
+            $stmt = $db->prepare($sql);
+            // associate values
+            $stmt->bind_param("s", $username);
+            // execute query
+            $stmt->execute();
+            // link outcome variables
+            $stmt->bind_result($numOfUsernameRepeated);
+            // get the value
+            $stmt->fetch();
+            if($numOfUsernameRepeated > 0)
+            {
+                // there are usernames repeated --> it is not unique
+                $isUnique = false;
+            }
+            // close connection
+            $db->close();
+            // return $isUnique
+            return $isUnique;
+        }
     }
     // Testeo
-//    $user = UserTable::findById(1);
-//    echo $user->getUsername(); 
+//    if(UserTable::isUniqueUsername("juan1"))
+//    {
+//        echo "es unico";
+//    }
+//    else
+//    {
+//        echo "no es unico";
+//    }
 ?>

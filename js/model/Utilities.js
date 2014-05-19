@@ -63,3 +63,21 @@ Utilities.createErrorListInHTMLFormat = function(errorsArray)
     }
     return list;
 }
+/**
+ * sendUserForRegister()
+ * @description Function that is intended to send the specified user (student or teacher) to the server 
+ * to register on the system.
+ * @author Sergio Baena López
+ * @version 1.0
+ * @param {Student object | Teacher object} user the user to send
+ * @param {String} serverPath the server path where we send the user
+ * @return POR ESPECIFICAR
+ */
+Utilities.sendUserForRegister = function(user, serverPath)
+{
+    
+    
+    
+    
+    
+}

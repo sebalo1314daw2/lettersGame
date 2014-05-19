@@ -8,6 +8,7 @@ function Student(user, province, school, city, course,dateOfBirth)
         this.course = course; // (String)
         this.dateOfBirth = dateOfBirth; // (String)
 }
+        Student.prototype.TYPE = "Student"; // (String)
         // ===================================== Accessors ======================================
         // ------------------------------------------ Read accessors -----------------------------------
         Student.prototype.getUser = function(){return this.user;}

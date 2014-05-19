@@ -7,6 +7,7 @@
         private $school;
         private $city;
         private $courses;
+        public static $TYPE = "Teacher";
         // =========================================== Constructor ============================
         function __construct($user, $province, $school, $city, $courses) {
             $this->user = $user;
