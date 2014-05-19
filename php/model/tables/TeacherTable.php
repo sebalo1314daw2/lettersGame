@@ -55,7 +55,50 @@
             $db->close();
             // return the list of teachers
             return $teacherList;
-        }        
+        }
+        /**
+         * insert()
+         * Procedure which aims to insert a new teacher to the table.
+         * @author Sergio Baena López
+         * @version 1.0
+         * @param {Teacher object} $teacher the teacher to insert
+         */
+        public static function insert($teacher)
+        {
+            // open connection
+            $db = new LettersGameDB();
+            // prepare query
+            $sql =   "INSERT INTO " . self::$NAME .  
+                    " ("
+                            .  self::$COL_ID_USER      . ", "
+                            .  self::$COL_ID_PROVINCE  . ", "
+                            .  self::$COL_SCHOOL       . ", "
+                            .  self::$COL_CITY         . ", "
+                            .  self::$COL_COURSES      .
+                    ") VALUES 
+                    (
+                        ?,
+                        ?,
+                        ?,
+                        ?,
+                        ?
+                    );";
+            $stmt = $db->prepare($sql);
+            // associate values
+            $stmt->bind_param
+            (
+                    "iisss", 
+                    $teacher->getUser()->getId(),
+                    $teacher->getProvince()->getId(),
+                    $teacher->getSchool(),
+                    $teacher->getCity(),
+                    $teacher->getCourses()
+            );
+            // execute query
+            $stmt->execute();
+            // close connection
+            $db->close();
+        }
     }
     // Testeo
 //    $teacherArray = TeacherTable::obtainAll();

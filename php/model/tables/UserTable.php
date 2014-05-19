@@ -85,6 +85,46 @@
             // return $isUnique
             return $isUnique;
         }
+        /**
+         * insert()
+         * Procedure which aims to insert a new user to the table.
+         * @author Sergio Baena López
+         * @version 1.0
+         * @param {User object} $user the user to insert
+         */
+        public static function insert($user)
+        {
+            // open connection
+            $db = new LettersGameDB();
+            // prepare query
+            $sql =   "INSERT INTO " . self::$NAME .  
+                    " ("
+                            .  self::$COL_USERNAME  . ", "
+                            .  self::$COL_PASSWORD  . ", "
+                            .  self::$COL_NAME      . ", "
+                            .  self::$COL_SURNAMES  .
+                    ") VALUES 
+                    (
+                        ?,
+                        ?,
+                        ?,
+                        ?
+                    );";
+            $stmt = $db->prepare($sql);
+            // associate values
+            $stmt->bind_param
+            (
+                    "ssss", 
+                    $user->getUsername(),
+                    $user->getPassword(),
+                    $user->getName(),
+                    $user->getSurnames()
+            );
+            // execute query
+            $stmt->execute();
+            // close connection
+            $db->close();
+        }
     }
     // Testeo
 //    if(UserTable::isUniqueUsername("juan1"))
