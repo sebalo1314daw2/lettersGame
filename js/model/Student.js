@@ -77,10 +77,17 @@ function Student(user, province, school, city, course,dateOfBirth)
                 validationArray[2][6] = "[Curso] Tiene que seguir el formato n&uacute;mero (1-6) letra (A-Z)";
             }
             // ----------------------------------- Validation dateOfBirth ------------------
-            
-
-
-
-
+            if(ValidationUtilities.isEarlierDate(this.dateOfBirth))
+            {
+                // is valid
+                validationArray[1]["dateOfBirth"] = true;   
+            }
+            else
+            {
+                // is invalid
+                validationArray[0] = false;
+                validationArray[1]["dateOfBirth"] = false;
+                validationArray[2][7] = "[Fecha de nacimiento] Tiene que ser una fecha pasada";
+            }
             return validationArray;
        }

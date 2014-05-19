@@ -162,6 +162,8 @@ function resetTeacherFields()
 function registerNewUser()
 {
     // --------------------------------------------- data validation -------------------------
+    var validationArray;
+    // create a User object with form data
     var user = new User
     (
             $("#username").val(),
@@ -170,7 +172,39 @@ function registerNewUser()
             $("#name").val(),
             $("#surnames").val()
     );
-    var validationArray = user.validate();
+    // create a Province object with form data
+    var province = new Province($("#selectProvinces").val());
+    province.setId(parseInt($("#selectProvinces > option:selected").attr("value")));
+    // look if the user are a student or teacher.  
+    if($("#selectType0fUser").val() == "student")
+    {
+        // the user is a student
+        // create a Student object with form data
+        var student = new Student
+        (
+                user,
+                province,
+                $("#school").val(),
+                $("#city").val(),
+                $("#course").val(),
+                $("#dateOfBirth").val()
+        );
+        validationArray = student.validate();
+    }
+    else
+    {
+        // the user is a teacher
+        // create a Teacher object with form data
+        var teacher = new Teacher
+        (
+                user,
+                province,
+                $("#school").val(),
+                $("#city").val(),
+                $("#courses").val()
+        );
+        validationArray = teacher.validate();
+    }
     // We put styles that correspond to text fields depending valid or not.
     for(var nameOfFormField in validationArray[1])
     {
