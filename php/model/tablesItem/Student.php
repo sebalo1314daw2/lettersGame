@@ -67,5 +67,22 @@
             $this->dateOfBirth = $dateOfBirth;
         }
         // ============================================= Methods =================================
+        /**
+         * correct()
+         * Procedure aims to correct the attributes of this object.
+         * @author Sergio Baena López
+         * @version 1.0
+         */
+        public function correct()
+        {
+            // ------------------------------------- user ----------------------------------------------
+            $this->user->correct();
+            // ------------------------------------- school ----------------------------------------------
+            $this->school = Utilities::correctProperName($this->school);
+            // ------------------------------------- city ----------------------------------------------
+            $this->city = Utilities::correctProperName($this->city);
+            // ------------------------------------- course ----------------------------------------------
+            $this->course = strtoupper($this->course);   
+        }
     }
 ?>

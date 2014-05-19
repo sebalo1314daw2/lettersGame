@@ -159,19 +159,18 @@
                 $validationArray[2][4] = "[Nombre de usuario] Este nombre de usuario ya se est&aacute; usando";
             }
             // Validation done
-            // correction to the data
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
+            if($validationArray[0])
+            {
+                // all valid
+                // correction to the data
+                $user->correct();
+                // correction done
+                
+                
+                
+                
+                
+            }
         }
     }
 ?>

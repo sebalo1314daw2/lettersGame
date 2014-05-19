@@ -1,4 +1,5 @@
 <?php
+    require_once '../Utilities.php';
     class User 
     {
         // =========================================== Attributes ============================
@@ -71,6 +72,20 @@
                 eval('$theAssociativeArray["' . $namesAttr[$i] . '"] = $this->' . $namesAttr[$i] . ';');
             }
             return $theAssociativeArray;
+        }
+        // ============================================= Methods =================================
+        /**
+         * correct()
+         * Procedure aims to correct the attributes of this object.
+         * @author Sergio Baena López
+         * @version 1.0
+         */
+        public function correct()
+        {
+            // ------------------------------------- name ----------------------------------------------
+            $this->name = Utilities::correctProperName($this->name);
+            // ------------------------------------- surnames ------------------------------------------
+            $this->surnames = Utilities::correctProperName($this->surnames);
         }
     }
 ?>
