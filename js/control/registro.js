@@ -226,6 +226,9 @@ function registerNewUser()
     }
     else
     {
-        showErrors(validationArray[2]);
+//        showErrors(validationArray[2]);
+          $("#errorsForm").children().remove();
+          var errorListInHTMLFormat = Utilities.createErrorListInHTMLFormat(validationArray[2]);
+          $("#errorsForm").append(errorListInHTMLFormat);
     }
 }

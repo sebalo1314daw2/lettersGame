@@ -122,7 +122,7 @@ function Teacher(user, province, school, city, courses)
             // is invalid
             validationArray[0] = false;
             validationArray[1]["school"] = false;
-            validationArray[2][2] = "[Colegio] Tienes que indicarlo";
+            validationArray[2][2] = "[Colegio] Tienes que indicarlo.";
         }
         // ----------------------------------- Validation city -------------------------
         if(ValidationUtilities.isEmpty(this.city))
@@ -135,7 +135,7 @@ function Teacher(user, province, school, city, courses)
             // is invalid
             validationArray[0] = false;
             validationArray[1]["city"] = false;
-            validationArray[2][3] = "[Ciudad] Tienes que indicarlo";
+            validationArray[2][3] = "[Ciudad] Tienes que indicarlo.";
         }
         // ----------------------------------- Validation courses -------------------------
         if(ValidationUtilities.isValidSeriesOfCourses(this.courses))
@@ -148,7 +148,7 @@ function Teacher(user, province, school, city, courses)
             // is invalid
             validationArray[0] = false;
             validationArray[1]["courses"] = false;
-            validationArray[2][6] = "[Cursos] Tiene que seguir el formato n&uacute;mero (1-6) letra (A-Z)y separados con coma y espacio";
+            validationArray[2][6] = "[Cursos] Tiene que seguir el formato n&uacute;mero (1-6) letra (A-Z)y separados con coma y espacio.";
         }
         return validationArray;
     }

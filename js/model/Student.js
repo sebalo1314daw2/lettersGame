@@ -48,7 +48,7 @@ function Student(user, province, school, city, course,dateOfBirth)
                 // is invalid
                 validationArray[0] = false;
                 validationArray[1]["school"] = false;
-                validationArray[2][2] = "[Colegio] Tienes que indicarlo";
+                validationArray[2][2] = "[Colegio] Tienes que indicarlo.";
             }
             // ----------------------------------- Validation city -------------------------
             if(ValidationUtilities.isEmpty(this.city))
@@ -61,7 +61,7 @@ function Student(user, province, school, city, course,dateOfBirth)
                 // is invalid
                 validationArray[0] = false;
                 validationArray[1]["city"] = false;
-                validationArray[2][3] = "[Ciudad] Tienes que indicarlo";
+                validationArray[2][3] = "[Ciudad] Tienes que indicarlo.";
             }
             // ----------------------------------- Validation course -------------------------
             if(ValidationUtilities.isValidCourse(this.course))
@@ -74,7 +74,7 @@ function Student(user, province, school, city, course,dateOfBirth)
                 // is invalid
                 validationArray[0] = false;
                 validationArray[1]["course"] = false;
-                validationArray[2][6] = "[Curso] Tiene que seguir el formato n&uacute;mero (1-6) letra (A-Z)";
+                validationArray[2][6] = "[Curso] Tiene que seguir el formato n&uacute;mero (1-6) letra (A-Z).";
             }
             // ----------------------------------- Validation dateOfBirth ------------------
             if(ValidationUtilities.isEarlierDate(this.dateOfBirth))
@@ -87,7 +87,7 @@ function Student(user, province, school, city, course,dateOfBirth)
                 // is invalid
                 validationArray[0] = false;
                 validationArray[1]["dateOfBirth"] = false;
-                validationArray[2][7] = "[Fecha de nacimiento] Tiene que ser una fecha pasada";
+                validationArray[2][7] = "[Fecha de nacimiento] Tiene que ser una fecha pasada.";
             }
             return validationArray;
        }

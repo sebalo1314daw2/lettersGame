@@ -40,3 +40,26 @@ Utilities.createSelect = function(objectList, attrNameOptionContent, attrNameOpt
     // we put all the option in the select
     return selectObject;
 }
+/**
+ * createErrorListInHTMLFormat()
+ * @description Function that aims to create a list of errors in HTML format.
+ * @author Sergio Baena López
+ * @version 1.0
+ * @param {Array of String} errorsArray the array of errors
+ * @return {ul object} the list of errors in HTML format
+ */
+Utilities.createErrorListInHTMLFormat = function(errorsArray)
+{
+    var list = $("<ul></ul>");
+    var item;
+    for(var i = 0; i < errorsArray.length; i++)
+    {
+        if(errorsArray[i] != undefined)
+        {
+            // create an item
+            item = $("<li></li>").html(errorsArray[i]);
+            list.append(item);
+        }
+    }
+    return list;
+}
