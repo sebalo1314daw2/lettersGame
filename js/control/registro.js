@@ -174,8 +174,8 @@ function registerNewUser()
             $("#surnames").val()
     );
     // create a Province object with form data
-    var province = new Province($("#selectProvinces").val());
-    province.setId(parseInt($("#selectProvinces > option:selected").attr("value")));
+    var province = new Province($("#selectProvinces > option:selected").html());
+    province.setId(parseInt($("#selectProvinces").val()));
     // look if the user are a student or teacher.  
     if($("#selectType0fUser").val() == "student")
     {
@@ -229,26 +229,51 @@ function registerNewUser()
     }
     if(validationArray[0])
     {
-        // all valid fields.
-        // PROBAMOS LA LLAMADA DE AJAX
-        Utilities.sendUserForRegister
+        // all valid fields (first validation)
+        var dataArray = Utilities.sendUserForRegister
         (
             teacherOrStudent, 
             SERVER_PATH, 
             function(){showLoadAnimation();}, 
             function(){hideLoadAnimation();}
         );
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
+        if(dataArray["isServerError"])
+        {
+            // is server error
+            alert("Error del servidor"); // ESTO HAY QUE CAMBIARLOS
+        }
+        else
+        {
+            // is not server error
+            // result of the second validation (server validation)
+            // We put styles that correspond to text fields depending valid or not.
+            validationArray = dataArray["validationArray"];
+            for(var nameOfFormField in validationArray[1])
+            {
+                if(validationArray[1][nameOfFormField])
+                {
+                    // is valid the field nameOfFormField
+                    // assign the normal box style --> Delete the "invalidField" class
+                    $("#" + nameOfFormField).removeClass("invalidField");
+                }
+                else
+                {
+                    // is not valid
+                    $("#" + nameOfFormField).addClass("invalidField");
+                }
+            }
+            if(validationArray[0])
+            {
+                // all valid fields (second validation)
+                alert("Todos los campos son validos");
+            }
+            else
+            {
+                $("#errorsForm").children().remove();
+                var errorListInHTMLFormat = Utilities.createErrorListInHTMLFormat(validationArray[2]);
+                $("#errorsForm").append(errorListInHTMLFormat);
+            }
+        }
     }
     else
     {

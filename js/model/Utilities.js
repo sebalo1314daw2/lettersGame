@@ -73,15 +73,21 @@ Utilities.createErrorListInHTMLFormat = function(errorsArray)
  * @param {String} serverPath the server path where we send the user
  * @param {function} beforeSendFunction Function to be performed just before going to the server.
  * @param {function} completeFunction Function to be executed just after returning from the server.
- * @return POR ESPECIFICAR
+ * @return {Associative array} an associative array with this format:
+ * "isServerError" {boolean} if there is a server error or not.
+ * "validationArray" {array} Array format --> first element:
+ * a boolean indicating whether all valid attributes; second element: an associative array as the key the key of the fields attribute  and values​as a boolean indicating
+ * whether the fields is valid or not; third element: an array of errors.
  */
 Utilities.sendUserForRegister = function(user, serverPath, beforeSendFunction, completeFunction)
 {
+    var dataArray = new Array();
+    dataArray["isServerError"] = false;
     $.ajax(
     {
             url: serverPath,
             type: "POST",
-            async: true,
+            async: false,
             data: "action=2&user=" + JSON.stringify(user),
             dataType: "json",
             beforeSend: function (xhr)
@@ -94,11 +100,31 @@ Utilities.sendUserForRegister = function(user, serverPath, beforeSendFunction, c
             },
             success: function (response)
             {
-//                outputData = response;
+                dataArray["validationArray"] = response;
             },
             error: function (xhr, ajaxOptions, thrownError) 
             {
-//                dataArray["isServerError"] = true;
+                dataArray["isServerError"] = true;
             }	
-    }); 
+    });
+    return dataArray;
+}
+/**
+ * associativeArrayToNumericArray()
+ * @description Function that seeks to convert the numeric associative array to a normal array (numeric).
+ * @author Sergio Baena López
+ * @version 1.0
+ * @param {Associative array} associativeArray the associative array to convert
+ * @return {Array} the associative array converted in numeric array
+ */
+Utilities.associativeArrayToNumericArray = function(associativeArray)
+{
+    var numericArray = new Array();
+    var index;
+    for(var key in associativeArray)
+    {
+        index = parseInt(key);
+        numericArray[index] = associativeArray[key];
+    }
+    return numericArray;
 }
