@@ -34,18 +34,6 @@ CREATE TABLE province
 	id              INT(6)          PRIMARY KEY         AUTO_INCREMENT      ,
         value           VARCHAR(20)     NOT NULL            UNIQUE
 ) ENGINE=InnoDB;
--- Create student table 
-CREATE TABLE student
-(
-	id_user         INT(6)          PRIMARY KEY                             ,
-        id_province     INT(6)                                                  ,
-        school          VARCHAR(50)     NOT NULL                                ,
-        city            VARCHAR(50)     NOT NULL                                ,
-        course          VARCHAR(2)      NOT NULL                                ,
-        date_of_birth   DATE            NOT NULL                                ,
-        FOREIGN KEY(id_user)     REFERENCES user(id)                            ,
-        FOREIGN KEY(id_province) REFERENCES province(id) 
-) ENGINE=InnoDB;
 -- Create teacher table 
 CREATE TABLE teacher
 (
@@ -57,15 +45,29 @@ CREATE TABLE teacher
         FOREIGN KEY(id_user) REFERENCES user(id)                                ,
         FOREIGN KEY(id_province) REFERENCES province(id) 
 ) ENGINE=InnoDB;
--- Create student_teacher table 
-CREATE TABLE student_teacher
+-- Create student table 
+CREATE TABLE student
 (
-	 id_student     INT(6)                                  ,
-         id_teacher     INT(6)                                  ,
-         PRIMARY KEY(id_student, id_teacher)                    ,
-         FOREIGN KEY(id_student) REFERENCES student(id_user)    ,
-         FOREIGN KEY(id_teacher) REFERENCES teacher(id_user)    
+	id_user         INT(6)          PRIMARY KEY                             ,
+        id_province     INT(6)                                                  ,
+        id_teacher      INT(6)                                                  ,
+        school          VARCHAR(50)     NOT NULL                                ,
+        city            VARCHAR(50)     NOT NULL                                ,
+        course          VARCHAR(2)      NOT NULL                                ,
+        date_of_birth   DATE            NOT NULL                                ,
+        FOREIGN KEY(id_user)     REFERENCES user(id)                            ,
+        FOREIGN KEY(id_province) REFERENCES province(id)                        ,
+        FOREIGN KEY(id_teacher) REFERENCES teacher(id_user) 
 ) ENGINE=InnoDB;
+-- -- Create student_teacher table 
+-- CREATE TABLE student_teacher
+-- (
+-- 	 id_student     INT(6)                                  ,
+--          id_teacher     INT(6)                                  ,
+--          PRIMARY KEY(id_student, id_teacher)                    ,
+--          FOREIGN KEY(id_student) REFERENCES student(id_user)    ,
+--          FOREIGN KEY(id_teacher) REFERENCES teacher(id_user)    
+-- ) ENGINE=InnoDB;
 -- Create webmaster table 
 CREATE TABLE webmaster
 (
@@ -271,58 +273,6 @@ INSERT INTO province (value) VALUES ('Barcelona');
 INSERT INTO province (value) VALUES ('Tarragona');
 INSERT INTO province (value) VALUES ('Lleida');
 INSERT INTO province (value) VALUES ('Girona');
--- Insert rows in table student
-INSERT INTO student 
-(
-    id_user,
-    id_province,
-    school,
-    city,
-    course,
-    date_of_birth
-) VALUES 
-(
-    1,
-    1,
-    'Escuela de Pepe',
-    'Ciudad de Pepe',
-    '1A',
-    '2009/03/01'
-);
-INSERT INTO student 
-(
-    id_user,
-    id_province,
-    school,
-    city,
-    course,
-    date_of_birth
-) VALUES 
-(
-    2,
-    2,
-    'Escuela de Juan',
-    'Ciudad de Juan',
-    '2A',
-    '2009/03/02'
-);
-INSERT INTO student 
-(
-    id_user,
-    id_province,
-    school,
-    city,
-    course,
-    date_of_birth
-) VALUES 
-(
-    6,
-    3,
-    'Escuela de Ana',
-    'Ciudad de Ana',
-    '2C',
-    '2009/03/09'
-);
 -- Insert rows in table teacher
 INSERT INTO teacher 
 (
@@ -354,10 +304,68 @@ INSERT INTO teacher
     'Ciudad de Frederico',
     '1A, 2B, 3C'
 );
+-- Insert rows in table student
+INSERT INTO student 
+(
+    id_user,
+    id_province,
+    id_teacher,
+    school,
+    city,
+    course,
+    date_of_birth
+) VALUES 
+(
+    1,
+    1,
+    3,
+    'Escuela de Pepe',
+    'Ciudad de Pepe',
+    '1A',
+    '2009/03/01'
+);
+INSERT INTO student 
+(
+    id_user,
+    id_province,
+    id_teacher,
+    school,
+    city,
+    course,
+    date_of_birth
+) VALUES 
+(
+    2,
+    2,
+    3,
+    'Escuela de Juan',
+    'Ciudad de Juan',
+    '2A',
+    '2009/03/02'
+);
+INSERT INTO student 
+(
+    id_user,
+    id_province,
+    id_teacher,
+    school,
+    city,
+    course,
+    date_of_birth
+) VALUES 
+(
+    6,
+    3,
+    5,
+    'Escuela de Ana',
+    'Ciudad de Ana',
+    '2C',
+    '2009/03/09'
+);
 -- Insert rows in table student_teacher
-INSERT INTO student_teacher (id_student, id_teacher) VALUES (1, 3);
-INSERT INTO student_teacher (id_student, id_teacher) VALUES (2, 3);
-INSERT INTO student_teacher (id_student, id_teacher) VALUES (6, 5);
+-- INSERT INTO student_teacher (id_student, id_teacher) VALUES (1, 3);
+-- INSERT INTO student_teacher (id_student, id_teacher) VALUES (2, 3);
+-- INSERT INTO student_teacher (id_student, id_teacher) VALUES (6, 5);
 -- Insert rows in table webmaster
 INSERT INTO webmaster 
 (
@@ -650,7 +658,6 @@ INSERT INTO ranking
 -- DROP TABLE province CASCADE;
 -- DROP TABLE student CASCADE;
 -- DROP TABLE teacher CASCADE;
--- DROP TABLE student_teacher CASCADE;
 -- DROP TABLE webmaster CASCADE;
 -- DROP TABLE ranking CASCADE;
 -- DROP TABLE ranking CASCADE;
