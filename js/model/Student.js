@@ -1,8 +1,9 @@
-function Student(user, province, school, city, course,dateOfBirth)
+function Student(user, province, teacher, school, city, course,dateOfBirth)
 {
         // =================================== Attributes ========================================
         this.user = user; // (User object)
         this.province = province; // (Province object)
+        this.teacher = teacher; // (Teacher object)
         this.school = school; // (String)
         this.city = city; // (String)
         this.course = course; // (String)
@@ -13,6 +14,7 @@ function Student(user, province, school, city, course,dateOfBirth)
         // ------------------------------------------ Read accessors -----------------------------------
         Student.prototype.getUser = function(){return this.user;}
         Student.prototype.getProvince = function(){return this.province;}
+        Student.prototype.getTeacher = function(){return this.teacher;}
         Student.prototype.getSchool = function(){return this.school;}
         Student.prototype.getCity = function(){return this.city;}
         Student.prototype.getCourse = function(){return this.course;}
@@ -20,6 +22,7 @@ function Student(user, province, school, city, course,dateOfBirth)
         // ------------------------------------------ Write accessors -----------------------------------
         Student.prototype.setUser = function(user){this.user = user;}
         Student.prototype.setProvince = function(province){this.province = province;}
+        Student.prototype.setTeacher = function(teacher){this.teacher = teacher;}
         Student.prototype.setSchool = function(school){this.school = school;}
         Student.prototype.setCity = function(city){this.city = city;}
         Student.prototype.setCourse = function(course){this.course = course;}

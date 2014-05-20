@@ -1,18 +1,24 @@
 <?php
+    require_once 'User.php';
+    require_once 'Province.php';
+    require_once 'Teacher.php';
+    require_once '../Utilities.php';
     class Student 
     {
         // =========================================== Attributes ============================
         private $user; // (User object)
         private $province; // (Province object)
+        private $teacher; // (Teacher object)
         private $school; // (String)
         private $city; // (String)
         private $course; // (String)
         private $dateOfBirth; // (String)
         public static $TYPE = "Student"; // (String)
         // =========================================== Constructor ============================
-        function __construct($user, $province, $school, $city, $course, $dateOfBirth) {
+        function __construct($user, $province, $teacher, $school, $city, $course, $dateOfBirth) {
             $this->user = $user;
             $this->province = $province;
+            $this->teacher = $teacher;
             $this->school = $school;
             $this->city = $city;
             $this->course = $course;
@@ -41,6 +47,13 @@
 
         public function getDateOfBirth() {
             return $this->dateOfBirth;
+        }
+        public function getTeacher() {
+            return $this->teacher;
+        }
+
+        public function setTeacher($teacher) {
+            $this->teacher = $teacher;
         }
 
         public function setUser($user) {

@@ -179,11 +179,16 @@ function registerNewUser()
     if($("#selectType0fUser").val() == "student")
     {
         // the user is a student
+        // create a Teacher object with form data
+        var userTeacher = new User("", "", "", "", "");
+        userTeacher.setId(parseInt($("#selectTeachers").val()));
+        var teacher = new Teacher(userTeacher, "", "", "", "");        
         // create a Student object with form data
         var student = new Student
         (
                 user,
                 province,
+                teacher,
                 $("#school").val(),
                 $("#city").val(),
                 $("#course").val(),

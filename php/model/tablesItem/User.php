@@ -1,5 +1,4 @@
 <?php
-    require_once '../Utilities.php';
     class User 
     {
         // =========================================== Attributes ============================

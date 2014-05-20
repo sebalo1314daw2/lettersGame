@@ -1,10 +1,13 @@
 <?php
+    require_once "../model/LettersGameDB.php";  
+    require_once '../tablesItem/Student.php';
     class StudentTable 
     {
         // ==================================== Attributes ===================================
         private static $NAME = "student";
         private static $COL_ID_USER = "id_user";
         private static $COL_ID_PROVINCE = "id_province";
+        private static $COL_ID_TEACHER = "id_teacher";
         private static $COL_SCHOOL = "school";
         private static $COL_CITY = "city";
         private static $COL_COURSE = "course";
@@ -26,6 +29,7 @@
                     " ("
                             .  self::$COL_ID_USER           . ", "
                             .  self::$COL_ID_PROVINCE       . ", "
+                            .  self::$COL_ID_TEACHER        . ", "
                             .  self::$COL_SCHOOL            . ", "
                             .  self::$COL_CITY              . ", "
                             .  self::$COL_COURSE            . ", "
@@ -37,15 +41,17 @@
                         ?,
                         ?,
                         ?,
+                        ?,
                         ?
                     );";
             $stmt = $db->prepare($sql);
             // associate values
             $stmt->bind_param
             (
-                    "iissss", 
+                    "iiissss", 
                     $student->getUser()->getId(),
                     $student->getProvince()->getId(),
+                    $student->getTeacher()->getUser()->getId(),
                     $student->getSchool(),
                     $student->getCity(),
                     $student->getCourse(),
