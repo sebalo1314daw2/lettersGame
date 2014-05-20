@@ -1,11 +1,11 @@
 <?php
             // Testing requires
-            require_once "../LettersGameDB.php";
-            require_once "../tablesItem/User.php";
+//            require_once "../LettersGameDB.php";
+//            require_once "../tablesItem/User.php";
 
     // Real requires
-//    require_once "../model/LettersGameDB.php";
-//    require_once "../model/tablesItem/User.php";
+    require_once "../model/LettersGameDB.php";
+    require_once "../model/tablesItem/User.php";
     class UserTable 
     {
         // ==================================== Attributes ===================================

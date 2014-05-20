@@ -1,15 +1,15 @@
 <?php
     // Testing requires
-    require_once "../LettersGameDB.php";
-    require_once "../tablesItem/Teacher.php";
-    require_once "UserTable.php";
-    require_once "ProvinceTable.php";
+//    require_once "../LettersGameDB.php";
+//    require_once "../tablesItem/Teacher.php";
+//    require_once "UserTable.php";
+//    require_once "ProvinceTable.php";
     
     // Real requires
-//    require_once "../model/LettersGameDB.php";    
-//    require_once "../model/tablesItem/Teacher.php";
-//    require_once "../model/tables/UserTable.php";
-//    require_once "../model/tables/ProvinceTable.php";
+    require_once "../model/LettersGameDB.php";    
+    require_once "../model/tablesItem/Teacher.php";
+    require_once "../model/tables/UserTable.php";
+    require_once "../model/tables/ProvinceTable.php";
     class TeacherTable 
     {
         // ==================================== Attributes ===================================
@@ -101,9 +101,10 @@
         }
     }
     // Testeo
-    $user = new User("", "", "", "");
-    $user->setId(8);
-    $province = new Province("");
-    $province->setId(1);
-    $teacher = new Teacher($user, $province, "Escuela de sergio", "ciudad de sergio", "3A, 1B");
+//    $user = new User("", "", "", "");
+//    $user->setId(8);
+//    $province = new Province("");
+//    $province->setId(1);
+//    $teacher = new Teacher($user, $province, "Escuela de sergio", "ciudad de sergio", "3A, 1B");
+//    TeacherTable::insert($teacher);
 ?>

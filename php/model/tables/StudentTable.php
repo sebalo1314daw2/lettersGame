@@ -1,6 +1,15 @@
 <?php
-    require_once "../model/LettersGameDB.php";  
-    require_once '../tablesItem/Student.php';
+    // Testing requires
+//    require_once "../LettersGameDB.php";
+//    require_once "../tablesItem/Student.php";
+//    require_once "UserTable.php";
+//    require_once "ProvinceTable.php";
+    
+    // Real requires
+    require_once "../model/LettersGameDB.php";    
+    require_once "../model/tablesItem/Student.php";
+    require_once "../model/tables/UserTable.php";
+    require_once "../model/tables/ProvinceTable.php";
     class StudentTable 
     {
         // ==================================== Attributes ===================================
@@ -63,4 +72,20 @@
             $db->close();
         }
     }
+    // Testeo
+//  // teacher
+//    $user = new User("", "", "", "");
+//    $user->setId(5);
+//    $province = new Province("");
+//    $province->setId(1);
+//    // student
+//    $user2 = new User("", "", "", "");
+//    $user2->setId(9);
+//    $province2 = new Province("");
+//    $province2->setId(2);
+//    
+//   
+//    $teacher = new Teacher($user, $province, "", "", "");
+//    $student = new Student($user2, $province2, $teacher, "Escuela de jose", "ciudad de jose", "curso de jose", "2012/03/12");
+//    StudentTable::insert($student);
 ?>
