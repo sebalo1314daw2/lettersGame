@@ -40,10 +40,10 @@
                         // Action: obtain all teachers stored in the database 
                         echo $this->obtainAllTeachers();
                         break;
-//                    case "2":
-//                        // Action: register a new user in the system
-//                        echo $this->registerNewUser($this->params["user"]);
-//                        break;
+                    case "2":
+                        // Action: register a new user in the system
+                        echo $this->registerNewUser($this->params["user"]);
+                        break;
                 }
             }
         }
@@ -93,84 +93,92 @@
          * @author Sergio Baena López
          * @version 1.0
          * @param {String} $user the user to register (Student or Teacher) (JSON format)
-         * @return POR ESPECIFICAR
+         * @return {String} Array format --> first element:
+         * a boolean indicating whether all valid attributes; second element: an associative array as the key the key of the fields attribute  and values​as a boolean indicating
+         * whether the fields is valid or not; third element: an array of errors (JSON encoded)
          */
-//        private function registerNewUser($user)
-//        {
-//            // decode the object.
-//            $user = json_decode(stripslashes($user));
-//            $province = new Province($user->province->value);
-//            $province->setId($user->province->id);
-//            // look if this is a Student or Teacher.
-//            if($user->TYPE == "Teacher")
-//            {
-//                // the user is a teacher
-//                $user = new Teacher
-//                (
-//                        new User
-//                        (
-//                                $user->user->username,
-//                                $user->user->password, 
-//                                $user->user->name,
-//                                $user->user->surnames
-//                        ), 
-//                        $province,
-//                        $user->school, 
-//                        $user->city,
-//                        $user->courses
-//                );
-//            }
-//            else
-//            {
-//                // the user is a student
-//                $user = new Student
-//                (
-//                        new User
-//                        (
-//                                $user->user->username,
-//                                $user->user->password, 
-//                                $user->user->name,
-//                                $user->user->surnames
-//                        ),
-//                        $province, 
-//                        $user->school, 
-//                        $user->city, 
-//                        $user->course,
-//                        $user->dateOfBirth
-//                );
-//            }
-//            // We have already created the Student or Teacher object.
-//            // Let's see if the username is unique (second validation)
-//            $validationArray = array();
-//            $validationArray[0] = true;
-//            $validationArray[1] = array();
-//            $validationArray[2] = array();
-//            // ----------------------- Validation username ----------------
-//            if(UserTable::isUniqueUsername($user->getUser()->getUsername()))
-//            {
-//                // is valid
-//                $validationArray[1]["username"] = true;
-//            }
-//            else
-//            {
-//                // is invalid
-//                $validationArray[0] = false;
-//                $validationArray[1]["username"] = false;
-//                $validationArray[2][4] = "[Nombre de usuario] Este nombre de usuario ya se est&aacute; usando";
-//            }
-//            // Validation done
-//            if($validationArray[0])
-//            {
-//                // all valid
-//                // correction to the data
-//                $user->correct();
-//                // correction done
-//                // TODO
-//                
-//                
-//                
-//                
-//            }
-//        }
+        private function registerNewUser($user)
+        {
+            // decode the object.
+            $user = json_decode(stripslashes($user));
+            $province = new Province($user->province->value);
+            $province->setId($user->province->id);
+            // look if this is a Student or Teacher.
+            if($user->TYPE == "Teacher")
+            {
+                // the user is a teacher
+                $user = new Teacher
+                (
+                        new User
+                        (
+                                $user->user->username,
+                                $user->user->password, 
+                                $user->user->name,
+                                $user->user->surnames
+                        ), 
+                        $province,
+                        $user->school, 
+                        $user->city,
+                        $user->courses
+                );
+            }
+            else
+            {
+                // the user is a student
+                $user = new Student
+                (
+                        new User
+                        (
+                                $user->user->username,
+                                $user->user->password, 
+                                $user->user->name,
+                                $user->user->surnames
+                        ),
+                        $province, 
+                        $user->school, 
+                        $user->city, 
+                        $user->course,
+                        $user->dateOfBirth
+                );
+            }
+            // We have already created the Student or Teacher object.
+            // Let's see if the username is unique (second validation)
+            $validationArray = array();
+            $validationArray[0] = true;
+            $validationArray[1] = array();
+            $validationArray[2] = array();
+            // ----------------------- Validation username ----------------
+            if(UserTable::isUniqueUsername($user->getUser()->getUsername()))
+            {
+                // is valid
+                $validationArray[1]["username"] = true;
+            }
+            else
+            {
+                // is invalid
+                $validationArray[0] = false;
+                $validationArray[1]["username"] = false;
+                $validationArray[2][4] = "[Nombre de usuario] Este nombre de usuario ya se est&aacute; usando";
+            }
+            // Validation done
+            if($validationArray[0])
+            {
+                // all valid
+                // correction to the data
+                $user->correct();
+                // correction done
+                // We do the INSERTS
+                UserTable::insert($user->getUser());
+                if($user->TYPE == "Student")
+                {
+                    StudentTable::insert($user);
+                }
+                else
+                {
+                    TeacherTable::insert($user);
+                }
+            }
+            return json_encode($validationArray);
+        }
     }
 ?>
