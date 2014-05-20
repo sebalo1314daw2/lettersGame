@@ -113,4 +113,14 @@ function User(username, password, passwordConfirmation, name, surnames)
         // ----------------------------------- return data -------------------------
         return validationArray;   
     }
-        
+   /**
+    * encryptedPassword()
+    * @description Procedure which aims to encrypt the password and put the empty string "passwordConfirmation".
+    * @author Sergio Baena López
+    * @version 1.0
+    */
+    User.prototype.encryptedPassword = function()
+    {
+        this.password = hex_md5(this.password);
+        this.passwordConfirmation = "";
+    }

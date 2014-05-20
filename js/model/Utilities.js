@@ -128,3 +128,58 @@ Utilities.associativeArrayToNumericArray = function(associativeArray)
     }
     return numericArray;
 }
+/**
+ * dateConverter()
+ * @description Function that seeks to convert a date format "yyyy-mm-dd" format "dd/mm/yyyy".
+ * @author Sergio Baena López
+ * @version 1.0
+ * @param {String} date date formatted "yyyy-mm-dd"
+ * @return {Array} an associative array:
+ * key: "converterError" {boolean} indicates if the converter has an error or not and could not do the conversion
+ * key: "convertedDate" {String} the converted date (dd/mm/yyyy)
+ */
+Utilities.dateConverter = function(date)
+{
+    var dateArray = date.split("-");
+    var arrayToReturn = new Array();
+    if(dateArray.length == 3)
+    {
+        // correct number of elements of the date --> We can do the conversion
+        arrayToReturn["converterError"] = false;
+        arrayToReturn["convertedDate"] = dateArray[2] + "/" + dateArray[1] + "/" + dateArray[0];
+    }
+    else
+    {
+        // incorrect number of elements of the date --> We cannot do the conversion
+        arrayToReturn["converterError"] = true;
+    }
+    return arrayToReturn;
+}
+/**
+ * dateConverterReverse()
+ * @description Function that is intended to make the reverse conversion date, ie convert a date in
+ * "dd/mm/yyyy" format to "yyyy-mm-dd" format.
+ * @author Sergio Baena López
+ * @version 1.0
+ * @param {String} date the date to convert (format dd/mm/yyyy)
+ * @return {Array} an associative array:
+ * key: "converterError" {boolean} indicates if the converter has an error or not and could not do the conversion
+ * key: "convertedDate" {String} the converted date (yyyy-mm-dd)
+ */
+Utilities.dateConverterReverse = function(date)
+{
+    var dateArray = date.split("/");
+    var arrayToReturn = new Array();
+    if(dateArray.length == 3)
+    {
+        // correct number of elements of the date --> We can do the conversion
+        arrayToReturn["converterError"] = false;
+        arrayToReturn["convertedDate"] = dateArray[2] + "-" + dateArray[1] + "-" + dateArray[0];
+    }
+    else
+    {
+        // incorrect number of elements of the date --> We cannot do the conversion
+        arrayToReturn["converterError"] = true;
+    }
+    return arrayToReturn;
+}

@@ -230,6 +230,8 @@ function registerNewUser()
     if(validationArray[0])
     {
         // all valid fields (first validation)
+        // Before sent, we encrypt the password.
+        teacherOrStudent.getUser().encryptedPassword();
         var dataArray = Utilities.sendUserForRegister
         (
             teacherOrStudent, 
@@ -270,7 +272,10 @@ function registerNewUser()
             else
             {
                 $("#errorsForm").children().remove();
-                var errorListInHTMLFormat = Utilities.createErrorListInHTMLFormat(validationArray[2]);
+                var errorListInHTMLFormat = Utilities.createErrorListInHTMLFormat
+                (
+                        Utilities.associativeArrayToNumericArray(validationArray[2])
+                );
                 $("#errorsForm").append(errorListInHTMLFormat);
             }
         }

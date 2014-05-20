@@ -19,7 +19,9 @@
             // We remove double or more spaces from the middle
             $properNames = preg_replace('/\s+/', ' ', $properNames);  
             // We put the first letter capitalized and the rest lower case of each word
-            $properNames = ucwords(strtolower($properNames));
+            $properNames = mb_convert_case($properNames, MB_CASE_TITLE, "UTF-8");
+            // Spent all non-ASCII characters to HTML entities.
+            $properNames = htmlentities($properNames, ENT_COMPAT, "UTF-8");
             return $properNames;
         }
     }
