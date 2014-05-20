@@ -1,11 +1,11 @@
 <?php
         // Testing requires
-        require_once "../LettersGameDB.php";
-        require_once "../tablesItem/Province.php";
+//        require_once "../LettersGameDB.php";
+//        require_once "../tablesItem/Province.php";
 
     // Real requires
-//    require_once "../model/LettersGameDB.php";
-//    require_once "../model/tablesItem/Province.php";
+    require_once "../model/LettersGameDB.php";
+    require_once "../model/tablesItem/Province.php";
     class ProvinceTable 
     {
         // ==================================== Attributes ===================================

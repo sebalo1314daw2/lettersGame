@@ -161,6 +161,7 @@ function resetTeacherFields()
  */
 function registerNewUser()
 {
+    var SERVER_PATH = "../php/control/invokeController.php";
     // --------------------------------------------- data validation -------------------------
     var validationArray;
     // create a User object with form data
@@ -182,9 +183,11 @@ function registerNewUser()
         // create a Teacher object with form data
         var userTeacher = new User("", "", "", "", "");
         userTeacher.setId(parseInt($("#selectTeachers").val()));
-        var teacher = new Teacher(userTeacher, "", "", "", "");        
+        var provinceTeacher = new Province("");
+        provinceTeacher.setId("");
+        var teacher = new Teacher(userTeacher, provinceTeacher, "", "", "");        
         // create a Student object with form data
-        var student = new Student
+        var teacherOrStudent = new Student
         (
                 user,
                 province,
@@ -194,13 +197,12 @@ function registerNewUser()
                 $("#course").val(),
                 $("#dateOfBirth").val()
         );
-        validationArray = student.validate();
     }
     else
     {
         // the user is a teacher
         // create a Teacher object with form data
-        var teacher = new Teacher
+        var teacherOrStudent = new Teacher
         (
                 user,
                 province,
@@ -208,8 +210,8 @@ function registerNewUser()
                 $("#city").val(),
                 $("#courses").val()
         );
-        validationArray = teacher.validate();
     }
+    validationArray = teacherOrStudent.validate();
     // We put styles that correspond to text fields depending valid or not.
     for(var nameOfFormField in validationArray[1])
     {
@@ -227,11 +229,29 @@ function registerNewUser()
     }
     if(validationArray[0])
     {
-        alert("es valido todos los campos");
+        // all valid fields.
+        // PROBAMOS LA LLAMADA DE AJAX
+        Utilities.sendUserForRegister
+        (
+            teacherOrStudent, 
+            SERVER_PATH, 
+            function(){showLoadAnimation();}, 
+            function(){hideLoadAnimation();}
+        );
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
     }
     else
     {
-//        showErrors(validationArray[2]);
           $("#errorsForm").children().remove();
           var errorListInHTMLFormat = Utilities.createErrorListInHTMLFormat(validationArray[2]);
           $("#errorsForm").append(errorListInHTMLFormat);

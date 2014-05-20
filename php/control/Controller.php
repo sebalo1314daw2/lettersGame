@@ -2,6 +2,8 @@
     require_once "../model/tables/ProvinceTable.php";
     require_once "../model/tables/TeacherTable.php";
     require_once "../model/tables/UserTable.php";
+    require_once "../model/tables/StudentTable.php";
+    require_once "../model/tables/TeacherTable.php";
     class Controller 
     {
         // ======================================== Attributes =================================================
@@ -125,6 +127,24 @@
             else
             {
                 // the user is a student
+                $theAtrrUserOfTheTeacher = new User
+                (
+                        $user->teacher->user->username,
+                        $user->teacher->user->password, 
+                        $user->teacher->user->name, 
+                        $user->teacher->user->surnames
+                );
+                $theAtrrUserOfTheTeacher->setId($user->teacher->user->id);
+                $theAttrProvinceOfTheTeacher = new Province($user->teacher->province->value);
+                $theAttrProvinceOfTheTeacher->setId($user->teacher->province->id);
+                $teacher = new Teacher
+                (
+                        $theAtrrUserOfTheTeacher,
+                        $theAttrProvinceOfTheTeacher,
+                        $user->teacher->school,
+                        $user->teacher->city,
+                        $user->teacher->courses
+                );
                 $user = new Student
                 (
                         new User
@@ -134,7 +154,8 @@
                                 $user->user->name,
                                 $user->user->surnames
                         ),
-                        $province, 
+                        $province,
+                        $teacher,
                         $user->school, 
                         $user->city, 
                         $user->course,

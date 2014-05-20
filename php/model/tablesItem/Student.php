@@ -2,7 +2,7 @@
     require_once 'User.php';
     require_once 'Province.php';
     require_once 'Teacher.php';
-    require_once '../Utilities.php';
+//    require_once '../Utilities.php';
     class Student 
     {
         // =========================================== Attributes ============================
@@ -13,7 +13,7 @@
         private $city; // (String)
         private $course; // (String)
         private $dateOfBirth; // (String)
-        public static $TYPE = "Student"; // (String)
+        public $TYPE = "Student"; // (String)
         // =========================================== Constructor ============================
         function __construct($user, $province, $teacher, $school, $city, $course, $dateOfBirth) {
             $this->user = $user;

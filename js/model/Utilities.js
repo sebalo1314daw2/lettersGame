@@ -71,13 +71,34 @@ Utilities.createErrorListInHTMLFormat = function(errorsArray)
  * @version 1.0
  * @param {Student object | Teacher object} user the user to send
  * @param {String} serverPath the server path where we send the user
+ * @param {function} beforeSendFunction Function to be performed just before going to the server.
+ * @param {function} completeFunction Function to be executed just after returning from the server.
  * @return POR ESPECIFICAR
  */
-Utilities.sendUserForRegister = function(user, serverPath)
+Utilities.sendUserForRegister = function(user, serverPath, beforeSendFunction, completeFunction)
 {
-    
-    
-    
-    
-    
+    $.ajax(
+    {
+            url: serverPath,
+            type: "POST",
+            async: true,
+            data: "action=2&user=" + JSON.stringify(user),
+            dataType: "json",
+            beforeSend: function (xhr)
+            {
+                beforeSendFunction();
+            },
+            complete: function (xhr, status)
+            {
+                completeFunction();
+            },
+            success: function (response)
+            {
+//                outputData = response;
+            },
+            error: function (xhr, ajaxOptions, thrownError) 
+            {
+//                dataArray["isServerError"] = true;
+            }	
+    }); 
 }
