@@ -125,6 +125,39 @@
             // close connection
             $db->close();
         }
+        /**
+         * findByUsername()
+         * Function which aims get the object "User" that match the specified username.
+         * @author Sergio Baena López
+         * @version 1.0
+         * @param {String} $username the username of the user to search
+         * @return {User object} the object "User" that match the specified username
+         */
+        public static function findByUsername($username)
+        {
+            // open connection
+            $db = new LettersGameDB();
+            // prepare query
+            $sql =   "SELECT *
+                      FROM " . self::$NAME .
+                    " WHERE " . self::$NAME . "." . self::$COL_USERNAME . " = ?;";
+            $stmt = $db->prepare($sql);
+            // associate values
+            $stmt->bind_param("s", $username);
+            // execute query
+            $stmt->execute();
+            // link outcome variables
+            $stmt->bind_result($id, $username, $password, $name, $surnames);
+            // get the value
+            $stmt->fetch();
+            // create a "User" object container for all these values.
+            $user = new User($username, $password, $name, $surnames);
+            $user->setId($id);
+            // close connection
+            $db->close();
+            // return the User object
+            return $user;
+        }
     }
     // Testeo
 //    $user = new User("sergio1", "sergio1", "Sergio", "Baena Lopez");

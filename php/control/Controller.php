@@ -190,6 +190,10 @@
                 // correction done
                 // We do the INSERTS
                 UserTable::insert($user->getUser());
+                // We get the id_user for the second insert
+                $idUser = UserTable::findByUsername($user->getUser()->getUsername())->getId();
+                // We put the id_user into this object
+                $user->getUser()->setId($idUser);
                 if($user->TYPE == "Student")
                 {
                     StudentTable::insert($user);

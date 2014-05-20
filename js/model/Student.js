@@ -8,8 +8,8 @@ function Student(user, province, teacher, school, city, course,dateOfBirth)
         this.city = city; // (String)
         this.course = course; // (String)
         this.dateOfBirth = dateOfBirth; // (String)
+        this.TYPE = "Student" // (String)
 }
-        Student.prototype.TYPE = "Student"; // (String)
         // ===================================== Accessors ======================================
         // ------------------------------------------ Read accessors -----------------------------------
         Student.prototype.getUser = function(){return this.user;}
@@ -19,6 +19,7 @@ function Student(user, province, teacher, school, city, course,dateOfBirth)
         Student.prototype.getCity = function(){return this.city;}
         Student.prototype.getCourse = function(){return this.course;}
         Student.prototype.getDateOfBirth = function(){return this.dateOfBirth;}
+        Student.prototype.getTYPE = function(){return this.TYPE;}
         // ------------------------------------------ Write accessors -----------------------------------
         Student.prototype.setUser = function(user){this.user = user;}
         Student.prototype.setProvince = function(province){this.province = province;}
@@ -26,7 +27,7 @@ function Student(user, province, teacher, school, city, course,dateOfBirth)
         Student.prototype.setSchool = function(school){this.school = school;}
         Student.prototype.setCity = function(city){this.city = city;}
         Student.prototype.setCourse = function(course){this.course = course;}
-        Student.prototype.SetDateOfBirth = function(dateOfBirth){this.dateOfBirth = dateOfBirth;}
+        Student.prototype.setDateOfBirth = function(dateOfBirth){this.dateOfBirth = dateOfBirth;}
         // ===================================== Methods =============================================
        /**
         * validate()

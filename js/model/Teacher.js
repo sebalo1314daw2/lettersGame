@@ -6,8 +6,8 @@ function Teacher(user, province, school, city, courses)
     this.school = school; // (String)
     this.city = city; // (String)
     this.courses = courses; // (String)
+    this.TYPE = "Teacher"; // (String)
 }
-    Teacher.prototype.TYPE = "Teacher"; // (String)
     // ===================================== Accessors =============================================
     // ------------------------------------------ Read accessors -----------------------------------
     Teacher.prototype.getUser = function(){return this.user;}
@@ -15,6 +15,7 @@ function Teacher(user, province, school, city, courses)
     Teacher.prototype.getSchool = function(){return this.school;}
     Teacher.prototype.getCity = function(){return this.city;}
     Teacher.prototype.getCourses = function(){return this.courses;}
+    Teacher.prototype.getTYPE = function(){return this.TYPE;}
     // ------------------------------------------ Write accessors -----------------------------------
     Teacher.prototype.setUser = function(user){this.user = user;}
     Teacher.prototype.setProvince = function(province){this.province = province;}
