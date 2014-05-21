@@ -187,6 +187,29 @@ function registerNewUser()
         provinceTeacher.setId("");
         var teacher = new Teacher(userTeacher, provinceTeacher, "", "", "");        
         // create a Student object with form data
+        var resultArray;
+        var date =  $("#dateOfBirth").val();
+        var finalDate;
+        if(date.search("-") != -1)
+        {
+            // has a dash least --> do conversion
+            resultArray = Utilities.dateConverter(date);
+            if(resultArray["converterError"])
+            {
+                // converter error
+                finalDate = date;
+            }
+            else
+            {
+                // no converter error
+                finalDate = resultArray["convertedDate"];
+            }
+        }
+        else
+        {
+            // has not a dash 
+            finalDate = date;
+        }
         var teacherOrStudent = new Student
         (
                 user,
@@ -195,7 +218,7 @@ function registerNewUser()
                 $("#school").val(),
                 $("#city").val(),
                 $("#course").val(),
-                $("#dateOfBirth").val()
+                finalDate
         );
     }
     else
@@ -232,6 +255,16 @@ function registerNewUser()
         // all valid fields (first validation)
         // Before sent, we encrypt the password.
         teacherOrStudent.getUser().encryptedPassword();
+        if(teacherOrStudent.getTYPE() == "Student")
+        {
+            // is student --> he has date
+            date = teacherOrStudent.getDateOfBirth();
+            // date is with this format: dd/mm/yyyy
+            resultArray = Utilities.dateConverterReverse(date);
+            finalDate = resultArray["convertedDate"];
+            // finalDate has the correct format for the database
+            teacherOrStudent.setDateOfBirth(finalDate);
+        }   
         var dataArray = Utilities.sendUserForRegister
         (
             teacherOrStudent, 
@@ -277,6 +310,7 @@ function registerNewUser()
                         Utilities.associativeArrayToNumericArray(validationArray[2])
                 );
                 $("#errorsForm").append(errorListInHTMLFormat);
+                resetPasswordFields();
             }
         }
     }
@@ -285,5 +319,17 @@ function registerNewUser()
           $("#errorsForm").children().remove();
           var errorListInHTMLFormat = Utilities.createErrorListInHTMLFormat(validationArray[2]);
           $("#errorsForm").append(errorListInHTMLFormat);
+          resetPasswordFields();
     }
+}
+/**
+ * resetPasswordFields()
+ * @description  Procedure which aims reset the password fields
+ * @author Sergio Baena López
+ * @version 1.0
+ */
+function resetPasswordFields()
+{
+    $("#password").val("");
+    $("#passwordConfirmation").val("");
 }
