@@ -6,6 +6,7 @@ function atTheStartOfPage()
 {
     createSelectProvincies();
     createSelectTeachers();
+    document.getElementById("initialSound").play();
 }
 /**
  * createSelectProvincies()

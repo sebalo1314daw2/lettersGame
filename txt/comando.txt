@@ -1,0 +1,1 @@
+espeak -ves+f5 -s150 -f /var/www/lettersGame/txt/sonido.txt -w "home.wav"
