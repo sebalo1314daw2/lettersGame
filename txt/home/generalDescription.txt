@@ -12,5 +12,9 @@ un cuerpo que describe de qué va esta web y un enlace para acceder a la ONCE.
 
 Si quieres utilizar el menú utiliza las teclas de derecha e izquierda.
 
-Si quieres saber de que va la web teclea "C" y si quieres clicar en el enlace de la ONCE, pulsa O.
+Si quieres saber de que va la web teclea "C".
+
+Si quieres clicar en el enlace de la ONCE, pulsa O.
+
+Y si quieres que se vuelva a repitir todo lo que acabamos de decir, pulsa "W".
 

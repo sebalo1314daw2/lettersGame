@@ -261,4 +261,7 @@ body.loading
     background-repeat: no-repeat;
     background-position: right center;
 }
-
+.hiddenData
+{
+    display: none;
+}

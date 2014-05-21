@@ -4,7 +4,18 @@ $("window").ready(function(){atTheStartOfPage();});
  */
 function atTheStartOfPage()
 {
+    var soundList = new Array
+    (
+            "generalDescriptionSound",
+            "goToRegisterSound",
+            "bodyIntroductionSound", 
+            "quickReadSound", 
+            "slowReadSound",
+            "clickLinkSound",
+            "timeoutSound"
+    );
     enableCaptureKey();
+    checkInactivity(soundList);
 }
 /**
  * keyHandler()
@@ -18,7 +29,9 @@ function keyHandler(ASCIICode)
             "goToRegisterSound",
             "bodyIntroductionSound", 
             "quickReadSound", 
-            "slowReadSound"
+            "slowReadSound",
+            "clickLinkSound",
+            "timeoutSound"
     );
     switch(ASCIICode)
     {
@@ -49,6 +62,23 @@ function keyHandler(ASCIICode)
             Utilities.stopAll(soundList);
             document.getElementById("slowReadSound").play();
             break;
+        case 79:
+            // Key: O
+            // Action: click on the ONCE link
+            // informative message
+            Utilities.stopAll(soundList);
+            document.getElementById("clickLinkSound").play();
+            // redirect
+            setTimeout(function(){window.location.href = "http://www.once.es/";}, 3000);
+            break;
+        case 87:
+            // Key: W
+            // Action: reproduce the sound of the description of the web.
+            Utilities.stopAll(soundList);
+            document.getElementById("generalDescriptionSound").play();
+            break;
     }
+    // Enter a hidden "div" the time the last time a key was pressed
+    var lastTime = new Date().getTime();
+    $("#lastTimeAKeyWasPressed").html(lastTime);
 }
-

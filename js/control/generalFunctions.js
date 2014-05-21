@@ -70,3 +70,37 @@ function enableCaptureKey()
         });
     }
 }
+/**
+ * checkInactivity()
+ * @description Procedure that aims to check whether the site is inactive or not. Consider that the site 
+ * is inactive if the time since the last time a key is pressed is longer than 10 minutes. If it is, this
+ * process will play a sound asking if the user is there.
+ * @author Sergio Baena López
+ * @version 1.0
+ * @param {Array} soundList the list of sounds to stop (id)
+ */
+function checkInactivity(soundList)
+{
+    // we look at the empty "div" hidden chain.
+    var currentTime = new Date().getTime();
+    if($("#lastTimeAKeyWasPressed").html() == "")
+    {
+        // is empty string (no inactivity)
+        // put the current time.
+        $("#lastTimeAKeyWasPressed").html(currentTime);
+    }
+    else
+    {
+        // there may be inactivity
+        var lastTime = parseInt($("#lastTimeAKeyWasPressed").html());
+        // look if the user has spent more than 10 minutes (600000 milliseconds).
+        if(currentTime - lastTime > 600000)
+        {
+            // more than 10 minutes of timeout
+            Utilities.stopAll(soundList);
+            document.getElementById("timeoutSound").play();
+        }
+    }
+    // do this function into a loop. (each 2 minutes)
+    setTimeout(function(){checkInactivity(soundList);}, 120000);
+}
