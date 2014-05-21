@@ -41,3 +41,32 @@ function showErrors(errorsArray)
     }
     alert(alertContent);
 }
+/**
+ * enableCaptureKey()
+ * @description Procedure that aims to enable the capture key. To handle user keystrokes, create a function 
+ * called keyHandler(ASCIICode)
+ * @author Sergio Baena López
+ * @version 1.0
+ */
+function enableCaptureKey()
+{
+    if(navigator.appVersion.indexOf("MSIE") != -1)
+    {
+        // is Internet Explorer
+        window.document.getElementById("webBody").attachEvent("onkeydown", function()
+        {
+            var event = window.event;
+            var ASCIICode = event.keyCode;
+            keyHandler(ASCIICode);
+        });
+    }
+    else
+    {
+        // is not Internet Explorer
+        $(window).keydown(function(event)
+        {
+            var ASCIICode = event.keyCode;
+            keyHandler(ASCIICode);
+        });
+    }
+}

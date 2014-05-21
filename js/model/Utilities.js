@@ -183,3 +183,18 @@ Utilities.dateConverterReverse = function(date)
     }
     return arrayToReturn;
 }
+/**
+ * stopAll()
+ * @description Procedure aims stop all sounds listed in the array (their id's).
+ * @author Sergio Baena López
+ * @version 1.0
+ * @param {Array} soundList list of sound to pause
+ */
+Utilities.stopAll = function(soundList)
+{
+    for(var i = 0; i < soundList.length; i++)
+    {
+        document.getElementById(soundList[i]).pause();
+        document.getElementById(soundList[i]).currentTime = "0";
+    }   
+}

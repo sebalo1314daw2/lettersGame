@@ -6,11 +6,11 @@ Esta web tiene un menú, con las opciones de ir a la página de inicio,
 
 registrarse, e iniciar sesión, 
 
-un cuerpo que describe de que va esta web y un enlace para acceder a la ONCE. 
+un cuerpo que describe de qué va esta web y un enlace para acceder a la ONCE. 
 
 ¿Qué quieres hacer?
 
 Si quieres utilizar el menú utiliza las teclas de derecha e izquierda.
 
-Si quieres saber de que va la web tecla "C" y si quieres clicar en el enlace de la ONCE, pulsa O.
+Si quieres saber de que va la web teclea "C" y si quieres clicar en el enlace de la ONCE, pulsa O.
 
