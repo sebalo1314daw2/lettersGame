@@ -4,8 +4,15 @@ $("document").ready(function(){atTheStartOfPage();});
  */
 function atTheStartOfPage()
 {
+    var soundList = new Array
+    (
+            "goToHomeSound",
+            "beginFormSound"
+    );
     createSelectProvincies();
     createSelectTeachers();
+    enableCaptureKey();
+    checkInactivity(soundList);
 //    document.getElementById("initialSound").play();
 }
 /**
@@ -333,4 +340,47 @@ function resetPasswordFields()
 {
     $("#password").val("");
     $("#passwordConfirmation").val("");
+}
+/**
+ * keyHandler()
+ */
+function keyHandler(ASCIICode)
+{
+//    alert(ASCIICode);
+    var soundList = new Array
+    (
+            "goToHomeSound", 
+            "beginFormSound"
+    );
+    switch(ASCIICode)
+    {
+        case 37:
+            // Key: <--
+            // Action: click on the menu item "Pagina de inicio".
+            // informative message 
+            Utilities.stopAll(soundList);
+            document.getElementById("goToHomeSound").play();
+            // redirect
+            setTimeout(function(){window.location.href = "home.html";}, 2500);
+            break;
+        case 39:
+            // Key: -->
+            // Action: click on the menu item "Iniciar sesion".
+            // TODO
+            break;
+        case 36:
+            // Key: Begin
+            // Action: gains focus first form field.
+            // informative message 
+            Utilities.stopAll(soundList);
+            document.getElementById("beginFormSound").play();
+            // gains focus first form field.
+            setTimeout(function(){document.getElementById("selectType0fUser").focus();}, 3100);
+            break;
+            
+        
+    }
+    // Enter a hidden "div" the time the last time a key was pressed
+    var lastTime = new Date().getTime();
+    $("#lastTimeAKeyWasPressed").html(lastTime);
 }
