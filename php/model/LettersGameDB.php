@@ -6,8 +6,8 @@
 		parent::__construct
                 (
 			"localhost",
-			"root",
-			"",
+			"letters_user",
+			"letters_user",
 			"letters_game_db"
 		);
 	}

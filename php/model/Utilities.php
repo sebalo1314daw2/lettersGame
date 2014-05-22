@@ -35,7 +35,13 @@
          */
         public static function convertStringToSound($string, $path, $fileName)
         {
-            $cmd = "espeak -ves+f5 -s150 ' . $string . '-w " . $path . $fileName . ".wav";
+            $cmd = "espeak -ves+f5 -s150 '" . $string . "' -w /tmp/" . $fileName . ".wav";
+//            echo $cmd;
+            shell_exec($cmd);
+            // we have the sound format "wav"
+            // changed it to mp3.
+            $cmd = "lame /tmp/" . $fileName . ".wav " . $path . $fileName . ".mp3";
+//            echo $cmd;
             shell_exec($cmd);
         }
     }
