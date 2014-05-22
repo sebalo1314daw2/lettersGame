@@ -437,12 +437,36 @@ function keyHandler(ASCIICode)
  */
 function readField(fieldObject)
 {
+    var SERVER_PATH = "../php/control/invokeController.php";
     var soundList = obtainAllSoundOfThePage();
     if($(fieldObject).val() == "")
     {
         // the field is empty string
         Utilities.stopAll(soundList);
         document.getElementById($(fieldObject).attr("id") + "EmptySound").play();
+    }
+    else
+    {
+        // the field has something
+        var fieldNames = new Array();
+        fieldNames["name"] = "El nombre";
+        fieldNames["surnames"] = "El/los apellidos";
+        fieldNames["school"] = "El colegio";
+        fieldNames["city"] = "La ciudad";
+        fieldNames["username"] = "El nombre de usuario";
+        fieldNames["course"] = "El curso";
+        fieldNames["dateOfBirth"] = "La fecha de nacimiento";
+        fieldNames["courses"] = "El/los cursos";
+//        var msg = "Campo rellenado. "                   +  
+//                  fieldNames[$(fieldObject).attr("id")] +
+//                  " que has indicado es "              +
+//                  $(fieldObject).val()                  +
+//                  ".";
+        var msg = "hola";
+        Utilities.convertStringToSound
+        (
+                SERVER_PATH, msg, "ficherito", function(){showLoadAnimation();}, function(){hideLoadAnimation();}
+        );
     }
 }
 /**

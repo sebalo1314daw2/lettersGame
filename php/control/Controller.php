@@ -4,6 +4,7 @@
     require_once "../model/tables/UserTable.php";
     require_once "../model/tables/StudentTable.php";
     require_once "../model/tables/TeacherTable.php";
+    require_once "../model/Utilities.php";
     class Controller 
     {
         // ======================================== Attributes =================================================
@@ -211,14 +212,17 @@
         }
         /**
          * passStringToSound()
+         * Function which aims to pass the string sound comes from client and put the name it provided.
+         * @author Sergio Baena López
+         * @version 1.0
+         * @param {String} $string the string we want to pass sound.
+         * @param {String} $fileName the name of the file we want to have
+         * @return {boolean} returns true because you have to return something.
          */
-        
-        
-        
-        
-        
-        
-        
-        
+        private function passStringToSound($string, $fileName)
+        {
+            Utilities::convertStringToSound($string, "../../mp3/dynamicSounds/", $fileName);
+            return true;
+        }
     }
 ?>

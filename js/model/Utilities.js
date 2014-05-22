@@ -198,3 +198,41 @@ Utilities.stopAll = function(soundList)
         document.getElementById(soundList[i]).currentTime = "0";
     }   
 }
+/**
+ * convertStringToSound()
+ * Procedure that aims to transform a string to a mp3 sound file.
+ * @author Sergio Baena López
+ * @version 1.0
+ * @param {String} serverPath the server path 
+ * @param {String} string the string to convert
+ * @param {String} fileName the file name of the created sound (without file extension)
+ * @param {function} beforeSendFunction Function to be performed just before going to the server.
+ * @param {function} completeFunction Function to be executed just after returning from the server.
+ */
+Utilities.convertStringToSound = function(serverPath, string, fileName, beforeSendFunction, completeFunction)
+{
+    $.ajax(
+    {
+            url: serverPath,
+            type: "POST",
+            async: false,
+            data: "action=3&string=" + string + "&fileName=" + fileName,
+            dataType: "json",
+            beforeSend: function (xhr)
+            {
+                beforeSendFunction();
+            },
+            complete: function (xhr, status)
+            {
+                completeFunction();
+            },
+            success: function (response)
+            {
+//                dataArray["validationArray"] = response;
+            },
+            error: function (xhr, ajaxOptions, thrownError) 
+            {
+//                dataArray["isServerError"] = true;
+            }	
+    });
+}
