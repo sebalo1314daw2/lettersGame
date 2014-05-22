@@ -24,5 +24,23 @@
             $properNames = htmlentities($properNames, ENT_COMPAT, "UTF-8");
             return $properNames;
         }
+        /**
+         * convertStringToSound()
+         * Procedure that aims to transform a string to a mp3 sound file.
+         * @author Sergio Baena López
+         * @version 1.0
+         * @param {String} $string the string to convert
+         * @param {String} $path the path where will be the sound file (must end with /)
+         * @param {String} $fileName the file name of the created sound (without file extension)
+         */
+        public static function convertStringToSound($string, $path, $fileName)
+        {
+            $cmd = "espeak -ves+f5 -s150 ' . $string . '-w " . $path . $fileName . ".wav";
+            shell_exec($cmd);
+        }
     }
+    // Testeo
+    Utilities::convertStringToSound("Hola chico", "/tmp/", "prueba");
+    
+    
 ?>

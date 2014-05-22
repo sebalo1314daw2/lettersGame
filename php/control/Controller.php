@@ -46,6 +46,10 @@
                         // Action: register a new user in the system
                         echo $this->registerNewUser($this->params["user"]);
                         break;
+                    case "3":
+                        // Action: pass a string to sound.
+                        echo $this->passStringToSound($this->params["string"], $this->params["fileName"]);
+                        break;
                 }
             }
         }
@@ -205,5 +209,16 @@
             }
             return json_encode($validationArray);
         }
+        /**
+         * passStringToSound()
+         */
+        
+        
+        
+        
+        
+        
+        
+        
     }
 ?>
