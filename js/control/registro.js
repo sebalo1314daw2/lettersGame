@@ -4,15 +4,12 @@ $("document").ready(function(){atTheStartOfPage();});
  */
 function atTheStartOfPage()
 {
-    var soundList = new Array
-    (
-            "goToHomeSound",
-            "beginFormSound"
-    );
+    var soundList = obtainAllSoundOfThePage();
     createSelectProvincies();
     createSelectTeachers();
     enableCaptureKey();
     checkInactivity(soundList);
+    addFocusEventInForm();
 //    document.getElementById("initialSound").play();
 }
 /**
@@ -347,11 +344,7 @@ function resetPasswordFields()
 function keyHandler(ASCIICode)
 {
 //    alert(ASCIICode);
-    var soundList = new Array
-    (
-            "goToHomeSound", 
-            "beginFormSound"
-    );
+    var soundList = obtainAllSoundOfThePage();
     switch(ASCIICode)
     {
         case 37:
@@ -386,16 +379,82 @@ function keyHandler(ASCIICode)
             // gains focus last form field.
             if($("#selectType0fUser").val() == "student")
             {
-                
+                 setTimeout(function(){document.getElementById("dateOfBirth").focus();}, 3200);
             }
-            
-            
-            
-//            setTimeout(function(){document.getElementById("selectType0fUser").focus();}, 3100);
-//            break;
-        
+            else
+            {
+                setTimeout(function(){document.getElementById("courses").focus();}, 3200);
+            }
+            break;
+        case 79:
+            // Key: O
+            // Action: click on the ONCE link
+            // informative message
+            Utilities.stopAll(soundList);
+            document.getElementById("clickLinkSound").play();
+            // redirect
+            setTimeout(function(){window.location.href = "http://www.once.es/";}, 3000);
+            break;
+        case 13:
+            // Key: intro
+            // Action: send form
+            // informative message
+            Utilities.stopAll(soundList);
+            document.getElementById("sendFormSound").play();
+            // send form
+            setTimeout(function(){registerNewUser();}, 3000);
+            break;
+    }
+    // Look if there is a field that has focus.
+    if
+    (
+            $(".field > *").is(":focus")
+    )
+    {
+        // a field has focus.
+        // reproduce, in the background, a sound that indicates you are typing.
+        Utilities.stopAll(new Array("keySound"));
+        document.getElementById("keySound").play();
     }
     // Enter a hidden "div" the time the last time a key was pressed
     var lastTime = new Date().getTime();
     $("#lastTimeAKeyWasPressed").html(lastTime);
+}
+/**
+ * readField()
+ * @description Procedure that is intended to run informative sounds when the user is positioned
+ * in a form field.
+ * @author Sergio Baena López
+ * @version 1.0
+ * @param {DOM object} fieldObject the field that has focus.
+ */
+function readField(fieldObject)
+{
+    var soundList = obtainAllSoundOfThePage();
+    if($(fieldObject).val() == "")
+    {
+        // the field is empty string
+        Utilities.stopAll(soundList);
+        document.getElementById($(fieldObject).attr("id") + "EmptySound").play();
+    }
+}
+/**
+ * obtainAllSoundOfThePage()
+ * @description Procedure which aims to get all the sounds of the page (id)
+ * @author Sergio Baena López
+ * @version 1.0
+ * @return {Array of STring's} all the sounds of the page (id)
+ */
+function obtainAllSoundOfThePage()
+{
+    var soundList = new Array
+    (
+            "goToHomeSound",
+            "beginFormSound",
+            "endFormSound",
+            "clickLinkSound",
+            "sendFormSound",
+            "nameEmptySound"
+    );
+    return soundList;
 }

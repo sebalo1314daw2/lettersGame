@@ -104,3 +104,15 @@ function checkInactivity(soundList)
     // do this function into a loop. (each 2 minutes)
     setTimeout(function(){checkInactivity(soundList);}, 120000);
 }
+/**
+ * addFocusEventInForm()
+ * @description Procedure that aims to add the "onfocus" event in all fields of the form.
+ * This procedure provides a method, "readField(fieldObject)", to manage what you do when a form 
+ * field has the focus.
+ * @author Sergio Baena López
+ * @version 1.0
+ */
+function addFocusEventInForm()
+{
+    $(".field > *").focus(function(){readField($(this));});
+}
