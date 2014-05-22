@@ -406,10 +406,17 @@ function keyHandler(ASCIICode)
             break;
     }
     // Look if there is a field that has focus.
-    if
-    (
-            $(".field > *").is(":focus")
-    )
+    if($(".field > *").is(":focus") && (ASCIICode >= 65 && ASCIICode <= 90 ||
+                                        ASCIICode >= 48 && ASCIICode <= 57 ||
+                                        ASCIICode == 0                     ||
+                                        ASCIICode == 32                    ||
+                                        ASCIICode == 188                   ||
+                                        ASCIICode == 190                   ||
+                                        ASCIICode == 175                   ||
+                                        ASCIICode == 171                   ||
+                                        ASCIICode == 222                   ||
+                                        ASCIICode == 60                    ||
+                                        ASCIICode == 173))
     {
         // a field has focus.
         // reproduce, in the background, a sound that indicates you are typing.
