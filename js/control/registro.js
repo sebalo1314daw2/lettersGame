@@ -377,7 +377,22 @@ function keyHandler(ASCIICode)
             // gains focus first form field.
             setTimeout(function(){document.getElementById("selectType0fUser").focus();}, 3100);
             break;
+        case 35:
+            // Key: end
+            // Action: gains focus last form field
+            // informative message 
+            Utilities.stopAll(soundList);
+            document.getElementById("endFormSound").play();
+            // gains focus last form field.
+            if($("#selectType0fUser").val() == "student")
+            {
+                
+            }
             
+            
+            
+//            setTimeout(function(){document.getElementById("selectType0fUser").focus();}, 3100);
+//            break;
         
     }
     // Enter a hidden "div" the time the last time a key was pressed
