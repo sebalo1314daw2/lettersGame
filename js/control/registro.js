@@ -11,6 +11,7 @@ function atTheStartOfPage()
     checkInactivity(soundList);
     addFocusEventInForm();
 //    document.getElementById("initialSound").play();
+    idUser = new Date().getTime();
 }
 /**
  * createSelectProvincies()
@@ -448,25 +449,58 @@ function readField(fieldObject)
     else
     {
         // the field has something
-        var fieldNames = new Array();
-        fieldNames["name"] = "El nombre";
-        fieldNames["surnames"] = "El/los apellidos";
-        fieldNames["school"] = "El colegio";
-        fieldNames["city"] = "La ciudad";
-        fieldNames["username"] = "El nombre de usuario";
-        fieldNames["course"] = "El curso";
-        fieldNames["dateOfBirth"] = "La fecha de nacimiento";
-        fieldNames["courses"] = "El/los cursos";
-//        var msg = "Campo rellenado. "                   +  
-//                  fieldNames[$(fieldObject).attr("id")] +
-//                  " que has indicado es "              +
-//                  $(fieldObject).val()                  +
-//                  ".";
-        var msg = "hola";
-        Utilities.convertStringToSound
+        // Look here, if you need to create the sound.
+        if($("#last_value_" + $(fieldObject).attr("id")).html() != $(fieldObject).val())
+        {
+            // Not Equals
+            // create sound. Assign new value to the div (field value)
+            var fieldNames = new Array();
+            fieldNames["name"] = "El nombre";
+            fieldNames["surnames"] = "El o los apellidos";
+            fieldNames["school"] = "El colegio";
+            fieldNames["city"] = "La ciudad";
+            fieldNames["username"] = "El nombre de usuario";
+            fieldNames["course"] = "El curso";
+            fieldNames["dateOfBirth"] = "La fecha de nacimiento";
+            fieldNames["courses"] = "El o los cursos";
+            var msg = "Campo rellenado. "                   +  
+                      fieldNames[$(fieldObject).attr("id")] +
+                      " que has indicado es "               +
+                      $(fieldObject).val()                  +
+                      ".";
+            // create sound
+            Utilities.convertStringToSound
+            (
+                    SERVER_PATH, 
+                    msg, 
+                    "register_id_" + idUser + "_field_" + $(fieldObject).attr("id"),
+                    function(){showLoadAnimation();}, 
+                    function(){hideLoadAnimation();}
+            );
+            // Assign new value to the div (field value)
+            $("#last_value_" + $(fieldObject).attr("id")).html($(fieldObject).val());
+        }
+        // reproduce sound
+        Utilities.stopAll(soundList);
+        var audioTag = $("<audio></audio>").attr
         (
-                SERVER_PATH, msg, "ficherito", function(){showLoadAnimation();}, function(){hideLoadAnimation();}
+                "id", "register_id_" + idUser + "_field_" + $(fieldObject).attr("id")
         );
+        var sourceTag = $("<source />").attr(
+        {
+            "src":"../mp3/dynamicSounds/register_id_"     + 
+                idUser                                    + 
+                "_field_"                                 + 
+                $(fieldObject).attr("id")                 +
+                ".mp3",
+            "type":"audio/mpeg"
+        });
+        audioTag.append(sourceTag);
+        audioTag = audioTag[0];
+        audioTag.load();
+        audioTag.play();
+        var audioTag = "";
+        // http://stackoverflow.com/questions/5721704/window-location-reload-with-clear-cache
     }
 }
 /**

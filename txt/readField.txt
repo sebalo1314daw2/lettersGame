@@ -1,0 +1,55 @@
+1
+
+lee campo vacio
+
+escribo "hola"
+
+----
+
+2
+
+toca leer lo del campo rellenado
+
+para ello:
+
+div "" == campo "hola"
+
+diferente --> creamos sonido --> asignamos nuevo valor div (div "hola")
+
+reproducimos sonido
+
+acabon dejando el valor "hola" del campo
+
+------
+
+3
+
+toca leer lo del campo rellenado
+
+para ello:
+
+div "hola" == campo "hola"
+
+igual --> no creamos sonido --> no asignamos nuevo valor en el div
+
+reproducimos sonido
+
+cambiamos el valor a "adios" en el campo
+
+---
+
+4
+
+toca leer lo del campo rellenado
+
+para ello:
+
+div "hola" == campo "adios"
+
+diferente --> creamos sonido --> asignamos nuevo valor div (div "adios")
+
+reproducimos sonido
+
+...
+
+

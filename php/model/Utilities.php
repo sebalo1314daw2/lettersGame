@@ -35,20 +35,20 @@
          */
         public static function convertStringToSound($string, $path, $fileName)
         {
-            echo $cmd = "espeak -ves+f5 -s150 '" . $string . "' -w /tmp/" . $fileName . ".wav";
+            $cmd = "espeak -ves+f5 -s150 '" . $string . "' -w /tmp/" . $fileName . ".wav";
 //            echo $cmd;
-            echo shell_exec($cmd);
+            shell_exec($cmd);
             // we have the sound format "wav"
             // changed it to mp3.
-            echo $cmd = "lame /tmp/" . $fileName . ".wav " . $path . $fileName . ".mp3";
+            $cmd = "lame /tmp/" . $fileName . ".wav " . $path . $fileName . ".mp3";
 //            echo $cmd;
-            echo shell_exec($cmd);
+            shell_exec($cmd);
             // remove the file "wav".
-            echo $cmd = "rm /tmp/" . $fileName . ".wav";
+            $cmd = "rm /tmp/" . $fileName . ".wav";
 //            echo $cmd;
-//            echo shell_exec($cmd);
+            shell_exec($cmd);
         }
     }
     // Testeo
-//    Utilities::convertStringToSound("Hola chiquilla", "/var/www/", "prueba");
+//    Utilities::convertStringToSound("Hola isaac", "/var/www/", "prueba");
 ?>
