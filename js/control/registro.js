@@ -496,16 +496,16 @@ function readField(fieldObject)
             "type":"audio/mpeg"
         });
         audioTag.append(sourceTag);
-//        audioTag = audioTag[0];
+        audioTag = audioTag[0];
 //        audioTag.load();
-//        audioTag.play();
+        audioTag.play();
 //        var audioTag = "";
 //        PRUEBA
-        $("#dynamic_sound_" + $(fieldObject).attr("id")).children().remove();
-        $("#dynamic_sound_" + $(fieldObject).attr("id")).append(audioTag);
-          audioTag = $("#register_id_" + $("#idUser").html() + "_field_" + $(fieldObject).attr("id"));
-          audioTag = audioTag[0];
-          audioTag.play();
+//        $("#dynamic_sound_" + $(fieldObject).attr("id")).children().remove();
+//        $("#dynamic_sound_" + $(fieldObject).attr("id")).append(audioTag);
+//          audioTag = $("#register_id_" + $("#idUser").html() + "_field_" + $(fieldObject).attr("id"));
+//          audioTag = audioTag[0];
+//          audioTag.play();
 
 
 
