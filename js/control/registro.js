@@ -11,7 +11,7 @@ function atTheStartOfPage()
     checkInactivity(soundList);
     addFocusEventInForm();
 //    document.getElementById("initialSound").play();
-    idUser = new Date().getTime();
+    $("#idUser").html(new Date().getTime());
 }
 /**
  * createSelectProvincies()
@@ -473,7 +473,7 @@ function readField(fieldObject)
             (
                     SERVER_PATH, 
                     msg, 
-                    "register_id_" + idUser + "_field_" + $(fieldObject).attr("id"),
+                    "register_id_" + $("#idUser").html() + "_field_" + $(fieldObject).attr("id"),
                     function(){showLoadAnimation();}, 
                     function(){hideLoadAnimation();}
             );
@@ -484,22 +484,35 @@ function readField(fieldObject)
         Utilities.stopAll(soundList);
         var audioTag = $("<audio></audio>").attr
         (
-                "id", "register_id_" + idUser + "_field_" + $(fieldObject).attr("id")
+                "id", "register_id_" + $("#idUser").html() + "_field_" + $(fieldObject).attr("id")
         );
         var sourceTag = $("<source />").attr(
         {
             "src":"../mp3/dynamicSounds/register_id_"     + 
-                idUser                                    + 
+                $("#idUser").html()                       + 
                 "_field_"                                 + 
                 $(fieldObject).attr("id")                 +
                 ".mp3",
             "type":"audio/mpeg"
         });
         audioTag.append(sourceTag);
-        audioTag = audioTag[0];
-        audioTag.load();
-        audioTag.play();
-        var audioTag = "";
+//        audioTag = audioTag[0];
+//        audioTag.load();
+//        audioTag.play();
+//        var audioTag = "";
+//        PRUEBA
+        $("#dynamic_sound_" + $(fieldObject).attr("id")).children().remove();
+        $("#dynamic_sound_" + $(fieldObject).attr("id")).append(audioTag);
+          audioTag = $("#register_id_" + $("#idUser").html() + "_field_" + $(fieldObject).attr("id"));
+          audioTag = audioTag[0];
+          audioTag.play();
+
+
+
+
+
+
+
         // http://stackoverflow.com/questions/5721704/window-location-reload-with-clear-cache
     }
 }
