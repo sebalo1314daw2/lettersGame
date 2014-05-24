@@ -492,28 +492,13 @@ function readField(fieldObject)
                 $("#idUser").html()                       + 
                 "_field_"                                 + 
                 $(fieldObject).attr("id")                 +
-                ".mp3",
+                ".mp3?state="                             +
+                new Date().getTime(),
             "type":"audio/mpeg"
         });
         audioTag.append(sourceTag);
         audioTag = audioTag[0];
-//        audioTag.load();
         audioTag.play();
-//        var audioTag = "";
-//        PRUEBA
-//        $("#dynamic_sound_" + $(fieldObject).attr("id")).children().remove();
-//        $("#dynamic_sound_" + $(fieldObject).attr("id")).append(audioTag);
-//          audioTag = $("#register_id_" + $("#idUser").html() + "_field_" + $(fieldObject).attr("id"));
-//          audioTag = audioTag[0];
-//          audioTag.play();
-
-
-
-
-
-
-
-        // http://stackoverflow.com/questions/5721704/window-location-reload-with-clear-cache
     }
 }
 /**
