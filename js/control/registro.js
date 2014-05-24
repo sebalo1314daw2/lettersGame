@@ -4,7 +4,24 @@ $("document").ready(function(){atTheStartOfPage();});
  */
 function atTheStartOfPage()
 {
-    var soundList = obtainAllSoundOfThePage();
+    soundList = new Array
+    (
+            "goToHomeSound",
+            "beginFormSound",
+            "endFormSound",
+            "clickLinkSound",
+            "sendFormSound",
+            "nameEmptySound",
+            "surnamesEmptySound",
+            "schoolEmptySound",
+            "cityEmptySound",
+            "usernameEmptySound",
+            "passwordEmptySound",
+            "passwordConfirmationEmptySound",
+            "courseEmptySound",
+            "dateOfBirthEmptySound",
+            "coursesEmptySound"
+    );
     createSelectProvincies();
     createSelectTeachers();
     enableCaptureKey();
@@ -345,7 +362,6 @@ function resetPasswordFields()
 function keyHandler(ASCIICode)
 {
 //    alert(ASCIICode);
-    var soundList = obtainAllSoundOfThePage();
     switch(ASCIICode)
     {
         case 37:
@@ -439,7 +455,6 @@ function keyHandler(ASCIICode)
 function readField(fieldObject)
 {
     var SERVER_PATH = "../php/control/invokeController.php";
-    var soundList = obtainAllSoundOfThePage();
     if($(fieldObject).val() == "")
     {
         // the field is empty string
@@ -452,9 +467,10 @@ function readField(fieldObject)
         // Look here, if you need to create the sound.
         if($("#last_value_" + $(fieldObject).attr("id")).html() != $(fieldObject).val())
         {
-            // Not Equals
+            // Not equals
             // create sound. Assign new value to the div (field value)
             var fieldNames = new Array();
+            var msg;
             fieldNames["name"] = "El nombre";
             fieldNames["surnames"] = "El o los apellidos";
             fieldNames["school"] = "El colegio";
@@ -463,7 +479,7 @@ function readField(fieldObject)
             fieldNames["course"] = "El curso";
             fieldNames["dateOfBirth"] = "La fecha de nacimiento";
             fieldNames["courses"] = "El o los cursos";
-            var msg = "Campo rellenado. "                   +  
+            msg = "Campo rellenado. "                       +  
                       fieldNames[$(fieldObject).attr("id")] +
                       " que has indicado es "               +
                       $(fieldObject).val()                  +
@@ -477,11 +493,11 @@ function readField(fieldObject)
                     function(){showLoadAnimation();}, 
                     function(){hideLoadAnimation();}
             );
+            soundList.push("register_id_" + $("#idUser").html() + "_field_" + $(fieldObject).attr("id"));
             // Assign new value to the div (field value)
             $("#last_value_" + $(fieldObject).attr("id")).html($(fieldObject).val());
         }
         // reproduce sound
-        Utilities.stopAll(soundList);
         var audioTag = $("<audio></audio>").attr
         (
                 "id", "register_id_" + $("#idUser").html() + "_field_" + $(fieldObject).attr("id")
@@ -497,36 +513,10 @@ function readField(fieldObject)
             "type":"audio/mpeg"
         });
         audioTag.append(sourceTag);
+        // put in HTML document
+        $("#soundList").append(audioTag);
+        Utilities.stopAll(soundList);
         audioTag = audioTag[0];
         audioTag.play();
     }
-}
-/**
- * obtainAllSoundOfThePage()
- * @description Procedure which aims to get all the sounds of the page (id)
- * @author Sergio Baena López
- * @version 1.0
- * @return {Array of STring's} all the sounds of the page (id)
- */
-function obtainAllSoundOfThePage()
-{
-    var soundList = new Array
-    (
-            "goToHomeSound",
-            "beginFormSound",
-            "endFormSound",
-            "clickLinkSound",
-            "sendFormSound",
-            "nameEmptySound",
-            "surnamesEmptySound",
-            "schoolEmptySound",
-            "cityEmptySound",
-            "usernameEmptySound",
-            "passwordEmptySound",
-            "passwordConfirmationEmptySound",
-            "courseEmptySound",
-            "dateOfBirthEmptySound",
-            "coursesEmptySound"
-    );
-    return soundList;
 }
