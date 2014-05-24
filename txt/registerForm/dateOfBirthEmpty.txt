@@ -1,0 +1,2 @@
+Campo vacío. Introduce tu fecha de nacimiento. El día tienes que ponerlo con dos dígitos, los meses también y
+los años con 4 dígitos. Y todo, sepáralo con las barras.

@@ -1,0 +1,1 @@
+Campo vacío. Introduce tus cursos. El formato es número, letra y separas cada curso con coma y espacio.
