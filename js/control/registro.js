@@ -517,7 +517,16 @@ function obtainAllSoundOfThePage()
             "endFormSound",
             "clickLinkSound",
             "sendFormSound",
-            "nameEmptySound"
+            "nameEmptySound",
+            "surnamesEmptySound",
+            "schoolEmptySound",
+            "cityEmptySound",
+            "usernameEmptySound",
+            "passwordEmptySound",
+            "passwordConfirmationEmptySound",
+            "courseEmptySound",
+            "dateOfBirthEmptySound",
+            "coursesEmptySound"
     );
     return soundList;
 }
