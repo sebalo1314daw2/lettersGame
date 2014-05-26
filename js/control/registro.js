@@ -20,7 +20,8 @@ function atTheStartOfPage()
             "passwordConfirmationEmptySound",
             "courseEmptySound",
             "dateOfBirthEmptySound",
-            "coursesEmptySound"
+            "coursesEmptySound",
+            "timeoutSound"
     );
     createSelectProvincies();
     createSelectTeachers();
