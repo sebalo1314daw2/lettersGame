@@ -493,11 +493,11 @@ function readField(fieldObject)
                     function(){showLoadAnimation();}, 
                     function(){hideLoadAnimation();}
             );
-            soundList.push("register_id_" + $("#idUser").html() + "_field_" + $(fieldObject).attr("id"));
+            soundList.addWithoutRepetition("register_id_" + $("#idUser").html() + "_field_" + $(fieldObject).attr("id"));      
             // Assign new value to the div (field value)
             $("#last_value_" + $(fieldObject).attr("id")).html($(fieldObject).val());
         }
-        // reproduce sound
+        // create audio and source tags
         var audioTag = $("<audio></audio>").attr
         (
                 "id", "register_id_" + $("#idUser").html() + "_field_" + $(fieldObject).attr("id")
@@ -513,8 +513,10 @@ function readField(fieldObject)
             "type":"audio/mpeg"
         });
         audioTag.append(sourceTag);
-        // put in HTML document
-        $("#soundList").append(audioTag);
+        // remove audio tag and put audio tag in HTML document
+        $("#register_id_" + $("#idUser").html() + "_field_" + $(fieldObject).attr("id")).remove();
+        $("#soundList").append(audioTag); 
+        // reproduce sound
         Utilities.stopAll(soundList);
         audioTag = audioTag[0];
         audioTag.play();
