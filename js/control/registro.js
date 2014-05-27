@@ -22,6 +22,8 @@ function atTheStartOfPage()
             "courseEmptySound",
             "dateOfBirthEmptySound",
             "coursesEmptySound",
+            "passwordCompleteSound",
+            "passwordConfirmationCompleteSound",
             "timeoutSound"
     );
     createSelectProvincies();
@@ -480,61 +482,72 @@ function readField(fieldObject)
     else
     {
         // the field has something
-        // Look here, if you need to create the sound.
-        if($("#last_value_" + $(fieldObject).attr("id")).html() != $(fieldObject).val())
+        if($(fieldObject).attr("id") == "password" || $(fieldObject).attr("id") == "passwordConfirmation")
         {
-            // Not equals
-            // create sound. Assign new value to the div (field value)
-            var fieldNames = new Array();
-            var msg;
-            fieldNames["name"] = "El nombre";
-            fieldNames["surnames"] = "El o los apellidos";
-            fieldNames["school"] = "El colegio";
-            fieldNames["city"] = "La ciudad";
-            fieldNames["username"] = "El nombre de usuario";
-            fieldNames["course"] = "El curso";
-            fieldNames["dateOfBirth"] = "La fecha de nacimiento";
-            fieldNames["courses"] = "El o los cursos";
-            msg = "Campo rellenado. "                       +  
-                      fieldNames[$(fieldObject).attr("id")] +
-                      " que has indicado es "               +
-                      $(fieldObject).val()                  +
-                      ".";
-            // create sound
-            Utilities.convertStringToSound
-            (
-                    SERVER_PATH, 
-                    msg, 
-                    "register_id_" + $("#idUser").html() + "_field_" + $(fieldObject).attr("id"),
-                    function(){showLoadAnimation();}, 
-                    function(){hideLoadAnimation();}
-            );
-            soundList.addWithoutRepetition("register_id_" + $("#idUser").html() + "_field_" + $(fieldObject).attr("id"));      
-            // Assign new value to the div (field value)
-            $("#last_value_" + $(fieldObject).attr("id")).html($(fieldObject).val());
+            // static sounds
+            // password fields
+            Utilities.stopAll(soundList);
+            document.getElementById($(fieldObject).attr("id") + "CompleteSound").play();
         }
-        // create audio and source tags
-        var audioTag = $("<audio></audio>").attr
-        (
-                "id", "register_id_" + $("#idUser").html() + "_field_" + $(fieldObject).attr("id")
-        );
-        var sourceTag = $("<source />").attr(
+        else
         {
-            "src":"../mp3/dynamicSounds/register_id_"     + 
-                $("#idUser").html()                       + 
-                "_field_"                                 + 
-                $(fieldObject).attr("id")                 +
-                ".mp3?state="                             +
-                new Date().getTime(),
-            "type":"audio/mpeg"
-        });
-        audioTag.append(sourceTag);
-        // remove audio tag and put audio tag in HTML document
-        $("#register_id_" + $("#idUser").html() + "_field_" + $(fieldObject).attr("id")).remove();
-        $("#soundList").append(audioTag); 
-        // reproduce sound
-        Utilities.stopAll(soundList);
-        audioTag = audioTag[0];
-        audioTag.play();
+            // dynamic sounds
+            // Look here, if you need to create the sound.
+            if($("#last_value_" + $(fieldObject).attr("id")).html() != $(fieldObject).val())
+            {
+                // Not equals
+                // create sound. Assign new value to the div (field value)
+                var fieldNames = new Array();
+                var msg;
+                fieldNames["name"] = "El nombre";
+                fieldNames["surnames"] = "El o los apellidos";
+                fieldNames["school"] = "El colegio";
+                fieldNames["city"] = "La ciudad";
+                fieldNames["username"] = "El nombre de usuario";
+                fieldNames["course"] = "El curso";
+                fieldNames["dateOfBirth"] = "La fecha de nacimiento";
+                fieldNames["courses"] = "El o los cursos";
+                msg = "Campo rellenado. "                       +  
+                          fieldNames[$(fieldObject).attr("id")] +
+                          " que has indicado es "               +
+                          $(fieldObject).val()                  +
+                          ".";
+                // create sound
+                Utilities.convertStringToSound
+                (
+                        SERVER_PATH, 
+                        msg, 
+                        "register_id_" + $("#idUser").html() + "_field_" + $(fieldObject).attr("id"),
+                        function(){showLoadAnimation();}, 
+                        function(){hideLoadAnimation();}
+                );
+                soundList.addWithoutRepetition("register_id_" + $("#idUser").html() + "_field_" + $(fieldObject).attr("id"));      
+                // Assign new value to the div (field value)
+                $("#last_value_" + $(fieldObject).attr("id")).html($(fieldObject).val());
+            }
+            // create audio and source tags
+            var audioTag = $("<audio></audio>").attr
+            (
+                    "id", "register_id_" + $("#idUser").html() + "_field_" + $(fieldObject).attr("id")
+            );
+            var sourceTag = $("<source />").attr(
+            {
+                "src":"../mp3/dynamicSounds/register_id_"     + 
+                    $("#idUser").html()                       + 
+                    "_field_"                                 + 
+                    $(fieldObject).attr("id")                 +
+                    ".mp3?state="                             +
+                    new Date().getTime(),
+                "type":"audio/mpeg"
+            });
+            audioTag.append(sourceTag);
+            // remove audio tag and put audio tag in HTML document
+            $("#register_id_" + $("#idUser").html() + "_field_" + $(fieldObject).attr("id")).remove();
+            $("#soundList").append(audioTag); 
+            // reproduce sound
+            Utilities.stopAll(soundList);
+            audioTag = audioTag[0];
+            audioTag.play();
+        }
     }
 }
