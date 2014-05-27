@@ -116,3 +116,14 @@ function addFocusEventInForm()
 {
     $(".field > *").focus(function(){readField($(this));});
 }
+/**
+ * isWritingTheUser()
+ * @description Procedure is intended to indicate if the user is typing in a form field or not.
+ * @author Sergio Baena López
+ * @version 1.0
+ * @return {boolean} if the user is typing in a form field or not
+ */
+function isWritingTheUser()
+{
+    return $(".field > *").is(":focus");
+}

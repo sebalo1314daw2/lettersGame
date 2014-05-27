@@ -6,6 +6,7 @@ function atTheStartOfPage()
 {
     soundList = new Array
     (
+            "generalDescriptionSound",
             "goToHomeSound",
             "beginFormSound",
             "endFormSound",
@@ -407,11 +408,15 @@ function keyHandler(ASCIICode)
         case 79:
             // Key: O
             // Action: click on the ONCE link
-            // informative message
-            Utilities.stopAll(soundList);
-            document.getElementById("clickLinkSound").play();
-            // redirect
-            setTimeout(function(){window.location.href = "http://www.once.es/";}, 3000);
+            if(!isWritingTheUser())
+            {
+                // is not writing the user
+                // informative message
+                Utilities.stopAll(soundList);
+                document.getElementById("clickLinkSound").play();
+                // redirect
+                setTimeout(function(){window.location.href = "http://www.once.es/";}, 3000);
+            }
             break;
         case 13:
             // Key: intro
@@ -422,9 +427,19 @@ function keyHandler(ASCIICode)
             // send form
             setTimeout(function(){registerNewUser();}, 3000);
             break;
+         case 87:
+            // Key: W
+            // Action: reproduce the sound of the description of the web.
+            if(!isWritingTheUser())
+            {
+                // is not writing the user
+                Utilities.stopAll(soundList);
+                document.getElementById("generalDescriptionSound").play();
+            }
+            break;
     }
     // Look if there is a field that has focus.
-    if($(".field > *").is(":focus") && (ASCIICode >= 65 && ASCIICode <= 90 ||
+    if(isWritingTheUser() &&           (ASCIICode >= 65 && ASCIICode <= 90 ||
                                         ASCIICode >= 48 && ASCIICode <= 57 ||
                                         ASCIICode == 0                     ||
                                         ASCIICode == 32                    ||

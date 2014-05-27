@@ -1,0 +1,24 @@
+¿Qué haríamos sin las letras?
+
+¡Sé ahora un nuevo usuario!
+
+Esta web tiene un menú, con las opciones de ir a la página de inicio, 
+registrarse, e iniciar sesión, un formulario de registro y un enlace para acceder a la ONCE.
+
+¿Qué quieres hacer?
+
+Si quieres utilizar el menú utiliza las teclas de derecha e izquierda.
+
+Si quieres colocarte en el primer campo del formulario, pulsa la tecla de inicio.
+
+Si quieres colocarte en el último campo del formulario, pulsa la tecla de fin.
+
+Si quieres navegar entre diferentes campos del formulario utiliza el tabulador.
+
+Si quieres navegar por las diferentes opciones de un desplegable, utiliza los botones de arriba y abajo.
+
+Si quieres enviar el formulario, teclea el intro.
+
+Si quieres clicar en el enlace de la ONCE, pulsa O.
+
+Y por último, si quieres que se vuelva a repitir todo lo que acabamos de decir, pulsa "W".
