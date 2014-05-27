@@ -31,8 +31,10 @@ function atTheStartOfPage()
     enableCaptureKey();
     checkInactivity(soundList);
     addFocusEventInForm();
-//    document.getElementById("initialSound").play();
     $("#idUser").html(new Date().getTime());
+    // PRUEBA
+    $("#selectTeachers").keyup(function(){alert($(this).val());});
+    
 }
 /**
  * createSelectProvincies()
@@ -499,19 +501,36 @@ function readField(fieldObject)
                 // create sound. Assign new value to the div (field value)
                 var fieldNames = new Array();
                 var msg;
-                fieldNames["name"] = "El nombre";
-                fieldNames["surnames"] = "El o los apellidos";
-                fieldNames["school"] = "El colegio";
-                fieldNames["city"] = "La ciudad";
-                fieldNames["username"] = "El nombre de usuario";
-                fieldNames["course"] = "El curso";
-                fieldNames["dateOfBirth"] = "La fecha de nacimiento";
-                fieldNames["courses"] = "El o los cursos";
-                msg = "Campo rellenado. "                       +  
-                          fieldNames[$(fieldObject).attr("id")] +
-                          " que has indicado es "               +
-                          $(fieldObject).val()                  +
-                          ".";
+                if($(fieldObject).attr("id") == "selectTeachers" || 
+                   $(fieldObject).attr("id") == "selectProvinces")
+                {
+                    // dynamic selects
+                    fieldNames["selectTeachers"] = "El profesor indicado";
+                    fieldNames["selectProvinces"] = "La provincia indicada";
+                    msg = "Campo desplegable. "                                                     +
+                                fieldNames[$(fieldObject).attr("id")]                               +
+                                " es "                                                              +
+                                $("#" + $(fieldObject).attr("id") + "> option:selected").html()     +
+                                ". Para cambiar tu selección utiliza las teclas de arriba y abajo " +
+                                "y para ir más rápido, pulsa la inicial.";
+                }
+                else
+                {
+                    // text fields
+                    fieldNames["name"] = "El nombre";
+                    fieldNames["surnames"] = "El o los apellidos";
+                    fieldNames["school"] = "El colegio";
+                    fieldNames["city"] = "La ciudad";
+                    fieldNames["username"] = "El nombre de usuario";
+                    fieldNames["course"] = "El curso";
+                    fieldNames["dateOfBirth"] = "La fecha de nacimiento";
+                    fieldNames["courses"] = "El o los cursos";
+                    msg = "Campo rellenado. "                       +  
+                              fieldNames[$(fieldObject).attr("id")] +
+                              " que has indicado es "               +
+                              $(fieldObject).val()                  +
+                              ".";
+                }
                 // create sound
                 Utilities.convertStringToSound
                 (
