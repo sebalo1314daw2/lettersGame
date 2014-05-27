@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>&iquest;Qu&eacute; har&iacute;amos sin las letras?</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <!-- CSS -->
+        <link rel="stylesheet" href="../css/reset.css" type="text/css" />
+        <link rel="stylesheet" href="../css/own_styles_of_the_web.css" type="text/css" />
+        <!-- Web fonts -->
+        <link href='http://fonts.googleapis.com/css?family=Gochi+Hand' rel='stylesheet' type='text/css'>
+        <link href='http://fonts.googleapis.com/css?family=Indie+Flower' rel='stylesheet' type='text/css'>
+        <link href='http://fonts.googleapis.com/css?family=Righteous' rel='stylesheet' type='text/css'>
+        <!-- JavaScript -->
+        <script type="text/javascript" src="../js/jQuery/jQuery.js"></script>
+        <script type="text/javascript" src="../js/json/json.js"></script>
+        <script type="text/javascript" src="../js/crypt_md5/md5-min.js"></script>
+        <script type="text/javascript" src="../js/control/generalFunctions.js"></script>
+        <script type="text/javascript" src="../js/control/login.js"></script>
+    </head>
+    <body id="webBody">
+        <div id="webContainer">   
+            <div id="title">
+                 <!-- Title --> 
+                <iframe src="../iFrames/title.html" scrolling="no" frameborder="0" width="984" height="60">
+                    Tu navegador no soporta iFrames
+                </iframe>
+            </div>
+            <div id="menuDiv">
+                <!-- Horizontal menu -->
+                <iframe src="../iFrames/menuDiv.html" scrolling="no" frameborder="0" width="984" height="70">
+                    Tu navegador no soporta iFrames
+                </iframe>
+            </div>
+            <div id="body">
+                <!-- Body -->
+                <div id="subtitle">
+                    <!-- Subtitle of body -->
+                    <h2>&iexcl;Entra y juega ahora!</h2>
+                </div>
+                <div>
+                    <form action="javascript:void(0)">
+                        <div id="errorsForm"></div>
+                        <!-- A field -->
+                        <div class="label">Nombre de usuario</div>
+                        <div class="field">
+                            <input type="text" id="username" maxlength="10" />
+                        </div>
+                        <!-- A field -->
+                        <div class="label">Contrase&ntilde;a</div>
+                        <div class="field">
+                            <input type="password" id="password" maxlength="500" />
+                        </div>
+                        <button onclick="">Entrar</button>
+                    </form>
+                </div>   
+            </div>
+            <div id="footer">
+                <!-- Footer -->
+                <iframe src="../iFrames/footer.html" scrolling="no" frameborder="0" width="984" height="17">
+                    Tu navegador no soporta iFrames
+                </iframe>
+            </div>
+        </div>
+        <div id="loadAnimation">
+            <iframe src="../iFrames/loadAnimation.html" scrolling="no" frameborder="0" width="48" height="48">
+                    Tu navegador no soporta iFrames
+            </iframe>
+        </div>
+        <div id="lastTimeAKeyWasPressed" class="hiddenData"></div>
+        <div id="soundList">
+             <!--Load of the sounds--> 
+<!--             <audio id="generalDescriptionSound" autoplay>
+                <source src="../mp3/staticSounds/registerForm/generalDescription.mp3" type="audio/mpeg" />
+             </audio>-->
+<!--             <audio id="goToHomeSound">
+                <source src="../mp3/staticSounds/menuUnauthenticatedUser/goToHome.mp3" type="audio/mpeg" />
+             </audio>-->
+             <audio id="beginFormSound">
+                <source src="../mp3/staticSounds/form/beginForm.mp3" type="audio/mpeg" />
+             </audio>
+             <audio id="endFormSound">
+                <source src="../mp3/staticSounds/form/endForm.mp3" type="audio/mpeg" />
+             </audio>
+             <audio id="clickLinkSound">
+                <source src="../mp3/staticSounds/footer/clickLink.mp3" type="audio/mpeg" />
+             </audio>
+             <audio id="sendFormSound">
+                <source src="../mp3/staticSounds/form/sendForm.mp3" type="audio/mpeg" />
+             </audio>
+             <audio id="usernameEmptySound">
+                <source src="../mp3/staticSounds/registerForm/usernameEmpty.mp3" type="audio/mpeg" />
+             </audio>
+             <audio id="passwordEmptySound">
+                <source src="../mp3/staticSounds/registerForm/passwordEmpty.mp3" type="audio/mpeg" />
+             </audio>
+             <audio id="keySound">
+                <source src="../mp3/staticSounds/key/key.mp3" type="audio/mpeg" />
+             </audio>
+             <audio id="timeoutSound">
+                <source src="../mp3/staticSounds/timeout/timeout.mp3" type="audio/mpeg" />
+             </audio>
+        </div>
+        <div class="hiddenData">
+            <!-- indicate here the last values that the user typed in the form fields. -->
+            <div id="last_value_username"></div>
+        </div>
+        <div class="hiddenData" id="idUser"></div>
+    </body>
+</html>

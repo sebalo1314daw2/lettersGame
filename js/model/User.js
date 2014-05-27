@@ -124,3 +124,15 @@ function User(username, password, passwordConfirmation, name, surnames)
         this.password = hex_md5(this.password);
         this.passwordConfirmation = "";
     }
+    // ------------------------ Methods that should not be used outside of the class ----------------
+    /**
+     * isEmptyUsernameOrPassword()
+     * @description Function that seeks to indicate whether the username or password is empty string or not.
+     * @author Sergio Baena López
+     * @version 1.0
+     * @return {boolean} if the username or password is empty or not
+     */
+    User.prototype.isEmptyUsernameOrPassword = function()
+    {
+        return this.username == "" || this.password == "";
+    }
