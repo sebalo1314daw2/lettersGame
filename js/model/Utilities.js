@@ -195,9 +195,9 @@ Utilities.stopAll = function(soundList)
     for(var i = 0; i < soundList.length; i++)
     {
         document.getElementById(soundList[i]).pause();
-        document.getElementById(soundList[i]).addEventListener("pause", function(audioTag)
+        document.getElementById(soundList[i]).addEventListener("pause", function(event)
         {
-            audioTag.currentTime = "0";
+            event.target.currentTime = "0";
         }, false);   
     }   
 }
