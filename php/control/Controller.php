@@ -184,7 +184,7 @@
                 // is invalid
                 $validationArray[0] = false;
                 $validationArray[1]["username"] = false;
-                $validationArray[2][4] = "[Nombre de usuario] Este nombre de usuario ya se est&aacute; usando";
+                $validationArray[2][4] = "[Nombre de usuario] Este nombre de usuario ya se está usando";
             }
             // Validation done
             if($validationArray[0])
