@@ -8,6 +8,7 @@ function atTheStartOfPage()
     (
             "generalDescriptionSound",
             "goToHomeSound",
+            "goToSessionStartSound",
             "beginFormSound",
             "endFormSound",
             "clickLinkSound",
@@ -425,7 +426,11 @@ function keyHandler(ASCIICode)
         case 39:
             // Key: -->
             // Action: click on the menu item "Iniciar sesion".
-            // TODO
+            // informative message 
+            Utilities.stopAll(soundList);
+            document.getElementById("goToSessionStartSound").play();
+            // redirect
+            setTimeout(function(){window.location.href = "login.html";}, 3000);
             break;
         case 36:
             // Key: Begin
