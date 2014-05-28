@@ -124,6 +124,38 @@ function User(username, password, passwordConfirmation, name, surnames)
         this.password = hex_md5(this.password);
         this.passwordConfirmation = "";
     }
+    /**
+      * logIn()
+      * @description Function aims log the user in the system. This function, verify that the attributes
+      * "username" and "password" are not empty, secondly, there is the user in the database and, if all
+      * went well, open session on the server and the client.
+      * @author Sergio Baena López
+      * @version 1.0
+      * @param {String} serverPath the server path
+      * @param {function} beforeSendFunction the "beforeSend" Ajax function we want to run.
+      * @param {function} completeFunction the complete function of Ajax that we want to execute
+      * @return {associative array} an associative array with this format:
+      * "isServerError" {boolean} indicates if an error occurred on the server or not
+      * "sessionOpened" {boolean} indicates whether or not the session opened 
+      */
+      User.prototype.logIn = function(serverPath, beforeSendFunction, completeFunction)
+      {
+          var sessionArray = new Array();
+          // verify that the attributes "username" and "password" are not empty
+          if(this.isEmptyUsernameOrPassword())
+          {
+              sessionArray["sessionOpened"] = false;
+          }
+          else
+          {
+              // is not empty username or password
+              // encrypt the password
+              this.encryptedPassword();
+              var session = new Session(serverPath); 
+              sessionArray = session.open(this, beforeSendFunction, completeFunction);
+          }
+          return sessionArray;
+      }
     // ------------------------ Methods that should not be used outside of the class ----------------
     /**
      * isEmptyUsernameOrPassword()
@@ -136,3 +168,4 @@ function User(username, password, passwordConfirmation, name, surnames)
     {
         return this.username == "" || this.password == "";
     }
+    
