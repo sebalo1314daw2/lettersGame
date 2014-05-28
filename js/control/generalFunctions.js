@@ -53,7 +53,7 @@ function enableCaptureKey()
     if(navigator.appVersion.indexOf("MSIE") != -1)
     {
         // is Internet Explorer
-        window.document.getElementById("webBody").attachEvent("onkeydown", function()
+        window.document.getElementById("webBody").attachEvent("onkeyup", function()
         {
             var event = window.event;
             var ASCIICode = event.keyCode;
@@ -63,7 +63,7 @@ function enableCaptureKey()
     else
     {
         // is not Internet Explorer
-        $(window).keydown(function(event)
+        $(window).keyup(function(event)
         {
             var ASCIICode = event.keyCode;
             keyHandler(ASCIICode);

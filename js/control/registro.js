@@ -32,8 +32,7 @@ function atTheStartOfPage()
     checkInactivity(soundList);
     addFocusEventInForm();
     $("#idUser").html(new Date().getTime());
-    // PRUEBA
-    $("#selectTeachers").keyup(function(){alert($(this).val());});
+//    $("#selectTeachers").keyup(function(){alert($(this).val());}); // PRUEBA
     
 }
 /**
@@ -64,6 +63,7 @@ function createSelectProvincies()
         (
                 dataArray["provinceList"], "value", "id", "selectProvinces"
         );
+        selectProvincies = AccessibleSelect.generate(selectProvincies).getSelect();
         // we put this select in the view
         $("#divSelectProvincies").append(selectProvincies);
     }
@@ -119,6 +119,7 @@ function createSelectTeachers()
                 );
                 selectTeachers.append(anOptionOfSelect);
             }
+            selectTeachers = AccessibleSelect.generate(selectTeachers).getSelect();
             // we put this select in the view
             $("#divSelectTeachers").append(selectTeachers);
         }   
@@ -364,10 +365,16 @@ function resetPasswordFields()
 }
 /**
  * keyHandler()
+ * @description Procedure aims handle a keypress event for different actions that will make the web
+ * (for the blind).
+ * @author Sergio Baena López
+ * @version 1.0
+ * @param {Number} ASCIICode the ASCII code of the pressed letter.
  */
 function keyHandler(ASCIICode)
 {
 //    alert(ASCIICode);
+    var SERVER_PATH = "../php/control/invokeController.php";
     switch(ASCIICode)
     {
         case 37:
@@ -441,6 +448,98 @@ function keyHandler(ASCIICode)
                 document.getElementById("generalDescriptionSound").play();
             }
             break;
+        case 38:
+            // Key: ^
+            //      |
+            // Action: go up the option in the "select" in-focus.
+            if($("select").is(":focus"))
+            {
+                // some select has focus.
+                // execute action
+                var oldSelect = $("select:focus"); // (select object)
+                var newSelect = new AccessibleSelect($(oldSelect)).goUp().getSelect();
+                // create string for conversion
+                var msg = $("#" + $(oldSelect).attr("id") + " > option[selected='selected']").html();
+                // create sound
+                Utilities.convertStringToSound
+                (
+                        SERVER_PATH, 
+                        msg, 
+                        "register_id_" + $("#idUser").html() + "_field_option" + $(oldSelect).attr("id"),
+                        function(){showLoadAnimation();}, 
+                        function(){hideLoadAnimation();}
+                );
+                soundList.addWithoutRepetition("register_id_" + $("#idUser").html() + "_field_option" + $(oldSelect).attr("id"));      
+                var audioTag = $("<audio></audio>").attr
+                (
+                        "id", "register_id_" + $("#idUser").html() + "_field_option" + $(oldSelect).attr("id")
+                );
+                var sourceTag = $("<source />").attr(
+                {
+                    "src":"../mp3/dynamicSounds/register_id_"     + 
+                        $("#idUser").html()                       + 
+                        "_field_option"                           + 
+                        $(oldSelect).attr("id")                   +
+                        ".mp3?state="                             +
+                        new Date().getTime(),
+                    "type":"audio/mpeg"
+                });
+                audioTag.append(sourceTag);
+                // remove audio tag and put audio tag in HTML document
+                $("#register_id_" + $("#idUser").html() + "_field_option" + $(oldSelect).attr("id")).remove();
+                $("#soundList").append(audioTag); 
+                // reproduce sound
+                Utilities.stopAll(soundList);
+                audioTag = audioTag[0];
+                audioTag.play();
+            }
+            break;
+        case 40:
+            // Key: |
+            //      v
+            // Action: go down the option in the "select" in-focus.
+            if($("select").is(":focus"))
+            {
+                // some select has focus.
+                // execute action
+                var oldSelect = $("select:focus"); // (select object)
+                var newSelect = new AccessibleSelect($(oldSelect)).goDown().getSelect();
+                // create string for conversion
+                var msg = $("#" + $(oldSelect).attr("id") + " > option[selected='selected']").html();
+                // create sound
+                Utilities.convertStringToSound
+                (
+                        SERVER_PATH, 
+                        msg, 
+                        "register_id_" + $("#idUser").html() + "_field_option" + $(oldSelect).attr("id"),
+                        function(){showLoadAnimation();}, 
+                        function(){hideLoadAnimation();}
+                );
+                soundList.addWithoutRepetition("register_id_" + $("#idUser").html() + "_field_option" + $(oldSelect).attr("id"));      
+                var audioTag = $("<audio></audio>").attr
+                (
+                        "id", "register_id_" + $("#idUser").html() + "_field_option" + $(oldSelect).attr("id")
+                );
+                var sourceTag = $("<source />").attr(
+                {
+                    "src":"../mp3/dynamicSounds/register_id_"     + 
+                        $("#idUser").html()                       + 
+                        "_field_option"                           + 
+                        $(oldSelect).attr("id")                   +
+                        ".mp3?state="                             +
+                        new Date().getTime(),
+                    "type":"audio/mpeg"
+                });
+                audioTag.append(sourceTag);
+                // remove audio tag and put audio tag in HTML document
+                $("#register_id_" + $("#idUser").html() + "_field_option" + $(oldSelect).attr("id")).remove();
+                $("#soundList").append(audioTag); 
+                // reproduce sound
+                Utilities.stopAll(soundList);
+                audioTag = audioTag[0];
+                audioTag.play();
+            }
+            break;
     }
     // Look if there is a field that has focus.
     if(isWritingTheUser() &&           (ASCIICode >= 65 && ASCIICode <= 90 ||
@@ -501,20 +600,21 @@ function readField(fieldObject)
                 // create sound. Assign new value to the div (field value)
                 var fieldNames = new Array();
                 var msg;
-                if($(fieldObject).attr("id") == "selectTeachers" || 
-                   $(fieldObject).attr("id") == "selectProvinces")
+                if($(fieldObject).attr("id") == "selectTeachers"    || 
+                   $(fieldObject).attr("id") == "selectProvinces"   ||
+                   $(fieldObject).attr("id") == "selectType0fUser")
                 {
-                    // dynamic selects
+                    // selects
                     fieldNames["selectTeachers"] = "El profesor indicado";
                     fieldNames["selectProvinces"] = "La provincia indicada";
+                    fieldNames["selectType0fUser"] = "El tipo de usuario indicado";
                     msg = "Campo desplegable. "                                                     +
                                 fieldNames[$(fieldObject).attr("id")]                               +
                                 " es "                                                              +
                                 $("#" + $(fieldObject).attr("id") + "> option:selected").html()     +
-                                ". Para cambiar tu selección utiliza las teclas de arriba y abajo " +
-                                "y para ir más rápido, pulsa la inicial.";
+                                ". Para cambiar tu selección utiliza las teclas de arriba y abajo.";
                 }
-                else
+                else 
                 {
                     // text fields
                     fieldNames["name"] = "El nombre";

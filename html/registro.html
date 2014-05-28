@@ -23,6 +23,7 @@
         <script type="text/javascript" src="../js/model/ValidationUtilities.js"></script>
         <script type="text/javascript" src="../js/model/Student.js"></script>
         <script type="text/javascript" src="../js/model/Array.js"></script>
+        <script type="text/javascript" src="../js/model/AccessibleSelect.js"></script>
     </head>
     <body id="webBody">
         <div id="webContainer">   
@@ -45,81 +46,79 @@
                     <h2>&iexcl;S&eacute; ahora un nuevo usuario!</h2>
                 </div>
                 <div>
-                    <form action="javascript:void(0)">
-                        <div id="errorsForm"></div>
+                    <div id="errorsForm"></div>
+                    <!-- A field -->
+                    <div class="label">Tipo de usuario</div>
+                    <div class="field">
+                        <select id="selectType0fUser" onblur="prepareForm($(this).val())">
+                            <option value="student" selected>Alumno</option>
+                            <option value="teacher" class="posterior">Profesor</option>
+                        </select>
+                    </div>
+                    <!-- A field -->
+                    <div class="label">Nombre</div>
+                    <div class="field">
+                        <input type="text" id="name" maxlength="50" />
+                    </div>
+                    <!-- A field -->
+                    <div class="label">Apellidos</div>
+                    <div class="field">
+                        <input type="text" id="surnames" maxlength="100" />
+                    </div>
+                    <!-- A field -->
+                    <div class="label">Colegio</div>
+                    <div class="field">
+                        <input type="text" id="school" maxlength="50" />
+                    </div>
+                    <!-- A field -->
+                    <div class="label">Provincia en d&oacute;nde vives</div>
+                    <div class="field" id="divSelectProvincies"></div>
+                    <!-- A field -->
+                    <div class="label">Ciudad en d&oacute;nde vives</div>
+                    <div class="field">
+                        <input type="text" id="city" maxlength="50" />
+                    </div>
+                    <!-- A field -->
+                    <div class="label">Nombre de usuario</div>
+                    <div class="field">
+                        <input type="text" id="username" maxlength="10" />
+                    </div>
+                    <!-- A field -->
+                    <div class="label">Contrase&ntilde;a</div>
+                    <div class="field">
+                        <input type="password" id="password" maxlength="500" />
+                    </div>
+                    <!-- A field -->
+                    <div class="label">Repite otra vez la contrase&ntilde;a</div>
+                    <div class="field">
+                        <input type="password" id="passwordConfirmation" maxlength="500" />
+                    </div>
+                    <!-- Hidden fields -->
+                    <!-- Student fields -->                        
+                    <div id="studentFields">
                         <!-- A field -->
-                        <div class="label">Tipo de usuario</div>
+                        <div class="label">Tu profesor</div>
+                        <div id="divSelectTeachers" class="field"></div>
+                        <!-- A field -->
+                        <div class="label">Curso (NL)</div>
                         <div class="field">
-                            <select id="selectType0fUser" onchange="prepareForm($(this).val())">
-                                <option value="student" selected>Alumno</option>
-                                <option value="teacher">Profesor</option>
-                            </select>
+                            <input type="text" id="course" maxlength="2" />
                         </div>
                         <!-- A field -->
-                        <div class="label">Nombre</div>
+                        <div class="label">Fecha de nacimiento (DD/MM/AAAA)</div>
                         <div class="field">
-                            <input type="text" id="name" maxlength="50" />
+                            <input type="text" id="dateOfBirth" />
                         </div>
+                    </div>
+                    <!-- Teacher fields -->
+                    <div id="teacherFields" style="display: none;">
                         <!-- A field -->
-                        <div class="label">Apellidos</div>
+                        <div class="label">Cursos (NL, NL, NL,...)</div>
                         <div class="field">
-                            <input type="text" id="surnames" maxlength="100" />
+                            <input type="text" id="courses" maxlength="50" />
                         </div>
-                        <!-- A field -->
-                        <div class="label">Colegio</div>
-                        <div class="field">
-                            <input type="text" id="school" maxlength="50" />
-                        </div>
-                        <!-- A field -->
-                        <div class="label">Provincia en d&oacute;nde vives</div>
-                        <div class="field" id="divSelectProvincies"></div>
-                        <!-- A field -->
-                        <div class="label">Ciudad en d&oacute;nde vives</div>
-                        <div class="field">
-                            <input type="text" id="city" maxlength="50" />
-                        </div>
-                        <!-- A field -->
-                        <div class="label">Nombre de usuario</div>
-                        <div class="field">
-                            <input type="text" id="username" maxlength="10" />
-                        </div>
-                        <!-- A field -->
-                        <div class="label">Contrase&ntilde;a</div>
-                        <div class="field">
-                            <input type="password" id="password" maxlength="500" />
-                        </div>
-                        <!-- A field -->
-                        <div class="label">Repite otra vez la contrase&ntilde;a</div>
-                        <div class="field">
-                            <input type="password" id="passwordConfirmation" maxlength="500" />
-                        </div>
-                        <!-- Hidden fields -->
-                        <!-- Student fields -->                        
-                        <div id="studentFields">
-                            <!-- A field -->
-                            <div class="label">Tu profesor</div>
-                            <div id="divSelectTeachers" class="field"></div>
-                            <!-- A field -->
-                            <div class="label">Curso (NL)</div>
-                            <div class="field">
-                                <input type="text" id="course" maxlength="2" />
-                            </div>
-                            <!-- A field -->
-                            <div class="label">Fecha de nacimiento (DD/MM/AAAA)</div>
-                            <div class="field">
-                                <input type="date" id="dateOfBirth" />
-                            </div>
-                        </div>
-                        <!-- Teacher fields -->
-                        <div id="teacherFields" style="display: none;">
-                            <!-- A field -->
-                            <div class="label">Cursos (NL, NL, NL,...)</div>
-                            <div class="field">
-                                <input type="text" id="courses" maxlength="50" />
-                            </div>
-                        </div>
-                        <button onclick="registerNewUser()">Registrarse</button>
-                    </form>
+                    </div>
+                    <button onclick="registerNewUser()">Registrarse</button>
                 </div>   
             </div>
             <div id="footer">
@@ -200,6 +199,7 @@
         </div>
         <div class="hiddenData">
             <!-- indicate here the last values that the user typed in the form fields. -->
+            <div id="last_value_selectType0fUser"></div>
             <div id="last_value_name"></div>
             <div id="last_value_surnames"></div>
             <div id="last_value_school"></div>
