@@ -346,10 +346,29 @@ function registerNewUser()
     }
     else
     {
+          // for normal user.
           $("#errorsForm").children().remove();
           var errorListInHTMLFormat = Utilities.createErrorListInHTMLFormat(validationArray[2]);
           $("#errorsForm").append(errorListInHTMLFormat);
           resetPasswordFields();
+          // for blind user.
+          Utilities.createErrorListInAudioFormat
+          (
+                  SERVER_PATH,
+                  function(){showLoadAnimation();}, 
+                  function(){hideLoadAnimation();},
+                  "¡Atención! No te has podido registrar porque lo que has escrito tiene errores. " +
+                  "Estos, son los errores que has cometido: ",
+                  soundList,
+                  validationArray[2],
+                  $("#soundList"),
+                  "validationErrorsSound",
+                  "../mp3/dynamicSounds/register_id_" +
+                  $("#idUser").html()                 +
+                  "_validation_errors.mp3?state="     + 
+                  new Date().getTime(),
+                  "register_id_" + $("#idUser").html() + "_validation_errors"
+          );
     }
 }
 /**

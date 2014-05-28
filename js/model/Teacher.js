@@ -150,7 +150,7 @@ function Teacher(user, province, school, city, courses)
             // is invalid
             validationArray[0] = false;
             validationArray[1]["courses"] = false;
-            validationArray[2][6] = "[Cursos] Tiene que seguir el formato n&uacute;mero (1-6) letra (A-Z) y separados con coma y espacio.";
+            validationArray[2][6] = "[Cursos] Tiene que seguir el formato número (del 1 al 6) letra (de la A a la Z) y separados con coma y espacio.";
         }
         return validationArray;
     }

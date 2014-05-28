@@ -64,7 +64,7 @@ function User(username, password, passwordConfirmation, name, surnames)
             // is invalid
             validationArray[0] = false;
             validationArray[1]["name"] = false;
-            validationArray[2][0] = "[Nombre] S&oacute;lo se aceptan letras y espacios.";
+            validationArray[2][0] = "[Nombre] Sólo se aceptan letras y espacios.";
         }
         // ----------------------------------- Validation surnames -------------------------
         if(ValidationUtilities.containsOnlyLettersAndSpaces(this.surnames))
@@ -77,7 +77,7 @@ function User(username, password, passwordConfirmation, name, surnames)
             // is invalid
             validationArray[0] = false;
             validationArray[1]["surnames"] = false;
-            validationArray[2][1] = "[Apellidos] S&oacute;lo se aceptan letras y espacios.";
+            validationArray[2][1] = "[Apellidos] Sólo se aceptan letras y espacios.";
         }
         // ----------------------------------- Validation username -------------------------
         if(ValidationUtilities.isCorrectUsername(4, this.username))
@@ -91,9 +91,9 @@ function User(username, password, passwordConfirmation, name, surnames)
             validationArray[0] = false;
             validationArray[1]["username"] = false;
             validationArray[2][4] = 
-                    "[Nombre de usuario] S&oacute;lo se aceptan letras del alfebeto ingl&eacute;s, "   +
-                    "n&uacute;meros, puntos, guiones y guiones bajos. Adem&aacute;s tiene que tener, " +
-                    "como m&iacute;nimo 4 car&aacute;cteres.";
+                    "[Nombre de usuario] Sólo se aceptan letras del alfabeto inglés, "                 +
+                    "números, puntos, guiones y guiones bajos. Además tiene que tener, "               +
+                    "como mínimo 4 carácteres.";
         }
         // ----------------------------------- Validation password -------------------------
         if(this.password.length >= 7 && this.password == this.passwordConfirmation)
@@ -107,8 +107,8 @@ function User(username, password, passwordConfirmation, name, surnames)
             validationArray[0] = false;
             validationArray[1]["password"] = false;
             validationArray[2][5] =
-                    "[Contrase&ntilde;a] Contrase&ntilde;a inv&aacute;lida. Ten en cuenta que la " +
-                    "contrase&ntilde;a tiene que tener, almenos, 7 car&aacute;cteres.";
+                    "[Contraseña] Contraseña inválida. Ten en cuenta que la " +
+                    "contraseña tiene que tener, almenos, 7 carácteres.";
         }
         // ----------------------------------- return data -------------------------
         return validationArray;   

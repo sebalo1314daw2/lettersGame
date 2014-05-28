@@ -79,7 +79,7 @@ function Student(user, province, teacher, school, city, course,dateOfBirth)
                 // is invalid
                 validationArray[0] = false;
                 validationArray[1]["course"] = false;
-                validationArray[2][6] = "[Curso] Tiene que seguir el formato n&uacute;mero (1-6) letra (A-Z).";
+                validationArray[2][6] = "[Curso] Tiene que seguir el formato número (del 1 al 6) letra (de la A a la Z).";
             }
             // ----------------------------------- Validation dateOfBirth ------------------
             if(ValidationUtilities.isEarlierDate(this.dateOfBirth))

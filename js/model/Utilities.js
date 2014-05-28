@@ -239,3 +239,69 @@ Utilities.convertStringToSound = function(serverPath, string, fileName, beforeSe
             }	
     });
 }
+/**
+ * createErrorListInAudioFormat()
+ * @description Procedure that aims to create the list of errors specified in an audio format.
+ * @author Sergio Baena López
+ * @version 1.0
+ * @param {String} serverPath the server path
+ * @param {function} beforeSendFunction Function to be performed just before going to the server.
+ * @param {function} completeFunction Function to be executed just after returning from the server.
+ * @param {String} previousMsg he previous message before enumeration errors.
+ * @param {Array of String's} soundList the list of sounds of the page
+ * @param {Array of String's} errorList the list of errors to converter to audio
+ * @param {DOM object} tagContainingTheAudio tag containing the audio tag.
+ * @param {String} idAudioTag id  of the audio tag
+ * @param {String} srcSourceTag the path of the audio tag
+ * @param {String} audioFileName the name of the audio file. 
+ */
+Utilities.createErrorListInAudioFormat = function
+(
+        serverPath, 
+        beforeSendFunction,
+        completeFunction,
+        previousMsg,
+        soundList,
+        errorList,
+        tagContainingTheAudio,
+        idAudioTag,
+        srcSourceTag,
+        audioFileName
+)
+{
+    // create message for the conversion to sound
+    var msg = previousMsg;
+    for(var i = 0; i < errorList.length; i++)
+    {
+        if(errorList[i] != undefined)
+        {
+            msg += errorList[i] + " ";
+        }
+    }
+    // the message is completed
+    // create sound
+    Utilities.convertStringToSound
+    (
+            serverPath, 
+            msg, 
+            audioFileName,
+            beforeSendFunction, 
+            completeFunction
+    );
+    soundList.addWithoutRepetition(idAudioTag);
+    // create audio and source tags
+    var audioTag = $("<audio></audio>").attr("id", idAudioTag);
+    var sourceTag = $("<source />").attr(
+    {
+        "src":srcSourceTag,
+        "type":"audio/mpeg"
+    });
+    audioTag.append(sourceTag);
+    // remove audio tag and put audio tag in HTML document
+    $("#" + idAudioTag).remove();
+    tagContainingTheAudio.append(audioTag);
+    // reproduce sound
+    Utilities.stopAll(soundList);
+    audioTag = audioTag[0];
+    audioTag.play();
+}
