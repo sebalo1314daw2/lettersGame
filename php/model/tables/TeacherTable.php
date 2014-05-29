@@ -184,6 +184,42 @@
             // return the teacher object
             return $teacher;
         }
+        /**
+          * isThisId()
+          * Function that seeks to indicate whether the specified "id" is present in the table or not.
+          * @author Sergio Baena López
+          * @version 1.0
+          * @param {int} $id the id to search
+          * @return {bool} whether the specified "id" is present in the table or not
+          */
+         public static function isThisId($id)
+         {
+            $isTheId = false;
+            // open connection
+            $db = new LettersGameDB();
+            // prepare query
+            $sql =   "SELECT COUNT(*)
+                      FROM " . self::$NAME .
+                    " WHERE " . self::$NAME . "." . self::$COL_ID_USER . "= ?;";
+            $stmt = $db->prepare($sql);
+            // associate values
+            $stmt->bind_param("i", $id);
+            // execute query
+            $stmt->execute();
+            // link outcome variables
+            $stmt->bind_result($numOfIdRepeated);
+            // get the value
+            $stmt->fetch();
+            if($numOfIdRepeated > 0)
+            {
+                // there are id's repeated --> is this id
+                $isTheId = true;
+            }
+            // close connection
+            $db->close();
+            // return $isTheId
+            return $isTheId; 
+         } 
     }
     // Testeo
 //    $user = new User("", "", "", "");

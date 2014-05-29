@@ -33,12 +33,21 @@
                 // get the 4 rankings of the user
                 $arrayToReturn["sessionContent"]["rankingList"] = RankingTable::findByUser($user);
                 // obtain full details of the user that is logging (the teacher or student or webmaster object)
-                
-                
-                
-                
-                
-                
+                if(StudentTable::isThisId($user->getId()))
+                {
+                    // is this id in student table --> is student
+                    $arrayToReturn["sessionContent"]["teacherOrStudentOrWebmaster"] = StudentTable::findByUser($user);
+                }
+                else if(TeacherTable::isThisId($user->getId()))
+                {
+                    // is this id in teacher table --> is teacher
+                    $arrayToReturn["sessionContent"]["teacherOrStudentOrWebmaster"] = TeacherTable::findByUser($user);
+                }
+                else
+                {
+                    // by elimination --> is webmaster
+                    $arrayToReturn["sessionContent"]["teacherOrStudentOrWebmaster"] = WebmasterTable::findByUser($user);
+                }
                 $_SESSION[self::$NAME] = $arrayToReturn["sessionContent"];
             }
             return $arrayToReturn;
@@ -55,10 +64,10 @@
         }
         /**
          * isOpen()
-         * Function that seeks to indicate whether a player's session is open or not
+         * Function that seeks to indicate whether a user's session is open or not
          * @author Sergio Baena López
          * @version 1.0
-         * @return {boolean} indicate whether a player's session is open or not
+         * @return {bool} indicate whether an user's session is open or not
          */
         public static function isOpen()
         {
@@ -75,4 +84,3 @@
             session_destroy();
         }
     }
-?>

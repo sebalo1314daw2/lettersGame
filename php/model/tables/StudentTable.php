@@ -121,21 +121,50 @@
             // return the student
             return $student;
          }
+         /**
+          * isThisId()
+          * Function that seeks to indicate whether the specified "id" is present in the table or not.
+          * @author Sergio Baena López
+          * @version 1.0
+          * @param {int} $id the id to search
+          * @return {bool} whether the specified "id" is present in the table or not
+          */
+         public static function isThisId($id)
+         {
+            $isTheId = false;
+            // open connection
+            $db = new LettersGameDB();
+            // prepare query
+            $sql =   "SELECT COUNT(*)
+                      FROM " . self::$NAME .
+                    " WHERE " . self::$NAME . "." . self::$COL_ID_USER . "= ?;";
+            $stmt = $db->prepare($sql);
+            // associate values
+            $stmt->bind_param("i", $id);
+            // execute query
+            $stmt->execute();
+            // link outcome variables
+            $stmt->bind_result($numOfIdRepeated);
+            // get the value
+            $stmt->fetch();
+            if($numOfIdRepeated > 0)
+            {
+                // there are id's repeated --> is this id
+                $isTheId = true;
+            }
+            // close connection
+            $db->close();
+            // return $isTheId
+            return $isTheId; 
+         }    
     }
     // Testeo
-//  // teacher
-//    $user = new User("", "", "", "");
-//    $user->setId(5);
-//    $province = new Province("");
-//    $province->setId(1);
-//    // student
-//    $user2 = new User("", "", "", "");
-//    $user2->setId(9);
-//    $province2 = new Province("");
-//    $province2->setId(2);
-//    
-//   
-//    $teacher = new Teacher($user, $province, "", "", "");
-//    $student = new Student($user2, $province2, $teacher, "Escuela de jose", "ciudad de jose", "curso de jose", "2012/03/12");
-//    StudentTable::insert($student);
+//    if(StudentTable::isThisId(500))
+//    {
+//        echo "esta ese id";
+//    }
+//    else
+//    {
+//        echo "no esta ese id";
+//    }
 ?>
