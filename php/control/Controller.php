@@ -51,6 +51,10 @@
                         // Action: pass a string to sound.
                         echo $this->passStringToSound($this->params["string"], $this->params["fileName"]);
                         break;
+                    case "4":
+                        // Action: Log in a user in the system
+                        echo $this->logIn($this->params["user"]);
+                        break;
                 }
             }
         }

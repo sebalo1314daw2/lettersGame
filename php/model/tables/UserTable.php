@@ -158,6 +158,42 @@
             // return the User object
             return $user;
         }
+        /**
+         * exists()
+         * Function that seeks to see if the specified user exists in the table
+         * @author Sergio Baena López
+         * @version 1.0
+         * @param {User object} $user the user to search
+         * @return {boolean} if the user exists in the table or not
+         */
+        public static function exists($user)
+        {
+            $userExists = false;
+            // open connection
+            $db = new LettersGameDB();
+            // prepare query
+            $sql =   "SELECT COUNT(*)
+                      FROM "  . self::$NAME .
+                    " WHERE " . self::$NAME . "." . self::$COL_USERNAME . "= ? AND " 
+                              . self::$NAME . "." . self::$COL_PASSWORD .  "= ?;";
+            $stmt = $db->prepare($sql);
+            // associate values
+            $stmt->bind_param("ss", $user->getUsername(),  $user->getPassword());
+            // execute query
+            $stmt->execute();
+            // link outcome variables
+            $stmt->bind_result($numOfMatches);
+            // get the value
+            $stmt->fetch();
+            if($numOfMatches == 1)
+            {
+                // the user exists 
+                $userExists = true;
+            }
+            // close connection
+            $db->close();
+            return $userExists;
+        }
     }
     // Testeo
 //    $user = new User("sergio1", "sergio1", "Sergio", "Baena Lopez");
