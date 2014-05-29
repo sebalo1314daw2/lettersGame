@@ -32,6 +32,10 @@
                 $arrayToReturn["sessionContent"] = array();
                 // get the 4 rankings of the user
                 $arrayToReturn["sessionContent"]["rankingList"] = RankingTable::findByUser($user);
+                // obtain full details of the user that is logging (the teacher or student or webmaster object)
+                
+                
+                
                 
                 
                 

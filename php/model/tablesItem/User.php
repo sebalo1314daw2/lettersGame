@@ -73,7 +73,6 @@
             }
             return $theAssociativeArray;
         }
-        // ============================================= Methods =================================
         /**
          * correct()
          * Procedure aims to correct the attributes of this object.

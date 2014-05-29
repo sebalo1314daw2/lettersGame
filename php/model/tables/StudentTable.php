@@ -71,6 +71,56 @@
             // close connection
             $db->close();
         }
+        /**
+          * findByUser()
+          * Function that seeks to obtain the student corresponding to the specified user
+          * @author Sergio Baena López
+          * @version 1.0
+          * @param {User object} $user the user that we want to get her/his student
+          * @return {Student object} the student corresponding to the specified user
+          */
+         public static function findByUser($user)
+         {
+            // open connection
+            $db = new LettersGameDB();
+            // prepare query
+            $sql =   "SELECT *
+                      FROM " . self::$NAME .
+                    " WHERE " . self::$NAME . "." . self::$COL_ID_USER . " = ?;";
+            $stmt = $db->prepare($sql);
+            // associate values
+            $stmt->bind_param("i", $user->getId());
+            // execute query
+            $stmt->execute();
+            // link outcome variables
+            $stmt->bind_result
+            (
+                    $idUser,
+                    $idProvince, 
+                    $idTeacher,
+                    $school,
+                    $city, 
+                    $course,
+                    $dateOfBirth
+            );
+            // get the value
+            $stmt->fetch();
+            // create a "Student" object container for all these values.
+            $student = new Student
+            (
+                    $user,
+                    ProvinceTable::findById($idProvince),
+                    TeacherTable::findById($idTeacher),
+                    $school,
+                    $city,
+                    $course,
+                    $dateOfBirth
+            );
+            // close connection
+            $db->close();
+            // return the student
+            return $student;
+         }
     }
     // Testeo
 //  // teacher

@@ -99,6 +99,91 @@
             // close connection
             $db->close();
         }
+        /**
+          * findByUser()
+          * Function that seeks to obtain the teacher corresponding to the specified user
+          * @author Sergio Baena López
+          * @version 1.0
+          * @param {User object} $user the user that we want to get her/his teacher
+          * @return {Teacher object} the teacher corresponding to the specified user
+          */
+         public static function findByUser($user)
+         {
+            // open connection
+            $db = new LettersGameDB();
+            // prepare query
+            $sql =   "SELECT *
+                      FROM " . self::$NAME .
+                    " WHERE " . self::$NAME . "." . self::$COL_ID_USER . " = ?;";
+            $stmt = $db->prepare($sql);
+            // associate values
+            $stmt->bind_param("i", $user->getId());
+            // execute query
+            $stmt->execute();
+            // link outcome variables
+            $stmt->bind_result
+            (
+                    $idUser,
+                    $idProvince,
+                    $school,
+                    $city,
+                    $courses
+            );
+            // get the value
+            $stmt->fetch();
+            // create a "Teacher" object container for all these values.
+            $teacher = new Teacher
+            (
+                    $user,
+                    ProvinceTable::findById($idProvince),
+                    $school,
+                    $city,
+                    $courses
+            );
+            // close connection
+            $db->close();
+            // return the teacher object
+            return $teacher;
+         }
+        /**
+         * findById()
+         * Function that seeks to find a teacher by id (primary key)
+         * @author Sergio Baena López
+         * @version 1.0
+         * @param {int} $id the id that will filter.
+         * @return {Teacher object} the Teacher object that has this id.
+         */
+        public static function findById($id)
+        {
+            // open connection
+            $db = new LettersGameDB();
+            // prepare query
+            $sql =   "SELECT *
+                      FROM " . self::$NAME .
+                    " WHERE " . self::$NAME . "." . self::$COL_ID_USER . " = ?;";
+            $stmt = $db->prepare($sql);
+            // associate values
+            $stmt->bind_param("i", $id);
+            // execute query
+            $stmt->execute();
+            // link outcome variables
+            $stmt->bind_result($idUser, $idProvince, $school, $city, $courses);
+            // get the value
+            $stmt->fetch();
+            // create a "Teacher" object container for all these values.
+            $teacher = new Teacher
+            (
+                    UserTable::findById($id),
+                    ProvinceTable::findById($idProvince),
+                    $school,
+                    $city,
+                    $courses
+            );
+            // close connection
+            $db->close();
+            // return the teacher object
+            return $teacher;
+        }
     }
     // Testeo
 //    $user = new User("", "", "", "");
