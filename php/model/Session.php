@@ -16,7 +16,7 @@
          * @return {Array} an associative array with this format:
          * "sessionOpened" {boolean} if the user opened session or not
          * "sessionContent" {Associative array} an associative array with this format:
-         *      "ranking" {Ranking object} the user ranking
+         *      "rankingList" {Array of Rankings object} the user rankings
          *      "teacherOrStudentOrWebmaster" {Teacher object | Student object | Webmaster object} 
          *      the user log. 
          */
@@ -30,12 +30,11 @@
                 // the user exists in database --> open session
                 $user = UserTable::findByUsername($user->getUsername());
                 $arrayToReturn["sessionContent"] = array();
+                // get the 4 rankings of the user
+                $arrayToReturn["sessionContent"]["rankingList"] = RankingTable::findByUser($user);
                 
                 
                 
-                
-                
-//                        RankingTable::findByPlayer($player);
                 $_SESSION[self::$NAME] = $arrayToReturn["sessionContent"];
             }
             return $arrayToReturn;
