@@ -6,7 +6,7 @@ function atTheStartOfPage()
 {
     soundList = new Array
     (
-//            "generalDescriptionSound",
+            "generalDescriptionSound",
 //            "goToHomeSound",
             "beginFormSound",
             "endFormSound",
