@@ -24,7 +24,7 @@ function Session(SERVER_PATH)
      */
     Session.prototype.open = function(user, beforeSendFunction, completeFunction)
     {
-        // Open a session on the server POR AQUI VOY
+        // Open a session on the server 
         var sessionArray = new Array();
         var outputData;
         sessionArray["isServerError"] = false;
@@ -33,7 +33,7 @@ function Session(SERVER_PATH)
                 url: this.SERVER_PATH,
                 type: "POST",
                 async: false,
-                data: "action=2&player=" + JSON.stringify(player),
+                data: "action=4&user=" + JSON.stringify(user),
                 dataType: "json",
                 beforeSend: function (xhr)
                 {
