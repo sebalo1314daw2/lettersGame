@@ -18,33 +18,69 @@ function atTheStartOfPage()
     );
 //    enableCaptureKey();
     checkInactivity(soundList);
-    addFocusEventInForm();
+//    addFocusEventInForm();
     $("#idUser").html(new Date().getTime());
-    // TESTEO DE LA ACCION DE LOGUEO
-    var user = new User("pepe1", "pepe1", "", "", "");
-    user.encryptedPassword();
-    $.ajax(
+}
+/**
+ * enterTheSystem()
+ * @description Procedure aims logging of a user in the system. It shall be verified, first, you have entered 
+ * a username and password (in case you message username and / or password is invalid display). Secondly, 
+ * it will go to the server to check for that user. If it exists, it will open a session on the server
+ * and the client.
+ * @author Sergio Baena López
+ * @version 1.0
+ */
+function enterTheSystem()
+{
+    var SERVER_PATH = "../php/control/invokeController.php";
+    var BEFORE_SEND_FUNCTION = function(){showLoadAnimation();};
+    var COMPLETE_FUNCTION = function(){hideLoadAnimation();};
+    // create a User object with form data.
+    var user = new User($("#username").val(), $("#password").val(), "", "", "");
+    var sessionArray = user.logIn(SERVER_PATH, BEFORE_SEND_FUNCTION, COMPLETE_FUNCTION);
+    // sessionArray loaded
+    if(sessionArray["isServerError"])
     {
-            url: "../php/control/invokeController.php",
-            type: "POST",
-            async: false,
-            data: "action=4&user=" + JSON.stringify(user),
-            dataType: "json",
-            beforeSend: function (xhr)
-            {
-//                beforeSendFunction();
-            },
-            complete: function (xhr, status)
-            {
-//                completeFunction();
-            },
-            success: function (response)
-            {
-//                dataArray["validationArray"] = response;
-            },
-            error: function (xhr, ajaxOptions, thrownError) 
-            {
-//                dataArray["isServerError"] = true;
-            }	
-    });
+        // is server error
+        // for normal user.
+        $("#errorsForm").children().remove();
+        var errorList = new Array();
+        errorList.push("Nombre de usuario y/o contrase&ntilde;a inv&aacute;lida");
+        // an message about the server error for user
+        errorList.push("Error del servidor. Esto puede ser debido a que tu conexi&oacute;n de Internet haya fallado. No te has podido loguear");
+        var errorListInHTMLFormat = Utilities.createErrorListInHTMLFormat(errorList);
+        $("#errorsForm").append(errorListInHTMLFormat);
+        // reset fields
+        // TODO
+        // for blind user
+        // TODO
+    }
+    else
+    {
+        // is not server error
+        if(sessionArray["sessionOpened"])
+        {
+            // session opened
+            // Let's go play now view
+            // TODO
+            // we show to player ranking 
+//            resetRankingTable(window.document);
+//            generateRankingTableOfActivePlayer(window.document);
+            // change the menu
+//            $(".beforeOpenSession").hide();
+//            $(".afterOpenSession").show();
+        }
+        else
+        {
+            // session did not open
+            // show to the error message of the login 
+            $("#errorsForm").children().remove();
+            var errorList = new Array();
+            errorList.push("Nombre de usuario y/o contrase&ntilde;a inv&aacute;lida");
+            var errorListInHTMLFormat = Utilities.createErrorListInHTMLFormat(errorList);
+            $("#errorsForm").append(errorListInHTMLFormat);
+            // reset login form
+            // TODO
+        }
+    }
 }
