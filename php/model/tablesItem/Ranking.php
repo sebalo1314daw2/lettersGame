@@ -76,5 +76,34 @@
             $this->numberOfAttempts = $numberOfAttempts;
         }
         // ============================================= Methods =================================
+        /**
+         * toAssociativeArray()
+         * Function that seeks to convert this Ranking object to an associative array
+         * @author Sergio Baena López
+         * @version 1.0
+         * @return {Associative array} an associative array that represent this Ranking object
+         */
+        public function toAssociativeArray()
+        {
+            $namesAttr = array("id", "points", "numberOfHits", "numberOfFailures", "numberOfAttempts");
+            $attrNamesThatAreObj = array("user", "game");
+            $theAssociativeArray = array();
+            for($i = 0; $i < count($attrNamesThatAreObj); $i++)
+            {
+                eval
+                (
+                        '$theAssociativeArray["' .
+                        $attrNamesThatAreObj[$i] .
+                        '"] = $this->'           . 
+                        $attrNamesThatAreObj[$i] .
+                        '->toAssociativeArray();' 
+                );
+            }
+            for($i = 0; $i < count($namesAttr); $i++)
+            {
+                eval('$theAssociativeArray["' . $namesAttr[$i] . '"] = $this->' . $namesAttr[$i] . ';');
+            }
+            return $theAssociativeArray;
+        }
     }
 ?>

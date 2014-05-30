@@ -1,4 +1,5 @@
 <?php
+    require_once "../model/tablesItem/Game.php";
     class GameTable 
     {
         // ==================================== Attributes ===================================

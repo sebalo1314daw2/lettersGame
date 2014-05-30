@@ -97,5 +97,34 @@
             // ------------------------------------- course ----------------------------------------------
             $this->course = strtoupper($this->course);   
         }
+        /**
+         * toAssociativeArray()
+         * Function that seeks to convert this Student object to an associative array
+         * @author Sergio Baena López
+         * @version 1.0
+         * @return {Associative array} an associative array that represent this Student object
+         */
+        public function toAssociativeArray()
+        {
+            $namesAttr = array("school", "city", "course", "dateOfBirth", "TYPE");
+            $attrNamesThatAreObj = array("user", "province", "teacher");
+            $theAssociativeArray = array();
+            for($i = 0; $i < count($attrNamesThatAreObj); $i++)
+            {
+                eval
+                (
+                        '$theAssociativeArray["' .
+                        $attrNamesThatAreObj[$i] .
+                        '"] = $this->'           . 
+                        $attrNamesThatAreObj[$i] .
+                        '->toAssociativeArray();' 
+                );
+            }
+            for($i = 0; $i < count($namesAttr); $i++)
+            {
+                eval('$theAssociativeArray["' . $namesAttr[$i] . '"] = $this->' . $namesAttr[$i] . ';');
+            }
+            return $theAssociativeArray;
+        }
     }
 ?>

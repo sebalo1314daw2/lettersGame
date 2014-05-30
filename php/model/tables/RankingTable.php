@@ -1,4 +1,6 @@
 <?php
+    require_once "../model/tablesItem/Ranking.php";
+    require_once "../model/tables/GameTable.php";
     class RankingTable 
     {
         // ==================================== Attributes ===================================

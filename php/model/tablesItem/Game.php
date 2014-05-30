@@ -96,5 +96,33 @@
             $this->numOfWords = $numOfWords;
         }
         // ============================================= Methods =================================
+        /**
+         * toAssociativeArray()
+         * Function that seeks to convert this Game object to an associative array
+         * @author Sergio Baena López
+         * @version 1.0
+         * @return {Associative array} an associative array that represent this Game object
+         */
+        public function toAssociativeArray()
+        {
+            $namesAttr = array
+            (
+                "id", 
+                "name", 
+                "shortDescription", 
+                "rules",
+                "punctuationAtTheFirstAttempt",
+                "punctuationAtTheSecondAttempt",
+                "timeOfFirstAttempt",
+                "timeOfSecondAttempt",
+                "numOfWords"
+            );
+            $theAssociativeArray = array();
+            for($i = 0; $i < count($namesAttr); $i++)
+            {
+                eval('$theAssociativeArray["' . $namesAttr[$i] . '"] = $this->' . $namesAttr[$i] . ';');
+            }
+            return $theAssociativeArray;
+        }
     }
 ?>

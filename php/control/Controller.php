@@ -4,6 +4,7 @@
     require_once "../model/tables/UserTable.php";
     require_once "../model/tables/StudentTable.php";
     require_once "../model/tables/TeacherTable.php";
+    require_once "../model/Session.php";
     require_once "../model/Utilities.php";
     class Controller 
     {
@@ -227,6 +228,47 @@
         {
             Utilities::convertStringToSound($string, "../../mp3/dynamicSounds/", $fileName);
             return true;
+        }
+        /**
+         * logIn()
+         * Function aims log in a user in the system. This function will look at the user exists and, if so, 
+         * will open session on the server.
+         * @author Sergio Baena López
+         * @version 1.0
+         * @param {String} $user the user who you want to log (JSON format)
+         * @return {String} an associative array with this format (JSON format):
+         * "sessionOpened" {bool} if the user opened session or not
+         * "sessionContent" {Associative array} an associative array with this format (JSON format):
+         *      "rankingList" {Array of Rankings object} the user rankings
+         *      "teacherOrStudentOrWebmaster" {Teacher object | Student object | Webmaster object} 
+         *      the user log. 
+         */
+        private function logIn($user)
+        {
+            // decode the user object
+            $user = json_decode(stripslashes($user));
+            $user = new User
+            (
+                    $user->username,
+                    $user->password, 
+                    "",
+                    ""
+            );
+            $sessionArray = Session::open($user);
+            // We convert the rankings object of the $sessionArray to some associative arrays 
+            if(isset($sessionArray["sessionContent"]))
+            {
+                // is set the $sessionArray["sessionContent"]
+                // we convert its to some associative arrays
+                // convert the rankings
+                for($i = 0; $i < count($sessionArray["sessionContent"]["rankingList"]); $i++)
+                {
+                    $sessionArray["sessionContent"]["rankingList"][$i] = $sessionArray["sessionContent"]["rankingList"][$i]->toAssociativeArray();
+                }
+                // rankings converted
+                $sessionArray["sessionContent"]["teacherOrStudentOrWebmaster"] = $sessionArray["sessionContent"]["teacherOrStudentOrWebmaster"]->toAssociativeArray();  
+            }
+            return json_encode($sessionArray); 
         }
     }
 ?>

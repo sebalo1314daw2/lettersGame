@@ -1,7 +1,5 @@
 <?php
-//    require_once "../model/tablesItem/Player.php";
-//    require_once "../model/tables/PlayerTable.php";
-//    require_once "../model/tables/RankingTable.php";
+    require_once "../model/tables/RankingTable.php";
     class Session 
     {
         // =========================================== Attributes ============================
