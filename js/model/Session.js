@@ -60,9 +60,22 @@ function Session(SERVER_PATH)
             if(sessionArray["sessionOpened"])
             {
                 // it opened a session on the server --> we open a session on the client
-                // we put the ranking object in the client session
-//                sessionStorage.setItem(this.NAME, JSON.stringify(outputData["sessionContent"]));
-                $.cookie(this.NAME, JSON.stringify(outputData["sessionContent"]), {path: "/"});
+                // we put the rankings and teacher/student/webmaster object in the client session
+                $.cookie
+                (
+                        this.NAME + "0",
+                        JSON.stringify(outputData["sessionContent"]["teacherOrStudentOrWebmaster"]),
+                        {path: "/"}
+                );
+                for(var i = 1; i <= outputData["sessionContent"]["rankingList"].length; i++)
+                {
+                    $.cookie
+                    (
+                            this.NAME + i, 
+                            JSON.stringify(outputData["sessionContent"]["rankingList"][i - 1]),
+                            {path: "/"}
+                    );
+                }
             }
         }
         return sessionArray;
