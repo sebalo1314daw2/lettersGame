@@ -17,11 +17,12 @@ function atTheStartOfPage()
             "sendFormSound",
             "usernameEmptySound",
             "passwordEmptySound",
+            "passwordCompleteSound",
             "timeoutSound"
     );
     enableCaptureKey();
     checkInactivity(soundList);
-//    addFocusEventInForm();
+    addFocusEventInForm();
     $("#idUser").html(new Date().getTime());
 }
 /**
@@ -182,4 +183,81 @@ function keyHandler(ASCIICode)
     // Enter a hidden "div" the time the last time a key was pressed
     var lastTime = new Date().getTime();
     $("#lastTimeAKeyWasPressed").html(lastTime);
+}
+/**
+ * readField()
+ * @description Procedure that is intended to run informative sounds when the user is positioned
+ * in a form field.
+ * @author Sergio Baena López
+ * @version 1.0
+ * @param {DOM object} fieldObject the field that has focus.
+ */
+function readField(fieldObject)
+{
+    var SERVER_PATH = "../php/control/invokeController.php";
+    if($(fieldObject).val() == "")
+    {
+        // the field is empty string
+        Utilities.stopAll(soundList);
+        document.getElementById($(fieldObject).attr("id") + "EmptySound").play(); 
+    }
+    else
+    {
+        // the field has something
+        if($(fieldObject).attr("id") == "password")
+        {
+            // static sound
+            // password field
+            Utilities.stopAll(soundList);
+            document.getElementById($(fieldObject).attr("id") + "CompleteSound").play(); 
+        }
+        else
+        {
+            // dynamic sound
+            // Look here, if you need to create the sound.
+            if($("#last_value_" + $(fieldObject).attr("id")).html() != $(fieldObject).val()) 
+            {
+                // Not equals
+                // create sound. Assign new value to the div (field value)
+                var msg = "Campo rellenado. El nombre de usuario que has indicado es "    +
+                          $(fieldObject).val()                                            +
+                          ".";
+                // create sound
+                Utilities.convertStringToSound
+                (
+                        SERVER_PATH, 
+                        msg, 
+                        "login_id_" + $("#idUser").html() + "_field_" + $(fieldObject).attr("id"),
+                        function(){showLoadAnimation();}, 
+                        function(){hideLoadAnimation();}
+                );
+                soundList.addWithoutRepetition("login_id_" + $("#idUser").html() + "_field_" + $(fieldObject).attr("id"));      
+                // Assign new value to the div (field value)
+                $("#last_value_" + $(fieldObject).attr("id")).html($(fieldObject).val());
+            }
+            // create audio and source tags
+            var audioTag = $("<audio></audio>").attr
+            (
+                    "id", "login_id_" + $("#idUser").html() + "_field_" + $(fieldObject).attr("id")
+            );
+            var sourceTag = $("<source />").attr(
+            {
+                "src":"../mp3/dynamicSounds/login_id_"        + 
+                    $("#idUser").html()                       + 
+                    "_field_"                                 + 
+                    $(fieldObject).attr("id")                 +
+                    ".mp3?state="                             +
+                    new Date().getTime(),
+                "type":"audio/mpeg"
+            });
+            audioTag.append(sourceTag);
+            // remove audio tag and put audio tag in HTML document
+            $("#login_id_" + $("#idUser").html() + "_field_" + $(fieldObject).attr("id")).remove();
+            $("#soundList").append(audioTag); 
+            // reproduce sound
+            Utilities.stopAll(soundList);
+            audioTag = audioTag[0];
+            audioTag.play();
+        }
+    }
 }
