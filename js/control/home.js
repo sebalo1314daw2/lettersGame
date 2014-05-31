@@ -1,6 +1,9 @@
-$("window").ready(function(){atTheStartOfPage();});
 /**
  * atTheStartOfPage()
+ * @description Procedure which aims to call certain functions when the page loads for its proper 
+ * functioning of it.
+ * @author Sergio Baena López
+ * @version 1.0
  */
 function atTheStartOfPage()
 {
@@ -19,6 +22,11 @@ function atTheStartOfPage()
 }
 /**
  * keyHandler()
+ * @description Procedure aims handle a keypress event for different actions that will make the web
+ * (for the blind).
+ * @author Sergio Baena López
+ * @version 1.0
+ * @param {Number} ASCIICode the ASCII code of the pressed letter.
  */
 function keyHandler(ASCIICode)
 {

@@ -1,6 +1,9 @@
-$("document").ready(function(){atTheStartOfPage();});
 /**
  * atTheStartOfPage()
+ * @description Procedure which aims to call certain functions when the page loads for its proper 
+ * functioning of it.
+ * @author Sergio Baena López
+ * @version 1.0
  */
 function atTheStartOfPage()
 {

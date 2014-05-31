@@ -1,3 +1,4 @@
+$("document").ready(function(){atTheStartOfPage();});
 /**
  * showLoadAnimation()
  * @description Procedure is to show the loading animation. What it will do is place the image centered on 
