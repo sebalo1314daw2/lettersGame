@@ -1,0 +1,5 @@
+Error del servidor. 
+
+Esto puede ser debido a que tu conexión de Internet haya fallado.
+
+No te has podido loguear.

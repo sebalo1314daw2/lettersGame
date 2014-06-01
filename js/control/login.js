@@ -18,6 +18,8 @@ function atTheStartOfPage()
             "usernameEmptySound",
             "passwordEmptySound",
             "passwordCompleteSound",
+            "serverErrorSound",
+            "loginErrorSound",
             "timeoutSound"
     );
     enableCaptureKey();
@@ -49,15 +51,15 @@ function enterTheSystem()
         // for normal user.
         $("#errorsForm").children().remove();
         var errorList = new Array();
-        errorList.push("Nombre de usuario y/o contrase&ntilde;a inv&aacute;lida");
         // an message about the server error for user
-        errorList.push("Error del servidor. Esto puede ser debido a que tu conexi&oacute;n de Internet haya fallado. No te has podido loguear");
+        errorList.push("Error del servidor. Esto puede ser debido a que tu conexi&oacute;n de Internet haya fallado. No te has podido loguear.");
         var errorListInHTMLFormat = Utilities.createErrorListInHTMLFormat(errorList);
         $("#errorsForm").append(errorListInHTMLFormat);
         // reset fields
-        // TODO
+        resetForm();
         // for blind user
-        // TODO
+        Utilities.stopAll(soundList);
+        document.getElementById("serverErrorSound").play(); 
     }
     else
     {
@@ -65,14 +67,7 @@ function enterTheSystem()
         if(sessionArray["sessionOpened"])
         {
             // session opened
-            // Let's go play now view
-            // TODO
-            // we show to player ranking 
-//            resetRankingTable(window.document);
-//            generateRankingTableOfActivePlayer(window.document);
-            // change the menu
-//            $(".beforeOpenSession").hide();
-//            $(".afterOpenSession").show();
+            alert("usuario logueado correctamente");
         }
         else
         {
@@ -80,11 +75,14 @@ function enterTheSystem()
             // show to the error message of the login 
             $("#errorsForm").children().remove();
             var errorList = new Array();
-            errorList.push("Nombre de usuario y/o contrase&ntilde;a inv&aacute;lida");
+            errorList.push("Nombre de usuario y/o contrase&ntilde;a inv&aacute;lida.");
             var errorListInHTMLFormat = Utilities.createErrorListInHTMLFormat(errorList);
             $("#errorsForm").append(errorListInHTMLFormat);
             // reset login form
-            // TODO
+            resetForm();
+            // for blind user
+            Utilities.stopAll(soundList);
+            document.getElementById("loginErrorSound").play();
         }
     }
 }
@@ -260,4 +258,15 @@ function readField(fieldObject)
             audioTag.play();
         }
     }
+}
+/**
+ * resetForm()
+ * @description Procedure is intended to reset the form.
+ * @author Sergio Baena López
+ * @version 1.0
+ */
+function resetForm()
+{
+    $("#username").val("");
+    $("#password").val("");
 }
