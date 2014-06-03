@@ -128,3 +128,58 @@ function isWritingTheUser()
 {
     return $(".field > *").is(":focus");
 }
+/**
+ * generateStudentMenu()
+ * @description Procedure that is intended to create the dropdown horizontal menu student.
+ * @author Sergio Baena López
+ * @version 1.0
+ */
+function generateStudentMenu()
+{
+    var menu = $
+    (
+            '<ul id="studentMenu">'                                                                     +
+                '<li>'                                                                                  +
+                        '<a href="">P&aacute;gina de inicio</a>'                                        +
+                '</li>'                                                                                 +
+                '<li>'                                                                                  +
+                        '<a href="">Tu perfil</a>'                                                      +
+                '</li>'                                                                                 +
+                '<li>'                                                                                  +
+                        '<a href="">Tus juegos</a>'                                                     +
+                        '<ul>'                                                                          +
+                            '<li>'                                                                      +
+                                    '<a href="">Cuenta cuenta</a>'                                      +
+                            '</li>'                                                                     +
+                            '<li>'                                                                      +
+                                    '<a href="">Encuentra encuentra</a>'                                +
+                            '</li>'                                                                     +
+                            '<li>'                                                                      +
+                                    '<a href="">Cataloga &nbsp;cataloga</a>'                            +
+                            '</li>'                                                                     +
+                            '<li>'                                                                      +
+                                    '<a href="">Accent&uacute;a accent&uacute;a</a>'                    +
+                            '</li>'                                                                     +
+                        '</ul>'                                                                         +
+                '</li>'                                                                                 +
+                '<li>'                                                                                  +
+                        '<a href="">Reglas</a>'                                                         +
+                        '<ul>'                                                                          +
+                             '<li>'                                                                     +
+                                    '<a href="">Cuenta cuenta</a>'                                      +
+                            '</li>'                                                                     +
+                            '<li>'                                                                      +
+                                    '<a href="">Encuentra encuentra</a>'                                +
+                            '</li>'                                                                     +
+                            '<li>'                                                                      +
+                                    '<a href="">Cataloga &nbsp;cataloga</a>'                            +
+                            '</li>'                                                                     +
+                            '<li>'                                                                      +
+                                    '<a href="">Accent&uacute;a accent&uacute;a</a>'                    +
+                            '</li>'                                                                     +
+                        '</ul>'                                                                         +
+                '</li>'                                                                                 +
+            '</ul>'
+    );
+    $("#menuDiv").append(menu);
+}
