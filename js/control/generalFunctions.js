@@ -183,3 +183,14 @@ function generateStudentMenu()
     );
     $("#menuDiv").append(menu);
 }
+/**
+ * loadTheNameOfTheActiveUser()
+ * @description Procedure is intended to load the name of the active user.
+ * @author Sergio Baena López
+ * @version 1.0
+ */
+function loadTheNameOfTheActiveUser()
+{
+    var name = new Session("").obtainValue(0).getUser().getName();
+    $(".nameActiveUser").html(name);
+}

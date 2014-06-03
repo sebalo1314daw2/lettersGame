@@ -80,3 +80,171 @@ function Session(SERVER_PATH)
         }
         return sessionArray;
     }
+    /**
+     * isOpen()
+     * @description Procedure that aims to look after the session is open or not
+     * @author Sergio Baena López
+     * @version 1.0
+     * @return {boolean} if the session is opened or not
+     */
+    Session.prototype.isOpen = function()
+    {
+          return $.cookie(this.NAME + "0") != undefined;
+    }
+    /**
+     * obtainValue()
+     * @description Function that seeks to obtain the value of the session
+     * @author Sergio Baena López
+     * @version 1.0
+     * @param {Number} index the index of the session you want to get its value.
+     * @return {Ranking object | Webmaster object | Teacher object | Student object} 
+     * the value contained in the session
+     */
+    Session.prototype.obtainValue = function(index)
+    {
+        var sessionContent;
+        var user;
+        if(index == 0)
+        {
+            // is teacher, student o webmaster
+            // look, if a student, teacher or webmaster.
+            var teacherOrStudentOrWebmasterJSONEncoded = $.cookie(this.NAME + index);
+            var teacherOrStudentOrWebmasterJSONDecoded = JSON.parse(teacherOrStudentOrWebmasterJSONEncoded);
+            var teacherOrStudentOrWebmaster;
+            switch(teacherOrStudentOrWebmasterJSONDecoded.TYPE)
+            {
+                case "Teacher":
+                    // is teacher
+                    // create the user object
+                    user = new User
+                    (
+                            teacherOrStudentOrWebmasterJSONDecoded.user.username,
+                            teacherOrStudentOrWebmasterJSONDecoded.user.password,
+                            "",
+                            teacherOrStudentOrWebmasterJSONDecoded.user.name,
+                            teacherOrStudentOrWebmasterJSONDecoded.user.surnames
+                    );
+                    user.setId(teacherOrStudentOrWebmasterJSONDecoded.user.id);
+                    // create the province object
+                    var province = new Province(teacherOrStudentOrWebmasterJSONDecoded.province.value);
+                    province.setId(teacherOrStudentOrWebmasterJSONDecoded.province.id);
+                    // create the teacher object
+                    teacherOrStudentOrWebmaster = new Teacher
+                    (
+                            user,
+                            province,
+                            teacherOrStudentOrWebmasterJSONDecoded.school,
+                            teacherOrStudentOrWebmasterJSONDecoded.city,
+                            teacherOrStudentOrWebmasterJSONDecoded.courses
+                    );
+                    break;
+                case "Student":
+                    // is student 
+                    // create the user object
+                    user = new User
+                    (
+                            teacherOrStudentOrWebmasterJSONDecoded.user.username,
+                            teacherOrStudentOrWebmasterJSONDecoded.user.password,
+                            "",
+                            teacherOrStudentOrWebmasterJSONDecoded.user.name,
+                            teacherOrStudentOrWebmasterJSONDecoded.user.surnames
+                    );
+                    user.setId(teacherOrStudentOrWebmasterJSONDecoded.user.id);
+                    // create the province object
+                    var province = new Province(teacherOrStudentOrWebmasterJSONDecoded.province.value);
+                    province.setId(teacherOrStudentOrWebmasterJSONDecoded.province.id);
+                    // create the user object (of teacher object)
+                    var userOfTeacher = new User
+                    (
+                            teacherOrStudentOrWebmasterJSONDecoded.teacher.user.username,
+                            teacherOrStudentOrWebmasterJSONDecoded.teacher.user.password,
+                            "",
+                            teacherOrStudentOrWebmasterJSONDecoded.teacher.user.name,
+                            teacherOrStudentOrWebmasterJSONDecoded.teacher.user.surnames
+                    );
+                    user.setId(teacherOrStudentOrWebmasterJSONDecoded.teacher.user.id);
+                    // create the province object (of teacher object)
+                    var provinceOfTeacher = new Province(teacherOrStudentOrWebmasterJSONDecoded.teacher.province.value);
+                    provinceOfTeacher.setId(teacherOrStudentOrWebmasterJSONDecoded.teacher.province.id);
+                    // create the teacher object
+                    var teacher = new Teacher
+                    (
+                            userOfTeacher,
+                            provinceOfTeacher,
+                            teacherOrStudentOrWebmasterJSONDecoded.teacher.school,
+                            teacherOrStudentOrWebmasterJSONDecoded.teacher.city,
+                            teacherOrStudentOrWebmasterJSONDecoded.teacher.courses
+                    );
+                    teacherOrStudentOrWebmaster = new Student
+                    (
+                            user,
+                            province,
+                            teacher,
+                            teacherOrStudentOrWebmasterJSONDecoded.school,
+                            teacherOrStudentOrWebmasterJSONDecoded.city,
+                            teacherOrStudentOrWebmasterJSONDecoded.course,
+                            teacherOrStudentOrWebmasterJSONDecoded.dateOfBirth
+                    );
+                    break;
+                case "Webmaster":
+                    // is webmaster
+                    // create the user object
+                    user = new User
+                    (
+                            teacherOrStudentOrWebmasterJSONDecoded.user.username,
+                            teacherOrStudentOrWebmasterJSONDecoded.user.password,
+                            "",
+                            teacherOrStudentOrWebmasterJSONDecoded.user.name,
+                            teacherOrStudentOrWebmasterJSONDecoded.user.surnames
+                    );
+                    user.setId(teacherOrStudentOrWebmasterJSONDecoded.user.id);
+                    teacherOrStudentOrWebmaster = new Webmaster
+                    (
+                            user,
+                            teacherOrStudentOrWebmasterJSONDecoded.role,
+                            teacherOrStudentOrWebmasterJSONDecoded.descriptionOfTheirRole
+                    );
+                    break;   
+            }
+            sessionContent = teacherOrStudentOrWebmaster;
+        }
+        else
+        {
+            // is ranking
+            var rankingJSONEncoded = $.cookie(this.NAME + index);
+            var rankingJSONDecoded = JSON.parse(rankingJSONEncoded);
+            // create the user object
+            user = new User
+            (
+                    rankingJSONDecoded.user.username,
+                    rankingJSONDecoded.user.password,
+                    "",
+                    rankingJSONDecoded.user.name,
+                    rankingJSONDecoded.user.surnames
+            );
+            user.setId(rankingJSONDecoded.user.id);
+            // create the game object
+            var game = new Game
+            (
+                    rankingJSONDecoded.game.id,
+                    rankingJSONDecoded.game.name,
+                    rankingJSONDecoded.game.shortDescription,
+                    rankingJSONDecoded.game.rules,
+                    rankingJSONDecoded.game.punctuationAtTheFirstAttempt,
+                    rankingJSONDecoded.game.punctuationAtTheSecondAttempt,
+                    rankingJSONDecoded.game.numOfWords
+            );
+            var ranking = new Ranking
+            (
+                    rankingJSONDecoded.id,
+                    user,
+                    game,
+                    rankingJSONDecoded.points,
+                    rankingJSONDecoded.numberOfHits,
+                    rankingJSONDecoded.numberOfFailures,
+                    rankingJSONDecoded.numberOfAttempts
+            );
+            sessionContent = ranking;
+        }
+        return sessionContent;
+    }    
