@@ -99,23 +99,6 @@
 {
     border-bottom-right-radius: 0;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 #title
 {
     margin-left: 20px;
@@ -236,6 +219,24 @@ a
 {
     text-decoration: none;
 }
+/* tables */
+td
+{
+    border: 1px dotted #ED354B;
+    vertical-align: middle;
+    padding: 5px;
+}
+th
+{
+    border: 1px dotted #ED354B;
+    vertical-align: middle;
+    padding: 5px;
+    font-style: italic;
+}
+table
+{
+    margin-bottom: 20px;
+}
 /* ----------------------------------------------------------------------------------------------------------------
  *
  *                                                 CLASSES OF THE WEB
@@ -330,4 +331,11 @@ body.loading
 .hiddenData
 {
     display: none;
+}
+button.buttonList
+{
+    float: left;
+    clear: none;
+    margin-right: 5px;
+    margin-bottom: 20px;
 }
