@@ -15,6 +15,8 @@
         <script type="text/javascript" src="../js/jQuery/pluginJqueryCookies/jquery.cookie.js"></script>
         <script type="text/javascript" src="../js/control/generalFunctions.js"></script>
         <script type="text/javascript" src="../js/control/pagina_del_alumno.js"></script> 
+        <script type="text/javascript" src="../js/model/Array.js"></script>
+        <script type="text/javascript" src="../js/model/Utilities.js"></script>
         <script type="text/javascript" src="../js/model/Session.js"></script>
         <script type="text/javascript" src="../js/model/User.js"></script> 
         <script type="text/javascript" src="../js/model/Game.js"></script>
@@ -62,12 +64,13 @@
                 </iframe>
             </div>
         </div>
+        <div class="hiddenData">
+            <div id="isGeneratedTheSound_generalDescription">0</div>
+            <div id="isGeneratedTheSound_bodyContent">0</div>
+        </div>
         <div id="lastTimeAKeyWasPressed" class="hiddenData"></div>
-        <div>
+        <div id="soundList">
              <!--Load of the sounds--> 
-             <audio id="generalDescriptionSound" autoplay>
-                <source src="../mp3/staticSounds/home/generalDescription.mp3" type="audio/mpeg" />
-             </audio>
              <audio id="goToRegisterSound">
                 <source src="../mp3/staticSounds/menuUnauthenticatedUser/goToRegister.mp3" type="audio/mpeg" />
              </audio>
