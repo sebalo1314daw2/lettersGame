@@ -222,13 +222,13 @@ a
 /* tables */
 td
 {
-    border: 1px dotted #ED354B;
+    border: 1px dashed #ED354B;
     vertical-align: middle;
     padding: 5px;
 }
 th
 {
-    border: 1px dotted #ED354B;
+    border: 1px dashed #ED354B;
     vertical-align: middle;
     padding: 5px;
     font-style: italic;

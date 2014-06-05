@@ -46,10 +46,16 @@ function Game
      * @param {String} serverPath the server path where we obtain all the teachers
      * @param {function} beforeSendFunction Function to be performed just before going to the server.
      * @param {function} completeFunction Function to be executed just after returning from the server.
-     * @return A ESPECIFICAR
+     * @return {Associative array} an associative array with this format:
+     * "isServerError" {boolean} if an error has occurred with the server.
+     * "deniedAccess" {boolean} if the access is denied or not
+     * "exists" {boolean} if the game exists or not in the database
+     * "game" {Game object} the game with the specified id
      */
     Game.obtain = function(id, serverPath, beforeSendFunction, completeFunction)
     {
+        var outputData = new Array(); // associative array to return
+        var isServerError = false;
         $.ajax(
         {
                 url: serverPath,
@@ -59,20 +65,40 @@ function Game
                 dataType: "json",
                 beforeSend: function (xhr)
                 {
-//                    beforeSendFunction();
+                    beforeSendFunction();
                 },
                 complete: function (xhr, status)
                 {
-//                    completeFunction();
+                    completeFunction();
                 },
                 success: function (response)
                 {
-//                    outputData = response;
+                    outputData = response;
                 },
                 error: function (xhr, ajaxOptions, thrownError) 
                 {
-//                    dataArray["isServerError"] = true;
+                    isServerError = true;
                 }	
-        }); 
+        });
+        outputData["isServerError"] = isServerError;
+        if(!outputData["isServerError"])
+        {
+            // is not server error
+            if(outputData["exists"])
+            {
+                // the game exists
+                outputData["game"] = new Game
+                (
+                        outputData["game"].id,
+                        outputData["game"].name,
+                        outputData["game"].shortDescription,
+                        outputData["game"].rules,
+                        outputData["game"].punctuationAtTheFirstAttempt,
+                        outputData["game"].punctuationAtTheSecondAttempt,
+                        outputData["game"].numOfWords
+                );
+            }
+        }
+        return outputData;
     }
     // ===================================== Methods =============================================

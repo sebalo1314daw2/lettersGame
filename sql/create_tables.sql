@@ -159,7 +159,7 @@ INSERT INTO game
     num_of_words
 ) VALUES 
 (
-    '&iquest;De qu&eacute; categor&iacute;a es esta palabra?',
+    'Cataloga cataloga',
     'Juego que consiste en acertar la categor&iacute;a de la palabra',
     'Reglas del juego de acertar la categor&iacute;a de la palabra',
     10,

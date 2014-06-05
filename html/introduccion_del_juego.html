@@ -25,6 +25,7 @@
         <script type="text/javascript" src="../js/model/Student.js"></script>
         <script type="text/javascript" src="../js/model/Teacher.js"></script>
         <script type="text/javascript" src="../js/model/Webmaster.js"></script>-->
+        <script type="text/javascript" src="../js/model/ValidationUtilities.js"></script>
     </head>
     <body id="webBody">
         <div id="webContainer">   
@@ -40,31 +41,23 @@
                 <!-- Body -->
                 <div id="subtitle">
                     <!-- Subtitle of body -->
-                    <h2>Introducci&oacute;n de "Cataloga cataloga"</h2>
+                    <h2>
+                        Introducci&oacute;n de "<span id="name"></span>"
+                    </h2>
                 </div>
                 <div>
                     <table>
                         <tr>
                             <th>Descripci&oacute;n</th>
-                            <td>
-                                First, let me express my gratitude for the efforts and sacrifices Spain 
-                                has made in Afghanistan. I believe Spain is committed to the mission in
-                                Afghanistan for the same reason we and our other NATO allies are: to 
-                                ensure the security of your country and to protect the Spanish people
-                                from attacks by al Qaeda and its affiliates by denying them safe haven
-                                in Afghanistan. Spain knows firsthand the anguish and sorrow of senseless 
-                                terrorist attacks. Al Qaeda remains the number one terrorist threat to 
-                                Europe at this time, and al Qaeda leaders have continued to broadcast 
-                                their intention to attack Europe and America.
-                            </td>
+                            <td id="shortDescription"></td>
                         </tr>
                         <tr>
                             <th>Puntuaci&oacute;n en el primer intento</th>
-                            <td>10 puntos</td>
+                            <td id="punctuationAtTheFirstAttempt"></td>
                         </tr>
                         <tr>
                             <th>Puntuaci&oacute;n en el segundo intento</th>
-                            <td>1 punto</td>
+                            <td id="punctuationAtTheSecondAttempt"></td>
                         </tr>
                     </table>
                     <button class="buttonList">Jugar ahora</button>
