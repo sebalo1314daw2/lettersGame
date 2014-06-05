@@ -18,7 +18,7 @@ function Game
     this.punctuationAtTheSecondAttempt = punctuationAtTheSecondAttempt;
     this.numOfWords = numOfWords;
 }
-    Game.prototype.COOKIE_NAME = "game";
+    Game.COOKIE_NAME = "game";
     // ===================================== Accessors ======================================
     // ------------------------------------------ Read accessors -----------------------------------
     Game.prototype.getId = function(){return this.id;}
@@ -28,7 +28,7 @@ function Game
     Game.prototype.getPunctuationAtTheFirstAttempts = function(){return this.punctuationAtTheFirstAttempt;}
     Game.prototype.getPunctuationAtTheSecondAttempt = function(){return this.punctuationAtTheSecondAttempt;}
     Game.prototype.getNumOfWords = function(){return this.numOfWords;}
-    Game.prototype.getCOOKIE_NAME = function(){return this.COOKIE_NAME;}
+    Game.prototype.getCOOKIE_NAME = function(){return Game.COOKIE_NAME;}
     // ------------------------------------------ Write accessors -----------------------------------
     Game.prototype.setId = function(id){this.id = id;}
     Game.prototype.setName = function(name){this.name = name;}
@@ -39,7 +39,7 @@ function Game
     Game.prototype.setNumOfWords = function(numOfWords){this.numOfWords = numOfWords;}
     // ===================================== Static methods ======================================
     /**
-     * obtain()
+     * obtainFromDatabase()
      * @description Function that seeks to get the game object that corresponds to the "id" specified 
      * (in the database).
      * @author Sergio Baena López
@@ -54,7 +54,7 @@ function Game
      * "exists" {boolean} if the game exists or not in the database
      * "game" {Game object} the game with the specified id
      */
-    Game.obtain = function(id, serverPath, beforeSendFunction, completeFunction)
+    Game.obtainFromDatabase = function(id, serverPath, beforeSendFunction, completeFunction)
     {
         var outputData = new Array(); // associative array to return
         var isServerError = false;
@@ -103,6 +103,29 @@ function Game
         }
         return outputData;
     }
+    /**
+     * obtainFromCookie()
+     * @description Function that seeks to get the game object stored in the cookie.
+     * @author Sergio Baena López
+     * @version 1.0
+     * @return {Game object} the game stored in the cookie
+     */
+    Game.obtainFromCookie = function()
+    {
+        var gameJSONEncoded = $.cookie(Game.COOKIE_NAME);
+        var gameJSONDecoded = JSON.parse(gameJSONEncoded);
+        var game = new Game
+        (
+                gameJSONDecoded.id,
+                gameJSONDecoded.name,
+                gameJSONDecoded.shortDescription,
+                gameJSONDecoded.rules,
+                gameJSONDecoded.punctuationAtTheFirstAttempt,
+                gameJSONDecoded.punctuationAtTheSecondAttempt,
+                gameJSONDecoded.numOfWords
+        );
+        return game;
+    }
     // ===================================== Methods =============================================
     /**
      * store()
@@ -112,5 +135,5 @@ function Game
      */
     Game.prototype.store = function()
     {
-        $.cookie(this.COOKIE_NAME, JSON.stringify(this), {path: "/"});
+        $.cookie(this.getCOOKIE_NAME(), JSON.stringify(this), {path: "/"});
     }

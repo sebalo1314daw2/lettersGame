@@ -59,8 +59,10 @@ function keyHandler(ASCIICode)
             break;
         case 51:
             // Key: 3
-            // Action: go to game "Cataloga cataloga"
-            // TODO
+            // Action: go to game "Cataloga cataloga" 
+            // informative message
+            var duration = generateAndPlayedGoToGame(3);
+            setTimeout(function(){window.location.href = "introduccion_del_juego.html?id=3";}, duration * 1000); 
             break;
         case 52:
             // Key: 4

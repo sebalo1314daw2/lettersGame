@@ -194,3 +194,83 @@ function loadTheNameOfTheActiveUser()
     var name = new Session("").obtainValue(0).getUser().getName();
     $(".nameActiveUser").html(name);
 }
+/**
+ * generateAndPlayedGoToGame()
+ * @description Procedure aims to generate and reproduce sound that tells the user that targets a game.
+ * @author Sergio Baena López
+ * @version 1.0
+ * @param {Number} idGame the id of the game where the user will go
+ * @return {Number} the duration of the audio 
+ */
+function generateAndPlayedGoToGame(idGame)
+{
+    // look if you are already generated sound
+    if($("#isGeneratedTheSound_goToGame_idGame_" + idGame).html() == "0")
+    {
+        // the sound is not generated --> they generate the sound
+        var user = new Session("").obtainValue(0).getUser();
+        var idUser = user.getId();
+        var dataArray = Game.obtainFromDatabase
+        (
+                idGame, SERVER_PATH, function(){showLoadAnimation();}, function(){hideLoadAnimation();}
+        );
+        if(dataArray["isServerError"])
+        {
+            // is server error
+            alert("Redireccionamos a la página de error del servidor");
+        }
+        // is not server error
+        if(dataArray["deniedAccess"])
+        {
+            // denied access
+            alert("Redireccionamos a la página de error de acceso denegado");
+        }
+        // is not denied access
+        if(!dataArray["exists"])
+        {
+            // the game does not exist
+            alert("Redireccionando a la pagina de error File not found 404"); // ESTO HAY QUE CAMBIARLO
+        }
+        // all correct 
+        var game = dataArray["game"]; // game object
+        var msg = "Vamos al juego de " + game.getName();
+        Encoder.EncodeType = "entity";
+        msg = Encoder.htmlDecode(msg);
+        // create sound
+        Utilities.convertStringToSound
+        (
+                SERVER_PATH, 
+                msg, 
+                "authenticatedPages_id_" + idUser + "_goToGame_idGame_" + idGame,
+                function(){showLoadAnimation();}, 
+                function(){hideLoadAnimation();}
+        );
+        soundList.addWithoutRepetition("goToGame" + idGame + "Sound");    
+        var audioTag = $("<audio></audio>").attr
+        (
+                "id", "goToGame" + idGame + "Sound"
+        );
+        var sourceTag = $("<source />").attr(
+        {
+            "src":"../mp3/dynamicSounds/authenticatedPages_id_" + idUser + "_goToGame_idGame_" + 
+                        idGame + ".mp3?state=" + new Date().getTime(),
+            "type":"audio/mpeg"
+        });
+        audioTag.append(sourceTag);
+        // put audio tag in HTML document
+        $("#soundList").append(audioTag); 
+        // indicated that it is already generated sound.
+        $("#isGeneratedTheSound_goToGame_idGame_" + idGame).html("1");
+    }
+    // play sound
+    var duration;
+    var sound = document.getElementById("goToGame" + idGame + "Sound");
+    sound.load();
+    sound.addEventListener("durationchange", function()
+    {
+        duration = document.getElementById("goToGame" + idGame + "Sound").duration;
+        Utilities.stopAll(soundList);
+        sound.play();
+    }, false);
+    return duration;
+}
