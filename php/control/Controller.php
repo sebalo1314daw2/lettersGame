@@ -4,6 +4,7 @@
     require_once "../model/tables/UserTable.php";
     require_once "../model/tables/StudentTable.php";
     require_once "../model/tables/TeacherTable.php";
+    require_once "../model/tables/GameTable.php";
     require_once "../model/Session.php";
     require_once "../model/Utilities.php";
     class Controller 
@@ -55,6 +56,10 @@
                     case "4":
                         // Action: Log in a user in the system
                         echo $this->logIn($this->params["user"]);
+                        break;
+                    case "5":
+                        // Action: get the game that has the "id" specified.
+                        echo $this->obtainGame($this->params["id"]);
                         break;
                 }
             }
@@ -269,6 +274,40 @@
                 $sessionArray["sessionContent"]["teacherOrStudentOrWebmaster"] = $sessionArray["sessionContent"]["teacherOrStudentOrWebmaster"]->toAssociativeArray();  
             }
             return json_encode($sessionArray); 
+        }
+        /**
+         * obtainGame()
+         * Function that seeks to obtain the game that has the "id" specified.
+         * @author Sergio Baena López
+         * @version 1.0
+         * @param {String} $id the id of the game to obtain
+         * @return {String} an associative array with this format (JSON format):
+         * "deniedAccess" {bool} if the access is denied or not
+         * "exists" {bool} if the game exists or not in the database
+         * "game" {Game object} the game with the specified id
+         */
+        private function obtainGame($id)
+        {
+            $dataArray = array("deniedAccess" => true);
+            if(Session::isOpen())
+            {
+                 // is open
+                 $dataArray["deniedAccess"] = false;
+                 $game = GameTable::findById($id);
+                 // look if the game exists or not
+                 if($game->getId() == null)
+                 {
+                     // the game does not exist
+                     $dataArray["exists"] = false;
+                 }
+                 else
+                 {
+                     // the game exists
+                     $dataArray["exists"] = true;
+                     $dataArray["game"] = $game->toAssociativeArray();
+                 }
+            }
+            return json_encode($dataArray);
         }
     }
 ?>

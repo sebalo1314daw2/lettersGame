@@ -305,3 +305,16 @@ Utilities.createErrorListInAudioFormat = function
     audioTag = audioTag[0];
     audioTag.play();
 }
+/**
+ * readGET()
+ * @description Function that seeks to read the parameters sent to an HTML document using the GET method.
+ * @author Sergio Baena López
+ * @version 1.0
+ * @return {Array of Strings} each element is a parameter value combination ("id=2" for exemple)
+ */
+Utilities.readGET = function()
+{
+    var strGET = location.search.substr(1,location.search.length);
+    var arrGET = strGET.split("&");
+    return arrGET;
+}

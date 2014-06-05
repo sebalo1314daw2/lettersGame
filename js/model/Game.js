@@ -35,4 +35,38 @@ function Game
     Game.prototype.setPunctuationAtTheFirstAttempts = function(punctuationAtTheFirstAttempt){this.punctuationAtTheFirstAttempt = punctuationAtTheFirstAttempt;}
     Game.prototype.setPunctuationAtTheSecondAttempt = function(punctuationAtTheSecondAttempt){this.punctuationAtTheSecondAttempt = punctuationAtTheSecondAttempt;}
     Game.prototype.setNumOfWords = function(numOfWords){this.numOfWords = numOfWords;}
+    // ===================================== Static methods ======================================
+    /**
+     * obtain()
+     * @description Function that seeks to get the game object that corresponds to the "id" specified 
+     * (in the database).
+     * @author Sergio Baena López
+     * @version 1.0
+     * @param {Number} id the id of the game to obtain from database
+     * @return A ESPECIFICAR
+     */
+    Game.obtain = function(id)
+    {
+        // POR AQUI VOY
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+    }
     // ===================================== Methods =============================================

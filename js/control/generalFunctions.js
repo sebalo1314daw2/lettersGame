@@ -155,7 +155,7 @@ function generateStudentMenu()
                                     '<a href="">Encuentra encuentra</a>'                                +
                             '</li>'                                                                     +
                             '<li>'                                                                      +
-                                    '<a href="">Cataloga &nbsp;cataloga</a>'                            +
+                                    '<a href="introduccion_del_juego.html?id=3">Cataloga &nbsp;cataloga</a>'                            +
                             '</li>'                                                                     +
                             '<li>'                                                                      +
                                     '<a href="">Accent&uacute;a accent&uacute;a</a>'                    +

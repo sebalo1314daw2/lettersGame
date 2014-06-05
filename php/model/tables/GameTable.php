@@ -1,5 +1,9 @@
 <?php
+    // Real requires
     require_once "../model/tablesItem/Game.php";
+    // Testing requires
+//    require_once "../tablesItem/Game.php";
+//    require_once "../LettersGameDB.php";
     class GameTable 
     {
         // ==================================== Attributes ===================================
@@ -69,4 +73,11 @@
             return $game;
         }
     }
+    // Testeo
+    // Miramos que pasa si el id no existe
+//    $game = GameTable::findById(20);
+//    if($game->getName() == null)
+//    {
+//        echo "es nulo"; 
+//    }
 ?>
