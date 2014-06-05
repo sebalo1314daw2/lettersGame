@@ -18,6 +18,7 @@ function Game
     this.punctuationAtTheSecondAttempt = punctuationAtTheSecondAttempt;
     this.numOfWords = numOfWords;
 }
+    Game.prototype.COOKIE_NAME = "game";
     // ===================================== Accessors ======================================
     // ------------------------------------------ Read accessors -----------------------------------
     Game.prototype.getId = function(){return this.id;}
@@ -27,6 +28,7 @@ function Game
     Game.prototype.getPunctuationAtTheFirstAttempts = function(){return this.punctuationAtTheFirstAttempt;}
     Game.prototype.getPunctuationAtTheSecondAttempt = function(){return this.punctuationAtTheSecondAttempt;}
     Game.prototype.getNumOfWords = function(){return this.numOfWords;}
+    Game.prototype.getCOOKIE_NAME = function(){return this.COOKIE_NAME;}
     // ------------------------------------------ Write accessors -----------------------------------
     Game.prototype.setId = function(id){this.id = id;}
     Game.prototype.setName = function(name){this.name = name;}
@@ -102,3 +104,13 @@ function Game
         return outputData;
     }
     // ===================================== Methods =============================================
+    /**
+     * store()
+     * @description Procedure which aims to store game object in a cookie.
+     * @author Sergio Baena López
+     * @version 1.0
+     */
+    Game.prototype.store = function()
+    {
+        $.cookie(this.COOKIE_NAME, JSON.stringify(this), {path: "/"});
+    }

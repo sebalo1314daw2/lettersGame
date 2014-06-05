@@ -82,16 +82,12 @@ function fillTable()
     $("#name").html(currentGame.getName());
     $("#shortDescription").html(currentGame.getShortDescription());
     $("#punctuationAtTheFirstAttempt").html(currentGame.getPunctuationAtTheFirstAttempts());
-    $("#punctuationAtTheSecondAttempt").html(currentGame.getPunctuationAtTheSecondAttempt());
+    var puntuactionSecondAttempt = currentGame.getPunctuationAtTheSecondAttempt();
+    if(puntuactionSecondAttempt == null)
+    {
+        puntuactionSecondAttempt = "Ninguna";
+    }
+    $("#punctuationAtTheSecondAttempt").html(puntuactionSecondAttempt);
     // store the game
-    // TODO
-    
-    
-    
-    
-    
-    
-    
-    
-    
+    currentGame.store();
 }
