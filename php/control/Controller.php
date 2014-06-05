@@ -34,7 +34,7 @@
             if(isset($this->params["action"]))
             {
                 // is set this parameter
-//                Session::enable();
+                Session::enable();
                 switch($this->params["action"])
                 {
                     case "0":
@@ -295,7 +295,7 @@
                  $dataArray["deniedAccess"] = false;
                  $game = GameTable::findById($id);
                  // look if the game exists or not
-                 if($game->getId() == null)
+                 if($game->getName() == null)
                  {
                      // the game does not exist
                      $dataArray["exists"] = false;

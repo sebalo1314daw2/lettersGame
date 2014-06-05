@@ -43,30 +43,36 @@ function Game
      * @author Sergio Baena López
      * @version 1.0
      * @param {Number} id the id of the game to obtain from database
+     * @param {String} serverPath the server path where we obtain all the teachers
+     * @param {function} beforeSendFunction Function to be performed just before going to the server.
+     * @param {function} completeFunction Function to be executed just after returning from the server.
      * @return A ESPECIFICAR
      */
-    Game.obtain = function(id)
+    Game.obtain = function(id, serverPath, beforeSendFunction, completeFunction)
     {
-        // POR AQUI VOY
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
+        $.ajax(
+        {
+                url: serverPath,
+                type: "POST",
+                async: false,
+                data: "action=5&id=" + id,
+                dataType: "json",
+                beforeSend: function (xhr)
+                {
+//                    beforeSendFunction();
+                },
+                complete: function (xhr, status)
+                {
+//                    completeFunction();
+                },
+                success: function (response)
+                {
+//                    outputData = response;
+                },
+                error: function (xhr, ajaxOptions, thrownError) 
+                {
+//                    dataArray["isServerError"] = true;
+                }	
+        }); 
     }
     // ===================================== Methods =============================================
