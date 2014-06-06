@@ -159,6 +159,19 @@
 {
     margin-bottom: 5px;
 }
+#game
+{
+    width: 300px;
+    margin-left: 342px;
+}
+#game > div
+{
+    margin-bottom: 5px;
+}
+#attempt
+{
+    margin-left: 797px;
+}
 /* ----------------------------------------------------------------------------------------------------------------
  *
  *                                                 TAGS OF THE WEB
@@ -182,6 +195,11 @@ h2
 {
     font-family: "Indie Flower", Arial;
     font-size: 60px;
+}
+h3
+{
+    font-size: 40px;
+    margin-bottom: 5px;
 }
 p
 {
@@ -338,4 +356,8 @@ button.buttonList
     clear: none;
     margin-right: 5px;
     margin-bottom: 20px;
+}
+.labelRadioButton
+{
+    display: inline;
 }
