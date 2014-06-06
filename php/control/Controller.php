@@ -5,6 +5,7 @@
     require_once "../model/tables/StudentTable.php";
     require_once "../model/tables/TeacherTable.php";
     require_once "../model/tables/GameTable.php";
+    require_once "../model/tables/WordTable.php";
     require_once "../model/Session.php";
     require_once "../model/Utilities.php";
     class Controller 
@@ -60,6 +61,10 @@
                     case "5":
                         // Action: get the game that has the "id" specified.
                         echo $this->obtainGame($this->params["id"]);
+                        break;
+                    case "6":
+                        // Action: get random words
+                        echo $this->obtainRandomWords($this->params["numWords"]);
                         break;
                 }
             }
@@ -306,6 +311,33 @@
                      $dataArray["exists"] = true;
                      $dataArray["game"] = $game->toAssociativeArray();
                  }
+            }
+            return json_encode($dataArray);
+        }
+        /**
+         * obtainRandomWords()
+         * Function which aims to get some random words object in word table
+         * @author Sergio Baena López
+         * @version 1.0
+         * @param {String} $numWords the number of words to obtain 
+         * @return {String} an associative array with this format (encoded to JSON):
+         * "deniedAccess" {bool} if the access is denied or not
+         * "wordList" {array of Word objects} the random words obtained
+         */
+        private function obtainRandomWords($numWords) 
+        {
+            $dataArray = array("deniedAccess" => true);
+            if(Session::isOpen())
+            {
+                 // is open
+                 $dataArray["deniedAccess"] = false;
+                 $wordList = WordTable::obtainRandomWords($numWords);
+                 for($i = 0; $i < count($wordList); $i++)
+                 {
+                     $wordList[$i] = $wordList[$i]->toAssociativeArray();
+                 }
+                 // correct wordList 
+                 $dataArray["wordList"] = $wordList;
             }
             return json_encode($dataArray);
         }
