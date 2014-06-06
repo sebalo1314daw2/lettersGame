@@ -5,6 +5,7 @@
         private $user;
         private $role;
         private $descriptionOfTheirRole;
+        public $TYPE = "Webmaster"; // (String)
         // =========================================== Constructor ============================
         function __construct($user, $role, $descriptionOfTheirRole) {
             $this->user = $user;
@@ -45,7 +46,7 @@
          */
         public function toAssociativeArray()
         {
-            $namesAttr = array("role", "descriptionOfTheirRole");
+            $namesAttr = array("role", "descriptionOfTheirRole", "TYPE");
             $attrNamesThatAreObj = array("user");
             $theAssociativeArray = array();
             for($i = 0; $i < count($attrNamesThatAreObj); $i++)

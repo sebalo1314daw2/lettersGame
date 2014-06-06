@@ -1,4 +1,5 @@
 <?php
+    require_once "../model/tablesItem/Webmaster.php";
     class WebmasterTable 
     {
         // ==================================== Attributes ===================================

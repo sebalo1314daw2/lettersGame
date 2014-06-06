@@ -1,5 +1,6 @@
 <?php
     require_once "../model/tables/RankingTable.php";
+    require_once "../model/tables/WebmasterTable.php";
     class Session 
     {
         // =========================================== Attributes ============================

@@ -66,7 +66,7 @@
          */
         public function toAssociativeArray()
         {
-            $namesAttr = array("school", "city", "courses");
+            $namesAttr = array("school", "city", "courses", "TYPE");
             $attrNamesThatAreObj = array("user", "province");
             $theAssociativeArray = array();
             for($i = 0; $i < count($attrNamesThatAreObj); $i++)

@@ -20,6 +20,7 @@ function atTheStartOfPage()
             "passwordCompleteSound",
             "serverErrorSound",
             "loginErrorSound",
+            "successSound",
             "timeoutSound"
     );
     enableCaptureKey();
@@ -67,7 +68,31 @@ function enterTheSystem()
         if(sessionArray["sessionOpened"])
         {
             // session opened
-            alert("usuario logueado correctamente");
+            // Users logged in successfully
+            // informative message for user
+            Utilities.stopAll(soundList);
+            document.getElementById("successSound").play(); 
+            // redirect
+            switch(new Session("").obtainValue(0).getTYPE())
+            {
+                case "Student":
+                    // is student
+                    // go to student page
+                    setTimeout(function(){window.location.href = "pagina_del_alumno.html";}, 5000);
+                    break;
+                case "Teacher":
+                    // is teacher
+                    // go to teacher page
+                    // TODO
+                    alert("eres profesor");
+                    break;
+                case "Webmaster":
+                    // is webmaster
+                    // go to webmaster page
+                    // TODO
+                    alert("eres webmaster");
+                    break;
+            }
         }
         else
         {
