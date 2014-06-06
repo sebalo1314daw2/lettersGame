@@ -140,7 +140,7 @@ function generateStudentMenu()
     (
             '<ul id="studentMenu">'                                                                     +
                 '<li>'                                                                                  +
-                        '<a href="">P&aacute;gina de inicio</a>'                                        +
+                        '<a href="pagina_del_alumno.html">P&aacute;gina de inicio</a>'                  +
                 '</li>'                                                                                 +
                 '<li>'                                                                                  +
                         '<a href="">Tu perfil</a>'                                                      +
@@ -155,7 +155,7 @@ function generateStudentMenu()
                                     '<a href="">Encuentra encuentra</a>'                                +
                             '</li>'                                                                     +
                             '<li>'                                                                      +
-                                    '<a href="introduccion_del_juego.html?id=3">Cataloga &nbsp;cataloga</a>'                            +
+                                    '<a href="introduccion_del_juego.html?id=3">Cataloga &nbsp;cataloga</a>'+
                             '</li>'                                                                     +
                             '<li>'                                                                      +
                                     '<a href="">Accent&uacute;a accent&uacute;a</a>'                    +
@@ -200,9 +200,9 @@ function loadTheNameOfTheActiveUser()
  * @author Sergio Baena López
  * @version 1.0
  * @param {Number} idGame the id of the game where the user will go
- * @return {Number} the duration of the audio 
+ * @param {String} path the path where we redirect the user
  */
-function generateAndPlayedGoToGame(idGame)
+function generateAndPlayedGoToGame(idGame, path)
 {
     // look if you are already generated sound
     if($("#isGeneratedTheSound_goToGame_idGame_" + idGame).html() == "0")
@@ -268,9 +268,10 @@ function generateAndPlayedGoToGame(idGame)
     sound.load();
     sound.addEventListener("durationchange", function()
     {
-        duration = document.getElementById("goToGame" + idGame + "Sound").duration;
+        duration = sound.duration;
         Utilities.stopAll(soundList);
         sound.play();
+        // redirect
+        setTimeout(function(){window.location.href = path;}, duration * 1000); 
     }, false);
-    return duration;
 }

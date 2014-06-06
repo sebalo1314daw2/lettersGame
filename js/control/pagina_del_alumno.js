@@ -61,8 +61,7 @@ function keyHandler(ASCIICode)
             // Key: 3
             // Action: go to game "Cataloga cataloga" 
             // informative message
-            var duration = generateAndPlayedGoToGame(3);
-            setTimeout(function(){window.location.href = "introduccion_del_juego.html?id=3";}, duration * 1000); 
+            generateAndPlayedGoToGame(3, "introduccion_del_juego.html?id=3");
             break;
         case 52:
             // Key: 4
