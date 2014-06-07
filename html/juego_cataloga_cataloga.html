@@ -43,29 +43,31 @@
                 <!-- Body -->
                 <div id="subtitle">
                     <!-- Subtitle of body -->
-                    <h2>Juego de "<span class="nameGame"></span>"</h2>
+                    <h2>Juego de "<span id="nameGame"></span>"</h2>
                 </div>
                 <div id="game">
                     <!-- the word and the options --> 
-                    <h3>calculadora</h3>
+                    <h3 id="valueWord"></h3>
                     <div>
-                        <input type="radio" name="category" value="aguda" />
+                        <input type="radio" name="category" value="aguda" onchange="checkResponse($(this).attr('value'))" />
                         <div class="labelRadioButton">Aguda</div>
                     </div>
                     <div>
-                        <input type="radio" name="category" value="llana" />
+                        <input type="radio" name="category" value="llana" onchange="checkResponse($(this).attr('value'))" />
                         <div class="labelRadioButton">Llana</div>
                     </div>
                     <div>
-                        <input type="radio" name="category" value="esdr&uacute;jula" />
+                        <input type="radio" name="category" value="esdr&uacute;jula" onchange="checkResponse($(this).attr('value'))" />
                         <div class="labelRadioButton">Esdr&uacute;jula</div> 
                     </div>          
                 </div>
                 <div>
                     <span>
-                        Tiempo: <span class=""></span>s
+                        Tiempo: <span id="timeGame"></span>s
                     </span>
-                    <span id="attempt">Intento: 1</span>
+                    <span id="attempt">
+                        Intento: <span id="numAttempt">0</span>
+                    </span>
                 </div>
             </div>
             <div id="footer">
@@ -88,6 +90,9 @@
             <div id="isGeneratedTheSound_goToGame_idGame_3">0</div>
             <div id="isGeneratedTheSound_goToGame_idGame_4">0</div>
         </div>
+        <div class="hiddenData" id="currentIndexOfTheWord">0</div>
+        <div class="hiddenData" id="stopTime">0</div>
+        <div class="hiddenData" id="rankingOfThatHeading"></div>
         <div id="lastTimeAKeyWasPressed" class="hiddenData"></div>
         <div id="soundList">
              <!--Load of the sounds--> 

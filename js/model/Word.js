@@ -81,6 +81,28 @@ function Word(id, value,numberOfSyllabes, category)
         }
         return outputData;
     }
+    /**
+     * obtainFromCookie()
+     * @description Function that seeks to obtain the "Word" object from the cookie whose index 
+     * is specified.
+     * @author Sergio Baena López
+     * @version 1.0
+     * @param {Number} index the index of the cookie
+     * @return {Word object} the word contained
+     */
+    Word.obtainFromCookie = function(index)
+    {
+        var wordJSONEncoded = $.cookie(Word.NAME_COOKIE + index);
+        var wordJSONDecoded = JSON.parse(wordJSONEncoded);
+        var word = new Word
+        (
+                wordJSONDecoded.id,
+                wordJSONDecoded.value,
+                wordJSONDecoded.numberOfSyllabes,
+                wordJSONDecoded.category
+        );
+        return word;
+    }
     // ================================== Methods =============================================
     /**
      * store()
