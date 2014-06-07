@@ -23,3 +23,20 @@ Array.prototype.addWithoutRepetition = function(newItem)
     }
     return canAdd;
 }
+/**
+ * store()
+ * @description Procedure which aims to store each item (object) of the list in a cookie using their 
+ * "store(index)" method.
+ * @author Sergio Baena López
+ * @version 1.0
+ */
+Array.prototype.store = function()
+{
+    // store the items
+    for(var i = 0; i < this.length; i++)
+    {
+        this[i].store(i);
+    }
+    // store the length
+    $.cookie(this[0].getNAME_COOKIE() + "Length", this.length, {path: "/"});
+}
