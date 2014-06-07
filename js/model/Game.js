@@ -6,6 +6,8 @@ function Game
         rules,
         punctuationAtTheFirstAttempt,
         punctuationAtTheSecondAttempt,
+        timeOfFirstAttempt,
+        timeOfSecondAttempt,
         numOfWords
 )
 {
@@ -16,6 +18,8 @@ function Game
     this.rules = rules;
     this.punctuationAtTheFirstAttempt = punctuationAtTheFirstAttempt;
     this.punctuationAtTheSecondAttempt = punctuationAtTheSecondAttempt;
+    this.timeOfFirstAttempt = timeOfFirstAttempt;
+    this.timeOfSecondAttempt = timeOfSecondAttempt;
     this.numOfWords = numOfWords;
 }
     Game.COOKIE_NAME = "game";
@@ -27,6 +31,8 @@ function Game
     Game.prototype.getRules = function(){return this.rules;}
     Game.prototype.getPunctuationAtTheFirstAttempts = function(){return this.punctuationAtTheFirstAttempt;}
     Game.prototype.getPunctuationAtTheSecondAttempt = function(){return this.punctuationAtTheSecondAttempt;}
+    Game.prototype.getTimeOfFirstAttempt = function(){return this.timeOfFirstAttempt;}
+    Game.prototype.getTimeOfSecondAttempt = function(){return this.timeOfSecondAttempt;}
     Game.prototype.getNumOfWords = function(){return this.numOfWords;}
     Game.prototype.getCOOKIE_NAME = function(){return Game.COOKIE_NAME;}
     // ------------------------------------------ Write accessors -----------------------------------
@@ -36,6 +42,8 @@ function Game
     Game.prototype.setRules = function(rules){this.rules = rules;}
     Game.prototype.setPunctuationAtTheFirstAttempts = function(punctuationAtTheFirstAttempt){this.punctuationAtTheFirstAttempt = punctuationAtTheFirstAttempt;}
     Game.prototype.setPunctuationAtTheSecondAttempt = function(punctuationAtTheSecondAttempt){this.punctuationAtTheSecondAttempt = punctuationAtTheSecondAttempt;}
+    Game.prototype.setTimeOfFirstAttempt = function(timeOfFirstAttempt){this.timeOfFirstAttempt = timeOfFirstAttempt;}
+    Game.prototype.setTimeOfSecondAttempt = function(timeOfSecondAttempt){this.timeOfSecondAttempt = timeOfSecondAttempt;}
     Game.prototype.setNumOfWords = function(numOfWords){this.numOfWords = numOfWords;}
     // ===================================== Static methods ======================================
     /**
@@ -97,6 +105,8 @@ function Game
                         outputData["game"].rules,
                         outputData["game"].punctuationAtTheFirstAttempt,
                         outputData["game"].punctuationAtTheSecondAttempt,
+                        outputData["game"].timeOfFirstAttempt,
+                        outputData["game"].timeOfSecondAttempt,
                         outputData["game"].numOfWords
                 );
             }
@@ -122,6 +132,8 @@ function Game
                 gameJSONDecoded.rules,
                 gameJSONDecoded.punctuationAtTheFirstAttempt,
                 gameJSONDecoded.punctuationAtTheSecondAttempt,
+                gameJSONDecoded.timeOfFirstAttempt,
+                gameJSONDecoded.timeOfSecondAttempt,
                 gameJSONDecoded.numOfWords
         );
         return game;

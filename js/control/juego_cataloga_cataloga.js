@@ -60,3 +60,18 @@ function prepareGame()
     wordList.store();
     // the game is prepared
 }
+/**
+ * fillPage()
+ * @description Procedure that aims to fill the page.
+ * @author Sergio Baena López
+ * @version 1.0 
+ */
+function fillPage()
+{
+    // fill subtitle
+    
+    
+    
+    
+    
+}
