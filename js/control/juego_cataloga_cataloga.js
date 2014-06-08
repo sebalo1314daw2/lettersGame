@@ -89,18 +89,22 @@ function initializePage()
     var valueWord = Word.obtainFromCookie(indexOfTheWord).getValue();
     $("#valueWord").html(valueWord);
     // create initial ranking
-    var rankingOfTheSession = new Session("").obtainValue(3);
-    var initialRanking = new Ranking
-    (
-            rankingOfTheSession.getId(),
-            rankingOfTheSession.getUser(),
-            rankingOfTheSession.getGame(),
-            0,
-            0, 
-            0,
-            0
-    ); 
-    initialRanking.storeInDocument($("#rankingOfThatHeading"));
+    if($("#rankingOfThatHeading").html() == "")
+    {
+        // we create its
+        var rankingOfTheSession = new Session("").obtainValue(3);
+        var initialRanking = new Ranking
+        (
+                rankingOfTheSession.getId(),
+                rankingOfTheSession.getUser(),
+                rankingOfTheSession.getGame(),
+                0,
+                0, 
+                0,
+                0
+        ); 
+        initialRanking.storeInDocument($("#rankingOfThatHeading"));
+    }
 }
 /**
  * play()
@@ -186,7 +190,15 @@ function checkResponse(response)
         (
                 rankingOfThatHeading.getNumberOfHits() + 1
         );
+        // sum number of attempts
+        rankingOfThatHeading.setNumberOfAttempts
+        (
+                rankingOfThatHeading.getNumberOfAttempts() + 1
+        );
+        // store the ranking of that heading
+        rankingOfThatHeading.storeInDocument($("#rankingOfThatHeading"));
         // updated ranking
+        alert("changeWord()");
         // TODO
         // llamar a changeWord()
     }
@@ -198,19 +210,26 @@ function checkResponse(response)
         (
                 rankingOfThatHeading.getNumberOfFailures() + 1 
         );
+        // sum number of attempts
+        rankingOfThatHeading.setNumberOfAttempts
+        (
+                rankingOfThatHeading.getNumberOfAttempts() + 1
+        );
+        // store the ranking of that heading
+        rankingOfThatHeading.storeInDocument($("#rankingOfThatHeading"));
         // updated ranking
         // look if the attempt is the first 
         if(attempt == "0")
         {
             // the attempt is the first
-            // POR AQUI VOY
+            // change the hidden data necessary for the page to initialize the second attempt.
+            // change #numAttempt
+            $("#numAttempt").html("1");
+            // change #stopTime
+            $("#stopTime").html("0");
+            // changes made
+            // play the second attempt
+            play();
         }
     }
-    // sum number of attempts
-    rankingOfThatHeading.setNumberOfAttempts
-    (
-            rankingOfThatHeading.getNumberOfAttempts() + 1
-    );
-    // store the ranking of that heading
-    rankingOfThatHeading.storeInDocument($("#rankingOfThatHeading"));
 }
