@@ -201,7 +201,12 @@ function checkResponse(response)
         rankingOfThatHeading.storeInDocument($("#rankingOfThatHeading"));
         // updated ranking
         // change word
-        setTimeout(function(){changeWord();}, 2000);       
+        disableRadioButtons();
+        setTimeout(function()
+        {
+            enableRadioButtons();
+            changeWord();
+        }, 2000);       
     }
     else
     {
@@ -227,8 +232,10 @@ function checkResponse(response)
             // change #numAttempt
             $("#numAttempt").html("1");
             // change #stopTime
+            disableRadioButtons();
             setTimeout(function()
             {
+                enableRadioButtons();
                 $("#stopTime").html("0");
                 // changes made
                 // play the second attempt
@@ -239,7 +246,12 @@ function checkResponse(response)
         {
             // the attempt is the second
             // change word
-            setTimeout(function(){changeWord();}, 2000);       
+            disableRadioButtons();
+            setTimeout(function()
+            {
+                enableRadioButtons();
+                changeWord();
+            }, 2000);       
         }
     }
 }
@@ -268,6 +280,38 @@ function checkResponse(response)
         $("#currentIndexOfTheWord").html(currentIndexOfTheWord + 1);
         $("#stopTime").html("0");
         // change done
+        // reset radio buttons
+        resetRadioButtons();
         play();
     }
+ }
+ /**
+  * resetRadioButtons()
+  * @description Procedure is intended to reset the "radio buttons".
+  * @author Sergio Baena López
+  * @version 1.0 
+  */
+ function resetRadioButtons()
+ {
+     $("input:radio:checked").attr("checked", false);
+ }
+ /**
+  * disableRadioButtons()
+  * @description Procedure aims disable "radio buttons".
+  * @author Sergio Baena López
+  * @version 1.0
+  */
+ function disableRadioButtons()
+ {
+     $("input:radio").attr("disabled", true);
+ }
+ /**
+  * enableRadioButtons()
+  * @description Procedure aims enable "radio buttons".
+  * @author Sergio Baena López
+  * @version 1.0
+  */
+ function enableRadioButtons()
+ {
+     $("input:radio").attr("disabled", false);
  }
