@@ -12,19 +12,19 @@ function atTheStartOfPage()
         // is not open the user session
         alert("Acceso denegado"); // ESTO HAY QUE CAMBIARLO
     }
-//    soundList = new Array
-//    (
-//            "clickLinkSound",
-//            "timeoutSound"
-//    );
+    soundList = new Array
+    (
+            "startGameSound",
+            "clickLinkSound",
+            "timeoutSound"
+    );
     SERVER_PATH = "../php/control/invokeController.php";
     generateStudentMenu();
-//    loadTheNameOfTheActiveUser();
-//    enableCaptureKey();
-//    checkInactivity(soundList);
-//    generateAndPlayedGeneralDescriptionSound();
+    enableCaptureKey();
+    checkInactivity(soundList);
     prepareGame();
     play();
+    generateAndPlayedGeneralDescriptionSound();
 }
 /**
  * prepareGame()
@@ -315,3 +315,226 @@ function checkResponse(response)
  {
      $("input:radio").attr("disabled", false);
  }
+ /**
+ * keyHandler()
+ * @description Procedure aims handle a keypress event for different actions that will make the web
+ * (for the blind).
+ * @author Sergio Baena López
+ * @version 1.0
+ * @param {Number} ASCIICode the ASCII code of the pressed letter.
+ */
+function keyHandler(ASCIICode)
+{
+//    alert(ASCIICode);
+    switch(ASCIICode)
+    {
+        case 39:
+            // Key: -->
+            // Action: click on the menu item "Reglas".
+            // TODO
+            break;
+        case 37:
+            // Key: <--
+            // Action: click on the menu item "Tu perfil".
+            // TODO
+            break;
+        case 49:
+            // Key: 1
+            // Action: go to game "Cuenta cuenta"
+            // TODO
+            break;
+        case 50:
+            // Key: 2
+            // Action: go to game "Encuentra encuentra"
+            // TODO
+            break;
+        case 51:
+            // Key: 3
+            // Action: go to game "Cataloga cataloga" 
+            // informative message
+            pauseGame();
+            generateAndPlayedGoToGame(3, "introduccion_del_juego.html?id=3");
+            break;
+        case 52:
+            // Key: 4
+            // Action: go to game "Accentúa accentúa"
+            // TODO
+            break;
+        case 74:
+            // Key: J
+            // Action: start or continue the game
+            if($("#stopTime").html() == "1")
+            {
+                // informative message
+                Utilities.stopAll(soundList);
+                document.getElementById("startGameSound").play();
+                setTimeout(function()
+                {
+                    continueGame();
+                    generateAndPlayedCurrentWord();
+                }, 5000);
+            }
+            break;
+        case 79:
+            // Key: O
+            // Action: click on the ONCE link
+            // informative message
+            pauseGame();
+            Utilities.stopAll(soundList);
+            document.getElementById("clickLinkSound").play();
+            // redirect
+            setTimeout(function(){window.location.href = "http://www.once.es/";}, 3000);
+            break;
+        case 87:
+            // Key: W
+            // Action: reproduce the sound of the description of the web.
+            generateAndPlayedGeneralDescriptionSound();
+            break;
+    }
+    // Enter a hidden "div" the time the last time a key was pressed
+    var lastTime = new Date().getTime();
+    $("#lastTimeAKeyWasPressed").html(lastTime);
+}
+/**
+ * generateAndPlayedGeneralDescriptionSound()
+ * @description Procedure that is intended to create and played the sound of the general description of
+ * page. Only generated once.
+ * @author Sergio Baena López
+ * @version 1.0
+ */
+function generateAndPlayedGeneralDescriptionSound()
+{
+    // pause game
+    pauseGame();
+    // look if you are already generated sound
+    if($("#isGeneratedTheSound_generalDescription").html() == "0")
+    {
+        // the sound is not generated --> they generate the sound
+        var user = new Session("").obtainValue(0).getUser();
+        var idUser = user.getId();
+        var game = Game.obtainFromCookie();
+        var msg = "¿Qué haríamos sin las letras?\n\n"                                                   +
+                  "Juego de " + game.getName() + "\n\n"                                                 +     
+                  "Esta web tiene un menú, con las opciones de ir a la página de inicio, "              +
+                  "a tu perfil, a tus juegos y a las reglas de tus juegos, una palabra a catalogar "    +
+                  "y un enlace para acceder a la ONCE.\n\n"                                             +
+                  "¿Qué quieres hacer?\n\n"                                                             +
+                  "Si quieres utilizar el menú utiliza las teclas de derecha e izquierda.\n\n"          +
+                  "Si quieres comenzar o continuar con el juego pulsa J.\n\n"                           +
+                  "Cuando estés jugando, pulsa A se crees que es aguda.\n\n"                            +
+                  "L si crees que es llana.\n\n"                                                        +
+                  "O, si se trata de una esdrújola,teclea E.\n\n"                                       +
+                  "Para repetir la palabra, pulsa R.\n\n"                                               +                                                         
+                  "Si quieres jugar al juego de cuenta cuenta pulsa 1.\n\n"                             +
+                  "Si quieres jugar al juego de encuentra encuentra pulsa 2.\n\n"                       +
+                  "Si quieres jugar al juego de cataloga cataloga pulsa 3.\n\n"                         +
+                  "Si quieres jugar al juego de accentúa accentúa pulsa 4.\n\n"                         +
+                  "Si quieres clicar en el enlace de la ONCE, pulsa O.\n\n"                             +
+                  "Y si quieres que se vuelva a repetir todo lo que acabamos de decir, pulsa W.";
+        Encoder.EncodeType = "entity";
+        msg = Encoder.htmlDecode(msg);
+        // create sound
+        Utilities.convertStringToSound
+        (
+                SERVER_PATH, 
+                msg, 
+                "cataloga_cataloga_id_" + idUser + "_generalDescription",
+                function(){showLoadAnimation();}, 
+                function(){hideLoadAnimation();}
+        );
+        soundList.addWithoutRepetition("generalDescriptionSound");      
+        var audioTag = $("<audio></audio>").attr
+        (
+                "id", "generalDescriptionSound"
+        );
+        var sourceTag = $("<source />").attr(
+        {
+            "src":"../mp3/dynamicSounds/cataloga_cataloga_id_"  + 
+                idUser                                          + 
+                "_generalDescription.mp3?state="                +
+                new Date().getTime(),
+            "type":"audio/mpeg"
+        });
+        audioTag.append(sourceTag);
+        // put audio tag in HTML document
+        $("#soundList").append(audioTag); 
+        // indicated that it is already generated sound.
+        $("#isGeneratedTheSound_generalDescription").html("1");
+    }
+    // play sound
+    Utilities.stopAll(soundList);
+    document.getElementById("generalDescriptionSound").play();
+}
+/**
+ * pauseGame()
+ * @description Procedure aims pause the game. Pause means disable "radio buttons" and put a "1"
+ * to "stopTime".
+ * @author Sergio Baena López
+ * @version 1.0
+ */
+function pauseGame()
+{
+    disableRadioButtons();
+    $("#stopTime").html("1");
+}
+/**
+ * continueGame()
+ * @description Procedure aims continue the game. Continue means enable "radio buttons" and put a "0"
+ * to "stopTime".
+ * @author Sergio Baena López
+ * @version 1.0
+ */
+function continueGame()
+{
+    enableRadioButtons();
+    $("#stopTime").html("0");
+    updateTime();
+}
+/**
+ * generateAndPlayedCurrentWord()
+ * @description Procedure that is intended to create and played the sound of the current word of
+ * page.
+ * @author Sergio Baena López
+ * @version 1.0
+ */
+function generateAndPlayedCurrentWord()
+{
+    // they generate the sound
+    var user = new Session("").obtainValue(0).getUser();
+    var idUser = user.getId();
+    var currentIndexOfTheWord = parseInt($("#currentIndexOfTheWord").html());
+    var currentWord = Word.obtainFromCookie(currentIndexOfTheWord); // word object
+    var valueWord = currentWord.getValue();
+    var msg = valueWord;
+    Encoder.EncodeType = "entity";
+    msg = Encoder.htmlDecode(msg);
+    // create sound
+    Utilities.convertStringToSound
+    (
+            SERVER_PATH, 
+            msg, 
+            "cataloga_cataloga_id_" + idUser + "_currentWord",
+            function(){showLoadAnimation();}, 
+            function(){hideLoadAnimation();}
+    );
+    soundList.addWithoutRepetition("currentWordSound");      
+    var audioTag = $("<audio></audio>").attr
+    (
+            "id", "currentWordSound"
+    );
+    var sourceTag = $("<source />").attr(
+    {
+        "src":"../mp3/dynamicSounds/cataloga_cataloga_id_"  + 
+            idUser                                          + 
+            "_currentWord.mp3?state="                      +
+            new Date().getTime(),
+        "type":"audio/mpeg"
+    });
+    audioTag.append(sourceTag);
+    // remove and put audio tag in HTML document
+    $("#currentWordSound").remove();
+    $("#soundList").append(audioTag); 
+    // play sound
+    Utilities.stopAll(soundList);
+    document.getElementById("currentWordSound").play();
+}
