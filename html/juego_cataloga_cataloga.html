@@ -49,6 +49,7 @@
                     <!-- the word and the options --> 
                     <h3 id="valueWord"></h3>
                     <div>
+                        <!-- disabled añadir ese attr en los radiobuttons -->
                         <input type="radio" name="category" value="aguda" onchange="checkResponse($(this).attr('value'))" />
                         <div class="labelRadioButton">Aguda</div>
                     </div>
@@ -57,7 +58,7 @@
                         <div class="labelRadioButton">Llana</div>
                     </div>
                     <div>
-                        <input type="radio" name="category" value="esdr&uacute;jula" onchange="checkResponse($(this).attr('value'))" />
+                        <input type="radio" name="category" value="esdr&amp;uacute;jula" onchange="checkResponse($(this).attr('value'))" />
                         <div class="labelRadioButton">Esdr&uacute;jula</div> 
                     </div>          
                 </div>

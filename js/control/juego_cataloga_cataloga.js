@@ -163,6 +163,8 @@ function checkResponse(response)
     var currentIndexOfTheWord = parseInt($("#currentIndexOfTheWord").html());
     var correctResponse = Word.obtainFromCookie(currentIndexOfTheWord).getCategory();
     var attempt = $("#numAttempt").html(); // string
+    // stop time
+    $("#stopTime").html("1");
     if(response == correctResponse)
     {
         // the user hits the response.
@@ -198,9 +200,8 @@ function checkResponse(response)
         // store the ranking of that heading
         rankingOfThatHeading.storeInDocument($("#rankingOfThatHeading"));
         // updated ranking
-        alert("changeWord()");
-        // TODO
-        // llamar a changeWord()
+        // change word
+        setTimeout(function(){changeWord();}, 2000);       
     }
     else
     {
@@ -222,14 +223,51 @@ function checkResponse(response)
         if(attempt == "0")
         {
             // the attempt is the first
-            // change the hidden data necessary for the page to initialize the second attempt.
+            // change the data necessary for the page to initialize the second attempt.
             // change #numAttempt
             $("#numAttempt").html("1");
             // change #stopTime
-            $("#stopTime").html("0");
-            // changes made
-            // play the second attempt
-            play();
+            setTimeout(function()
+            {
+                $("#stopTime").html("0");
+                // changes made
+                // play the second attempt
+                play();
+            }, 2000);
+        }
+        else
+        {
+            // the attempt is the second
+            // change word
+            setTimeout(function(){changeWord();}, 2000);       
         }
     }
 }
+/**
+ * changeWord()
+ * @description Procedure that aims to change word. This procedure previously look whether to
+ * change the word or already reached the end of the game.
+ * @author Sergio Baena López
+ * @version 1.0 
+ */
+ function changeWord()
+ {
+    // look if we can change the word.
+    var currentIndexOfTheWord = parseInt($("#currentIndexOfTheWord").html());
+    var numOfWords = Game.obtainFromCookie().getNumOfWords();
+    if(currentIndexOfTheWord == numOfWords - 1)
+    {
+        // end game
+        alert("Fin del juego");
+    }
+    else
+    {
+        // change word
+        // change the data necessary for start with a new word
+        $("#numAttempt").html("0");
+        $("#currentIndexOfTheWord").html(currentIndexOfTheWord + 1);
+        $("#stopTime").html("0");
+        // change done
+        play();
+    }
+ }
