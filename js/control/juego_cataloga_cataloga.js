@@ -18,6 +18,13 @@ function atTheStartOfPage()
             "acuteOptionSound",
             "plainOptionSound",
             "antepenultimeOptionSound",
+            "hitSound",
+            "failSound",
+            "shortTimeSound",
+            "correctResponseIsAcuteSound",
+            "correctResponseIsPlainSound",
+            "correctResponseIsAntepenultimeSound",
+            "secondAttemptSound",
             "clickLinkSound",
             "timeoutSound"
     );
@@ -145,6 +152,13 @@ function updateTime()
             {
                 checkResponse("nothing");
             }
+            else if(newTime > 0 && newTime < 5 )
+            {
+                // notify the user that his time is short 
+                // sound that will not stop other active sounds.
+                document.getElementById("shortTimeSound").play();
+                updateTime();
+            }
             else
             {
                 // you can still decrease more.
@@ -203,9 +217,11 @@ function checkResponse(response)
         // store the ranking of that heading
         rankingOfThatHeading.storeInDocument($("#rankingOfThatHeading"));
         // updated ranking
-        // change word
+        // change word and play hit sound
         disableRadioButtons();
         $("#disableKeys").html("1");
+        Utilities.stopAll(soundList);
+        document.getElementById("hitSound").play();
         setTimeout(function()
         {
             $("#disableKeys").html("0");
@@ -229,6 +245,9 @@ function checkResponse(response)
         // store the ranking of that heading
         rankingOfThatHeading.storeInDocument($("#rankingOfThatHeading"));
         // updated ranking
+        // play fail sound
+        Utilities.stopAll(soundList); 
+        document.getElementById("failSound").play();
         // look if the attempt is the first 
         if(attempt == "0")
         {
@@ -239,6 +258,13 @@ function checkResponse(response)
             // change #stopTime
             disableRadioButtons();
             $("#disableKeys").html("1");
+            // play #secondAttemptSound
+            setTimeout(function()
+            {
+                Utilities.stopAll(soundList); 
+                document.getElementById("secondAttemptSound").play();
+            }, 2000);
+            // wait to the two sounds
             setTimeout(function()
             {
                 $("#disableKeys").html("0");
@@ -247,7 +273,7 @@ function checkResponse(response)
                 // changes made
                 // play the second attempt
                 play();
-            }, 2000);
+            }, 3000);
         }
         else
         {
@@ -255,12 +281,18 @@ function checkResponse(response)
             // change word
             disableRadioButtons();
             $("#disableKeys").html("1");
+            // play correct response sound
+            setTimeout(function()
+            {
+                playCorrectResponse();
+            }, 2000);
+            // wait to the two sounds
             setTimeout(function()
             {
                 $("#disableKeys").html("0");
                 enableRadioButtons();
                 changeWord();
-            }, 2000);       
+            }, 5000);       
         }
     }
 }
@@ -292,6 +324,7 @@ function checkResponse(response)
         // reset radio buttons
         resetRadioButtons();
         play();
+        generateAndPlayedCurrentWord();
     }
  }
  /**
@@ -617,4 +650,34 @@ function generateAndPlayedCurrentWord()
     // play sound
     Utilities.stopAll(soundList);
     document.getElementById("currentWordSound").play();
+}
+/**
+ * playCorrectResponse()
+ * @description Procedure aims to play the sound that indicates the correct answer from 
+ * the current word.
+ * @author Sergio Baena López
+ * @version 1.0
+ */
+function playCorrectResponse()
+{
+    // they generate the sound
+    var currentIndexOfTheWord = parseInt($("#currentIndexOfTheWord").html());
+    var currentWord = Word.obtainFromCookie(currentIndexOfTheWord); // word object
+    var categoryWord = currentWord.getCategory();
+    var idAudioToPlay;
+    switch(categoryWord)
+    {
+        case "aguda":
+            idAudioToPlay = "correctResponseIsAcuteSound";
+            break;
+        case "llana":
+            idAudioToPlay = "correctResponseIsPlainSound";
+            break;
+        case "esdr&uacute;jula":
+            idAudioToPlay = "correctResponseIsAntepenultimeSound";
+            break;
+    }
+    // play sound
+    Utilities.stopAll(soundList);
+    document.getElementById(idAudioToPlay).play();
 }
