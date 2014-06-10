@@ -15,6 +15,9 @@ function atTheStartOfPage()
     soundList = new Array
     (
             "startGameSound",
+            "acuteOptionSound",
+            "plainOptionSound",
+            "antepenultimeOptionSound",
             "clickLinkSound",
             "timeoutSound"
     );
@@ -202,8 +205,10 @@ function checkResponse(response)
         // updated ranking
         // change word
         disableRadioButtons();
+        $("#disableKeys").html("1");
         setTimeout(function()
         {
+            $("#disableKeys").html("0");
             enableRadioButtons();
             changeWord();
         }, 2000);       
@@ -233,8 +238,10 @@ function checkResponse(response)
             $("#numAttempt").html("1");
             // change #stopTime
             disableRadioButtons();
+            $("#disableKeys").html("1");
             setTimeout(function()
             {
+                $("#disableKeys").html("0");
                 enableRadioButtons();
                 $("#stopTime").html("0");
                 // changes made
@@ -247,8 +254,10 @@ function checkResponse(response)
             // the attempt is the second
             // change word
             disableRadioButtons();
+            $("#disableKeys").html("1");
             setTimeout(function()
             {
+                $("#disableKeys").html("0");
                 enableRadioButtons();
                 changeWord();
             }, 2000);       
@@ -351,9 +360,12 @@ function keyHandler(ASCIICode)
         case 51:
             // Key: 3
             // Action: go to game "Cataloga cataloga" 
-            // informative message
-            pauseGame();
-            generateAndPlayedGoToGame(3, "introduccion_del_juego.html?id=3");
+            if($("#disableKeys").html() == "0")
+            {
+                // informative message
+                pauseGame();
+                generateAndPlayedGoToGame(3, "introduccion_del_juego.html?id=3");
+            }
             break;
         case 52:
             // Key: 4
@@ -363,7 +375,7 @@ function keyHandler(ASCIICode)
         case 74:
             // Key: J
             // Action: start or continue the game
-            if($("#stopTime").html() == "1")
+            if($("#stopTime").html() == "1" && $("#disableKeys").html() == "0")
             {
                 // informative message
                 Utilities.stopAll(soundList);
@@ -375,20 +387,88 @@ function keyHandler(ASCIICode)
                 }, 5000);
             }
             break;
+        case 65:
+            // Key: A
+            // Action: the user selects the option "Aguda".
+            if($("#stopTime").html() == "0" && $("#disableKeys").html() == "0")
+            {
+                pauseGame();
+                $("#disableKeys").html("1");
+                // informative message
+                Utilities.stopAll(soundList);
+                document.getElementById("acuteOptionSound").play();
+                setTimeout(function()
+                {
+                    // check the "Aguda" option.
+                    $("input:radio[value='aguda']").attr("checked", true);
+                    checkResponse("aguda");
+                }, 3000);
+            }
+            break;
+        case 76:
+            // Key: L
+            // Action: the user selects the option "Llana".
+            if($("#stopTime").html() == "0" && $("#disableKeys").html() == "0")
+            {
+                pauseGame();
+                $("#disableKeys").html("1");
+                // informative message
+                Utilities.stopAll(soundList);
+                document.getElementById("plainOptionSound").play();
+                setTimeout(function()
+                {
+                    // check the "Llana" option.
+                    $("input:radio[value='llana']").attr("checked", true);
+                    checkResponse("llana");
+                }, 3000);
+            }
+            break;
+        case 69:
+            // Key: E
+            // Action: the user selects the option "Esdrujola".
+            if($("#stopTime").html() == "0" && $("#disableKeys").html() == "0")
+            {
+                pauseGame();
+                $("#disableKeys").html("1");
+                // informative message
+                Utilities.stopAll(soundList);
+                document.getElementById("antepenultimeOptionSound").play();
+                setTimeout(function()
+                {
+                    // check the "Esdrujula" option.
+                    $("input:radio[value='esdr&uacute;jula']").attr("checked", true);
+                    checkResponse("esdr&uacute;jula");
+                }, 3000);
+            }
+            break;
+        case 82:
+            // Key: R
+            // Action: again repeat the current word.
+            if($("#stopTime").html() == "0" && $("#disableKeys").html() == "0")
+            {
+                generateAndPlayedCurrentWord();
+            }
+            break;
         case 79:
             // Key: O
             // Action: click on the ONCE link
-            // informative message
-            pauseGame();
-            Utilities.stopAll(soundList);
-            document.getElementById("clickLinkSound").play();
-            // redirect
-            setTimeout(function(){window.location.href = "http://www.once.es/";}, 3000);
+            if($("#disableKeys").html() == "0")
+            {
+                // informative message
+                pauseGame();
+                Utilities.stopAll(soundList);
+                document.getElementById("clickLinkSound").play();
+                // redirect
+                setTimeout(function(){window.location.href = "http://www.once.es/";}, 3000);
+            }
             break;
         case 87:
             // Key: W
             // Action: reproduce the sound of the description of the web.
-            generateAndPlayedGeneralDescriptionSound();
+            if($("#disableKeys").html() == "0")
+            {
+                 generateAndPlayedGeneralDescriptionSound();
+            }
             break;
     }
     // Enter a hidden "div" the time the last time a key was pressed
@@ -526,7 +606,7 @@ function generateAndPlayedCurrentWord()
     {
         "src":"../mp3/dynamicSounds/cataloga_cataloga_id_"  + 
             idUser                                          + 
-            "_currentWord.mp3?state="                      +
+            "_currentWord.mp3?state="                       +
             new Date().getTime(),
         "type":"audio/mpeg"
     });
