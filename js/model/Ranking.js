@@ -9,6 +9,7 @@ function Ranking(id, user, game, points, numberOfHits, numberOfFailures, numberO
     this.numberOfFailures = numberOfFailures;
     this.numberOfAttempts = numberOfAttempts;
 }
+    Ranking.COOKIE_NAME = "ranking";
     // ===================================== Accessors ======================================
     // ------------------------------------------ Read accessors -----------------------------------
     Ranking.prototype.getId = function(){return this.id;}
@@ -18,6 +19,7 @@ function Ranking(id, user, game, points, numberOfHits, numberOfFailures, numberO
     Ranking.prototype.getNumberOfHits = function(){return this.numberOfHits;}
     Ranking.prototype.getNumberOfFailures = function(){return this.numberOfFailures;}
     Ranking.prototype.getNumberOfAttempts = function(){return this.numberOfAttempts;}
+    Ranking.prototype.getCOOKIE_NAME = function(){return Ranking.COOKIE_NAME;}
     // ------------------------------------------ Write accessors -----------------------------------
     Ranking.prototype.setId = function(id){this.id = id;}
     Ranking.prototype.setUser = function(user){this.user = user;}
@@ -72,6 +74,50 @@ function Ranking(id, user, game, points, numberOfHits, numberOfFailures, numberO
         );
         return ranking;
     }
+    /**
+     * obtainFromCookie()
+     * @description Function that seeks to get the ranking object stored in the cookie.
+     * @author Sergio Baena López
+     * @version 1.0
+     * @return {Ranking object} the ranking stored in the cookie
+     */
+    Ranking.obtainFromCookie = function()
+    {
+        var rankingJSONEncoded = $.cookie(Ranking.COOKIE_NAME);
+        var rankingJSONDecoded = JSON.parse(rankingJSONEncoded);
+        var user = new User
+        (
+                rankingJSONDecoded.user.username,
+                rankingJSONDecoded.user.password,
+                rankingJSONDecoded.user.passwordConfirmation,
+                rankingJSONDecoded.user.name,
+                rankingJSONDecoded.user.surnames
+        );
+        user.setId(rankingJSONDecoded.user.id);
+        var game = new Game
+        (
+                rankingJSONDecoded.game.id,
+                rankingJSONDecoded.game.name,
+                rankingJSONDecoded.game.shortDescription,
+                rankingJSONDecoded.game.rules,
+                rankingJSONDecoded.game.punctuationAtTheFirstAttempt,
+                rankingJSONDecoded.game.punctuationAtTheSecondAttempt,
+                rankingJSONDecoded.game.timeOfFirstAttempt,
+                rankingJSONDecoded.game.timeOfSecondAttempt,
+                rankingJSONDecoded.game.numOfWords
+        );
+        var ranking = new Ranking
+        (
+                rankingJSONDecoded.id,
+                user,
+                game,
+                rankingJSONDecoded.points,
+                rankingJSONDecoded.numberOfHits,
+                rankingJSONDecoded.numberOfFailures,
+                rankingJSONDecoded.numberOfAttempts
+        );
+        return ranking;
+    }
     // ===================================== Methods =============================================
     /**
      * storeInDocument()
@@ -84,5 +130,27 @@ function Ranking(id, user, game, points, numberOfHits, numberOfFailures, numberO
     {
         $(tag).html(JSON.stringify(this));
     }
-    
-    
+    /**
+     * store()
+     * @description Procedure which aims to store this object in the cookie.
+     * @author Sergio Baena López
+     * @version 1.0
+     */
+    Ranking.prototype.store = function()
+    {
+        $.cookie(this.getCOOKIE_NAME(), JSON.stringify(this), {path: "/"});
+    }
+    /**
+     * update()
+     * @description Procedure which aims to update this object ranking considering the ranking specified.
+     * @author Sergio Baena López
+     * @version 1.0
+     * @param {Ranking object} lastRanking the new ranking to consider.
+     */
+    Ranking.prototype.update = function(lastRanking)
+    {
+        this.points = this.points + lastRanking.points;
+        this.numberOfHits = this.numberOfHits + lastRanking.numberOfHits;
+        this.numberOfFailures = this.numberOfFailures + lastRanking.numberOfFailures;
+        this.numberOfAttempts = this.numberOfAttempts + lastRanking.numberOfAttempts;
+    }

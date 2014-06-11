@@ -11,20 +11,20 @@
         <link href='http://fonts.googleapis.com/css?family=Indie+Flower' rel='stylesheet' type='text/css'>
         <link href='http://fonts.googleapis.com/css?family=Righteous' rel='stylesheet' type='text/css'>
         <!-- JavaScript -->
-<!--        <script type="text/javascript" src="../js/jQuery/jQuery.js"></script>
+        <script type="text/javascript" src="../js/jQuery/jQuery.js"></script>
         <script type="text/javascript" src="../js/jQuery/pluginJqueryCookies/jquery.cookie.js"></script>
         <script type="text/javascript" src="../js/json/json.js"></script>
-        <script type="text/javascript" src="../js/htmlEntities/encoder.js"></script>
+        <!--<script type="text/javascript" src="../js/htmlEntities/encoder.js"></script>-->
         <script type="text/javascript" src="../js/control/generalFunctions.js"></script>
-        <script type="text/javascript" src="../js/control/introduccion_del_juego.js"></script> 
-        <script type="text/javascript" src="../js/model/Array.js"></script>
+        <script type="text/javascript" src="../js/control/fin_del_juego.js"></script> 
+        <!--<script type="text/javascript" src="../js/model/Array.js"></script>-->
         <script type="text/javascript" src="../js/model/Utilities.js"></script>
         <script type="text/javascript" src="../js/model/Session.js"></script>
         <script type="text/javascript" src="../js/model/User.js"></script> 
         <script type="text/javascript" src="../js/model/Game.js"></script>
-        <script type="text/javascript" src="../js/model/Province.js"></script>
+        <!--<script type="text/javascript" src="../js/model/Province.js"></script>-->
         <script type="text/javascript" src="../js/model/Ranking.js"></script>
-        <script type="text/javascript" src="../js/model/Student.js"></script>
+<!--        <script type="text/javascript" src="../js/model/Student.js"></script>
         <script type="text/javascript" src="../js/model/Teacher.js"></script>
         <script type="text/javascript" src="../js/model/Webmaster.js"></script>
         <script type="text/javascript" src="../js/model/ValidationUtilities.js"></script>-->
@@ -43,7 +43,9 @@
                 <!-- Body -->
                 <div id="subtitle">
                     <!-- Subtitle of body -->
-                    <h2>Fin del juego "Cataloga cataloga"</h2>
+                    <h2>
+                        Fin del juego "<span id="nameGame"></span>"
+                    </h2>
                 </div>
                 <div>
                     <table>
@@ -59,20 +61,20 @@
                         </tr>
                         <tr>
                             <th>Esta &uacute;ltima partida</th>
-                            <td>30</td>
-                            <td>5</td>
-                            <td>2</td>
-                            <td>7</td>
+                            <td id="lastPoints"></td>
+                            <td id="lastNumberOfHits"></td>
+                            <td id="lastNumberOfFailures"></td>
+                            <td id="lastNumberOfAttempts"></td>
                         </tr>
                         <tr>
                             <th>Todas las partidas</th>
-                            <td>50</td>
-                            <td>7</td>
-                            <td>4</td>
-                            <td>11</td>
+                            <td id="points"></td>
+                            <td id="numberOfHits"></td>
+                            <td id="numberOfFailures"></td>
+                            <td id="numberOfAttempts"></td>
                         </tr>
                     </table>
-                    <button>Jugar otra vez</button>
+                    <button onclick="redirectToGameIntroduction()">Jugar otra vez</button>
                 </div>   
             </div>
             <div id="footer">

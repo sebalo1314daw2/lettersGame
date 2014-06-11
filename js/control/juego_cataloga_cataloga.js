@@ -311,7 +311,20 @@ function checkResponse(response)
     if(currentIndexOfTheWord == numOfWords - 1)
     {
         // end game
-        alert("Fin del juego");
+        // store ranking of that heading in a cookie
+        var rankingOfThatHeading = Ranking.obtainFromDocument($("#rankingOfThatHeading"));
+        rankingOfThatHeading.store();
+        // stored ranking in a cookie
+        // obtain general ranking to update
+        var idRanking = rankingOfThatHeading.getId();
+        var session = new Session("");
+        var generalRanking = session.obtainValue(idRanking);
+        // update general ranking
+        generalRanking.update(rankingOfThatHeading);
+        session.establishValue(idRanking, generalRanking);
+        // general ranking saved        
+        // redirect to fin_del_juego.html
+        window.location.href = "fin_del_juego.html";
     }
     else
     {

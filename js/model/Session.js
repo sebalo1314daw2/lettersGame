@@ -247,4 +247,16 @@ function Session(SERVER_PATH)
             sessionContent = ranking;
         }
         return sessionContent;
-    }    
+    }
+    /**
+     * establishValue()
+     * @description Procedure is to establish the value of the session
+     * @author Sergio Baena López
+     * @version 1.0
+     * @param {Number} index the index of the cookie of the session to establish
+     * @param {Ranking or Student or Teacher or Webmaster object} value the value to establish
+     */
+    Session.prototype.establishValue = function(index, value)
+    {
+          $.cookie(this.NAME + index, JSON.stringify(value), {path: "/"});
+    }
