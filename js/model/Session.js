@@ -232,6 +232,8 @@ function Session(SERVER_PATH)
                     rankingJSONDecoded.game.rules,
                     rankingJSONDecoded.game.punctuationAtTheFirstAttempt,
                     rankingJSONDecoded.game.punctuationAtTheSecondAttempt,
+                    rankingJSONDecoded.game.timeOfFirstAttempt,
+                    rankingJSONDecoded.game.timeOfSecondAttempt,
                     rankingJSONDecoded.game.numOfWords
             );
             var ranking = new Ranking
@@ -290,4 +292,36 @@ function Session(SERVER_PATH)
         {
             $.removeCookie(this.NAME + i, {path: "/"});
         }    
+    }
+    /**
+     * saveChanges()
+     * @description Procedure which aims to store its values in the database.
+     * @author Sergio Baena López
+     * @version 1.0
+     */
+    Session.prototype.saveChanges = function()
+    {
+        var rankingList = new Array();
+        for(var i = 1; i < 5; i++)
+        {
+            rankingList.push(this.obtainValue(i));
+        }
+        // rankingList loaded
+        Encoder.EncodeType = "entity";
+        $.ajax(
+        {
+                url: this.SERVER_PATH,
+                type: "POST",
+                async: true,
+                data: "action=8&rankingList=" + Encoder.htmlDecode(JSON.stringify(rankingList)),
+                dataType: "json",
+                success: function (response)
+                {
+                    // nothing
+                },
+                error: function (xhr, ajaxOptions, thrownError) 
+                {
+                    // nothing
+                }	
+        });
     }

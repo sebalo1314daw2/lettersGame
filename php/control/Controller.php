@@ -70,6 +70,10 @@
                         // Action: close of the session
                         echo $this->logout();
                         break;
+                    case "8":
+                        // Action: update rankings
+                        echo $this->updateRankings($this->params["rankingList"]);
+                        break;
                 }
             }
         }
@@ -358,6 +362,63 @@
             {
                 // the session is open --> close the session
                 Session::close();
+            }
+            return true;
+        }
+        /**
+         * updateRankings()
+         * Function that seeks to update the ranking list specified.
+         * @author Sergio Baena López
+         * @version 1.0
+         * @param {String} $rankingList the list of rankings  to update (JSON format)
+         * @return {bool} returns "true" simply because we have to return something.
+         */
+        private function updateRankings($rankingList)
+        {
+            if(Session::isOpen())
+            {
+                // is open the session
+                $rankingListJSONDecoded = json_decode(stripslashes($rankingList));
+                for($i = 0; $i < count($rankingListJSONDecoded); $i++)
+                {
+                    // an item (ranking object to JSON format)
+                    // creare User object
+                    $user = new User
+                    (
+                            $rankingListJSONDecoded[$i]->user->username,
+                            $rankingListJSONDecoded[$i]->user->password,
+                            $rankingListJSONDecoded[$i]->user->name,
+                            $rankingListJSONDecoded[$i]->user->surnames
+                    );
+                    $user->setId($rankingListJSONDecoded[$i]->user->id);
+                    // create Game object
+                    $game = new Game
+                    (
+                            $rankingListJSONDecoded[$i]->game->id,
+                            $rankingListJSONDecoded[$i]->game->name, 
+                            $rankingListJSONDecoded[$i]->game->shortDescription,
+                            $rankingListJSONDecoded[$i]->game->rules,
+                            $rankingListJSONDecoded[$i]->game->punctuationAtTheFirstAttempt,
+                            $rankingListJSONDecoded[$i]->game->punctuationAtTheSecondAttempt, 
+                            $rankingListJSONDecoded[$i]->game->timeOfFirstAttempt, 
+                            $rankingListJSONDecoded[$i]->game->timeOfSecondAttempt, 
+                            $rankingListJSONDecoded[$i]->game->numOfWords
+                    );
+                    // create Ranking object
+                    $ranking = new Ranking
+                    (
+                            $rankingListJSONDecoded[$i]->id,
+                            $user,
+                            $game,
+                            $rankingListJSONDecoded[$i]->points, 
+                            $rankingListJSONDecoded[$i]->numberOfHits,
+                            $rankingListJSONDecoded[$i]->numberOfFailures, 
+                            $rankingListJSONDecoded[$i]->numberOfAttempts
+                    );
+                    // ranking object loaded
+                    // update ranking
+                    RankingTable::update($ranking);
+                }
             }
             return true;
         }

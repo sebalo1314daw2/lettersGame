@@ -292,10 +292,25 @@ function logout()
     {
         // the session is open --> we can close to the session
         // save changes 
-//        saveChanges();
+        saveChanges();
         // close session
         session.close();
     }
     // redirect to home page
     window.location.href = "home.html";
+}
+/**
+ * saveChanges()
+ * @description Procedure that aims to save the changes of the rankings in the database
+ * @author Sergio Baena López
+ * @version 1.0
+ */
+function saveChanges()
+{
+    if(new Session("").isOpen())
+    {
+        // the session is open
+        var session = new Session(SERVER_PATH);
+        session.saveChanges();
+    }
 }

@@ -69,17 +69,44 @@
             // return the rankingList
             return $rankingList;
          }
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
+         /**
+          * update()
+          * Procedure which aims to update this table with the ranking specified.
+          * @author Sergio Baena López
+          * @version 1.0
+          * @param {Ranking object} $ranking the ranking to update
+          */
+         public static function update($ranking)
+         {
+            // open connection
+            $db = new LettersGameDB();
+            // prepare query
+            $sql =    "UPDATE " . self::$NAME                                                     .  
+                     " SET "                                                                      .
+                                  self::$NAME . "." . self::$COL_ID_USER             . " = ?, "   .
+                                  self::$NAME . "." . self::$COL_ID_GAME             . " = ?, "   . 
+                                  self::$NAME . "." . self::$COL_POINTS              . " = ?, "   . 
+                                  self::$NAME . "." . self::$COL_NUMBER_OF_HITS      . " = ?, "   .
+                                  self::$NAME . "." . self::$COL_NUMBER_OF_FAILURES  . " = ?, "   .
+                                  self::$NAME . "." . self::$COL_NUMBER_OF_ATTEMPTS  . " = ?  "   .
+                     " WHERE " .  self::$NAME . "." . self::$COL_ID                  . " = ?; ";    
+            $stmt = $db->prepare($sql);
+            // associate values
+            $stmt->bind_param
+            (
+                    "iiiiiii", 
+                    $ranking->getUser()->getId(),
+                    $ranking->getGame()->getId(),
+                    $ranking->getPoints(),
+                    $ranking->getNumberOfHits(),
+                    $ranking->getNumberOfFailures(),
+                    $ranking->getNumberOfAttempts(),
+                    $ranking->getId()
+            );
+            // execute query
+            $stmt->execute();
+            // close connection
+            $db->close();
+         }
     }
 ?>
