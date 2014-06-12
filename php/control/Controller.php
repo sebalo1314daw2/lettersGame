@@ -66,6 +66,10 @@
                         // Action: get random words
                         echo $this->obtainRandomWords($this->params["numWords"]);
                         break;
+                    case "7":
+                        // Action: close of the session
+                        echo $this->logout();
+                        break;
                 }
             }
         }
@@ -340,6 +344,22 @@
                  $dataArray["wordList"] = $wordList;
             }
             return json_encode($dataArray);
+        }
+        /**
+         * logout()
+         * Function aims log out the active user
+         * @author Sergio Baena López
+         * @version 1.0 
+         * @return {bool} returns "true" simply because we have to return something. 
+         */
+        private function logout()
+        {
+            if(Session::isOpen())
+            {
+                // the session is open --> close the session
+                Session::close();
+            }
+            return true;
         }
     }
 ?>

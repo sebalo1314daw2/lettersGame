@@ -260,3 +260,34 @@ function Session(SERVER_PATH)
     {
           $.cookie(this.NAME + index, JSON.stringify(value), {path: "/"});
     }
+    /**
+     * close()
+     * @description Procedure aims log out the active player. What it will do is to log off the server and client.
+     * @author Sergio Baena López
+     * @version 1.0
+     */
+    Session.prototype.close = function()
+    {
+        // close session of the server
+        $.ajax(
+        {
+                url: this.SERVER_PATH,
+                type: "POST",
+                async: true,
+                data: "action=7",
+                dataType: "json",
+                success: function (response)
+                {
+                    // nothing
+                },
+                error: function (xhr, ajaxOptions, thrownError) 
+                {
+                    // nothing
+                }	
+        });
+        // close session of the client
+        for(var i = 0; i < 5; i++)
+        {
+            $.removeCookie(this.NAME + i, {path: "/"});
+        }    
+    }

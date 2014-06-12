@@ -278,3 +278,24 @@ function generateAndPlayedGoToGame(idGame, path)
         setTimeout(function(){window.location.href = path;}, duration * 1000); 
     }, false);
 }
+/**
+ * logout()
+ * @description Procedure aims log off user and redirect to the "home" page. Previously, the data 
+ * stored in the session (rankings) will be saved.
+ * @author Sergio Baena López
+ * @version 1.0
+ */
+function logout()
+{
+    var session = new Session(SERVER_PATH);
+    if(session.isOpen())
+    {
+        // the session is open --> we can close to the session
+        // save changes 
+//        saveChanges();
+        // close session
+        session.close();
+    }
+    // redirect to home page
+    window.location.href = "home.html";
+}
