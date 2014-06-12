@@ -12,6 +12,7 @@ function atTheStartOfPage()
         // is not open the user session
         alert("Acceso denegado"); // ESTO HAY QUE CAMBIARLO
     }
+    $(window).bind("beforeunload", function(){saveChanges();});
     soundList = new Array
     (
             "closeSessionSound",
