@@ -58,7 +58,7 @@
 }
 #studentMenu a
 {
-    width: 245px;
+    width: 196px;
     display: block;
     font-size: 30px;
     background-color: #B12535;
@@ -94,10 +94,6 @@
 #studentMenu > li:hover > ul
 {
     display: block;
-}
-#studentMenu > li:hover:last-child > a
-{
-    border-bottom-right-radius: 0;
 }
 #title
 {

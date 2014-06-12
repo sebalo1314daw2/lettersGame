@@ -140,7 +140,7 @@ function generateStudentMenu()
     (
             '<ul id="studentMenu">'                                                                     +
                 '<li>'                                                                                  +
-                        '<a href="pagina_del_alumno.html">P&aacute;gina de inicio</a>'                  +
+                        '<a href="pagina_del_alumno.html">Inicio</a>'                                   +
                 '</li>'                                                                                 +
                 '<li>'                                                                                  +
                         '<a href="">Tu perfil</a>'                                                      +
@@ -149,7 +149,7 @@ function generateStudentMenu()
                         '<a href="">Tus juegos</a>'                                                     +
                         '<ul>'                                                                          +
                             '<li>'                                                                      +
-                                    '<a href="">Cuenta cuenta</a>'                                      +
+                                    '<a href="">Cuenta &nbsp;cuenta</a>'                                      +
                             '</li>'                                                                     +
                             '<li>'                                                                      +
                                     '<a href="">Encuentra encuentra</a>'                                +
@@ -166,7 +166,7 @@ function generateStudentMenu()
                         '<a href="">Reglas</a>'                                                         +
                         '<ul>'                                                                          +
                              '<li>'                                                                     +
-                                    '<a href="">Cuenta cuenta</a>'                                      +
+                                    '<a href="">Cuenta &nbsp;cuenta</a>'                                      +
                             '</li>'                                                                     +
                             '<li>'                                                                      +
                                     '<a href="">Encuentra encuentra</a>'                                +
@@ -178,6 +178,9 @@ function generateStudentMenu()
                                     '<a href="">Accent&uacute;a accent&uacute;a</a>'                    +
                             '</li>'                                                                     +
                         '</ul>'                                                                         +
+                '</li>'                                                                                 +
+                '<li>'                                                                                  +
+                        '<a href="javascript:void(0)" onclick="logout()">Cerrar sesi&oacute;n</a>'      +
                 '</li>'                                                                                 +
             '</ul>'
     );

@@ -418,6 +418,11 @@ function keyHandler(ASCIICode)
             // Action: go to game "Accentúa accentúa"
             // TODO
             break;
+         case 27:
+            // Key: Esc
+            // Action: close session
+            // TODO
+            break;
         case 74:
             // Key: J
             // Action: start or continue the game
@@ -542,8 +547,8 @@ function generateAndPlayedGeneralDescriptionSound()
         var msg = "¿Qué haríamos sin las letras?\n\n"                                                   +
                   "Juego de " + game.getName() + "\n\n"                                                 +     
                   "Esta web tiene un menú, con las opciones de ir a la página de inicio, "              +
-                  "a tu perfil, a tus juegos y a las reglas de tus juegos, una palabra a catalogar "    +
-                  "y un enlace para acceder a la ONCE.\n\n"                                             +
+                  "a tu perfil, a tus juegos, a las reglas de tus juegos y para cerrar sesión, "        +
+                  "una palabra a catalogar y un enlace para acceder a la ONCE.\n\n"                     +
                   "¿Qué quieres hacer?\n\n"                                                             +
                   "Si quieres utilizar el menú utiliza las teclas de derecha e izquierda.\n\n"          +
                   "Si quieres comenzar o continuar con el juego pulsa J.\n\n"                           +
