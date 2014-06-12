@@ -210,7 +210,7 @@ function keyHandler(ASCIICode)
             // Action: "game now" button
             // informative message
             var game = Game.obtainFromCookie();
-            generateAndPlayedGoToGame(game.getId(), "http://www.google.es");
+            generateAndPlayedGoToGame(game.getId(), "juego_cataloga_cataloga.html");
             break;
         case 82:
             // Key: R
@@ -297,4 +297,21 @@ function generateAndPlayedBodyContent()
     // play sound
     Utilities.stopAll(soundList);
     document.getElementById("bodyContentSound").play();
+}
+/**
+ * goToGame()
+ * @description Procedure is intended to direct the user to the game stored in the cookie.
+ * @author Sergio Baena López
+ * @version 1.0
+ */
+function goToGame()
+{
+    var idGame = Game.obtainFromCookie().getId();
+    switch(idGame)
+    {
+        case 3:
+            // Cataloga cataloga game
+            window.location.href = "juego_cataloga_cataloga.html";
+            break;
+    }
 }
