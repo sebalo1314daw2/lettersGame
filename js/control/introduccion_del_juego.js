@@ -14,6 +14,7 @@ function atTheStartOfPage()
     }
     soundList = new Array
     (
+            "closeSessionSound",
             "clickLinkSound",
             "timeoutSound"
     );
@@ -119,6 +120,7 @@ function generateAndPlayedGeneralDescriptionSound()
                   "Si quieres jugar al juego de encuentra encuentra pulsa 2.\n\n"                       +
                   "Si quieres jugar al juego de cataloga cataloga pulsa 3.\n\n"                         +
                   "Si quieres jugar al juego de accentúa accentúa pulsa 4.\n\n"                         +
+                  "Si quieres cerrar la sesión pulsa la tecla de escape.\n\n"                           +
                   "Si quieres jugar ahora pulsa J.\n\n"                                                 +
                   "Si quieres ver las reglas de este juego pulsa R.\n\n"                                +
                   "Si quieres clicar en el enlace de la ONCE, pulsa O.\n\n"                             +
@@ -209,7 +211,11 @@ function keyHandler(ASCIICode)
          case 27:
             // Key: Esc
             // Action: close session
-            // TODO
+            // informative message
+            Utilities.stopAll(soundList);
+            document.getElementById("closeSessionSound").play();
+            // close session
+            setTimeout(function(){logout();}, 2000);
             break;
         case 74:
             // Key: J
