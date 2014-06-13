@@ -334,7 +334,7 @@ function registerNewUser()
             if(validationArray[0])
             {
                 // all valid fields (second validation)
-                alert("Todos los campos son validos");
+                window.location.href = "login.html";
             }
             else
             {
