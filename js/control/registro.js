@@ -57,7 +57,7 @@ function createSelectProvincies()
     if(dataArray["isServerError"])
     {
         // is server error
-        alert("es error de servidor"); // ESTO HAY QUE CAMBIARLO
+        window.location.href = "error_del_servidor.html";
     }
     else
     {
@@ -90,7 +90,7 @@ function createSelectTeachers()
     if(dataArray["isServerError"])
     {
         // is server error
-        alert("es error de servidor"); // ESTO HAY QUE CAMBIARLO
+       window.location.href = "error_del_servidor.html";
     }
     else
     {
@@ -309,7 +309,7 @@ function registerNewUser()
         if(dataArray["isServerError"])
         {
             // is server error
-            alert("Error del servidor"); // ESTO HAY QUE CAMBIARLOS
+            window.location.href = "error_del_servidor.html";
         }
         else
         {

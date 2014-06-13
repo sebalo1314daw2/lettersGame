@@ -10,7 +10,7 @@ function atTheStartOfPage()
     if(!new Session("").isOpen())
     {
         // is not open the user session
-        alert("Acceso denegado"); // ESTO HAY QUE CAMBIARLO
+        window.location.href = "permiso_denegado.html";
     }
     $(window).bind("beforeunload", function(){saveChanges();});
     soundList = new Array
@@ -42,14 +42,14 @@ function fillTable()
     if(nameParam != "id")
     {
         // incorrect name of the parameter
-        alert("Redireccionando a la pagina de error File not found 404"); // ESTO HAY QUE CAMBIARLO
+        window.location.href = "error_404.html";
     }
     // correct name of the parameter
     // Now look if the value is a number
     if(!ValidationUtilities.isPositiveInteger(valueParam))
     {
         // is not positive integer the value of the parameter --> is invalid value
-        alert("Redireccionando a la pagina de error File not found 404"); // ESTO HAY QUE CAMBIARLO
+        window.location.href = "error_404.html";
     }
     // all valid --> go to the server
     // obtain the indicated game
@@ -63,19 +63,19 @@ function fillTable()
     if(dataArray["isServerError"])
     {
         // is server error
-        alert("Redireccionamos a la página de error del servidor");
+        window.location.href = "error_del_servidor.html";
     }
     // is not server error
     if(dataArray["deniedAccess"])
     {
         // denied access
-        alert("Redireccionamos a la página de error de acceso denegado");
+        window.location.href = "permiso_denegado.html";
     }
     // is not denied access
     if(!dataArray["exists"])
     {
         // the game does not exist
-        alert("Redireccionando a la pagina de error File not found 404"); // ESTO HAY QUE CAMBIARLO
+        window.location.href = "error_404.html";
     }
     // all correct 
     var currentGame = dataArray["game"]; // game object

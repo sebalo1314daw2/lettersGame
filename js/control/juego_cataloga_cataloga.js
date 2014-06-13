@@ -10,7 +10,7 @@ function atTheStartOfPage()
     if(!new Session("").isOpen())
     {
         // is not open the user session
-        alert("Acceso denegado"); // ESTO HAY QUE CAMBIARLO
+         window.location.href = "permiso_denegado.html";
     }
     $(window).bind("beforeunload", function(){saveChanges();});
     soundList = new Array
@@ -58,13 +58,13 @@ function prepareGame()
     if(dataArray["isServerError"])
     {
         // is server error
-        alert("Redireccionamos a la página de error del servidor");
+        window.location.href = "error_del_servidor.html";
     }
     // is not server error
     if(dataArray["deniedAccess"])
     {
         // denied access
-        alert("Redireccionamos a la página de error de acceso denegado");
+        window.location.href = "permiso_denegado.html";
     }
     // all correct
     // get the word list

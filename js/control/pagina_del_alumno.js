@@ -10,7 +10,7 @@ function atTheStartOfPage()
     if(!new Session("").isOpen())
     {
         // is not open the user session
-        alert("Acceso denegado"); // ESTO HAY QUE CAMBIARLO
+        window.location.href = "permiso_denegado.html";
     }
     $(window).bind("beforeunload", function(){saveChanges();});
     soundList = new Array

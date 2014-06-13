@@ -220,19 +220,19 @@ function generateAndPlayedGoToGame(idGame, path)
         if(dataArray["isServerError"])
         {
             // is server error
-            alert("Redireccionamos a la página de error del servidor");
+            window.location.href = "error_del_servidor.html";
         }
         // is not server error
         if(dataArray["deniedAccess"])
         {
             // denied access
-            alert("Redireccionamos a la página de error de acceso denegado");
+             window.location.href = "permiso_denegado.html";
         }
         // is not denied access
         if(!dataArray["exists"])
         {
             // the game does not exist
-            alert("Redireccionando a la pagina de error File not found 404"); // ESTO HAY QUE CAMBIARLO
+            window.location.href = "error_404.html";
         }
         // all correct 
         var game = dataArray["game"]; // game object
