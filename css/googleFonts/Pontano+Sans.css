@@ -1,0 +1,7 @@
+@font-face 
+{
+  font-family: 'Pontano Sans';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Pontano Sans'), local('PontanoSans-Regular'), url(../../woff/Pontano+Sans.woff) format('woff');
+}
